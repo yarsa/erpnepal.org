@@ -883,3 +883,84 @@ button[hidden] {
     animation:none!important;
   }
 }
+
+/* Feature directory and individual guides. All content is present in the HTML. */
+.feature-directory {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  column-gap:60px;
+}
+.feature-directory article {
+  display:flex;
+  align-items:baseline;
+  gap:22px;
+  border-top:1px solid var(--line);
+  padding:30px 0;
+}
+.feature-directory .feature-number { flex-shrink:0; }
+.feature-directory h3 {
+  font-size:22px;
+  line-height:1.4;
+  font-weight:400;
+  letter-spacing:-.3px;
+  margin:0 0 12px;
+}
+.feature-directory h3 a { text-decoration:none; }
+.feature-directory h3 a:hover { text-decoration:underline; }
+.feature-directory p { font-size:15px; color:var(--muted); margin:0 0 17px; }
+.feature-page { padding-bottom:70px; }
+.breadcrumbs { margin:30px 0 42px; font-size:13px; color:var(--muted); }
+.breadcrumbs ol { display:flex; flex-wrap:wrap; gap:9px 13px; margin:0; padding:0; list-style:none; }
+.breadcrumbs li+li:before { content:'/'; margin-right:13px; color:#8b9095; }
+.feature-page-layout { display:grid; grid-template-columns:250px minmax(0,1fr); gap:65px; }
+.feature-navigation { border-top:1px solid var(--ink); padding-top:20px; }
+.feature-navigation nav { display:flex; flex-direction:column; gap:2px; }
+.feature-navigation .section-label { margin-bottom:13px; }
+.feature-navigation nav a { font-size:14px; padding:9px 11px; line-height:1.5; text-decoration:none; border-left:2px solid transparent; }
+.feature-navigation nav a:hover { background:var(--surface); text-decoration:underline; }
+.feature-navigation nav a[aria-current='page'] { border-left-color:var(--ink); background:var(--surface); font-weight:600; }
+.feature-navigation>p { color:var(--muted); font-size:13px; margin:25px 11px; }
+.feature-article { min-width:0; max-width:780px; }
+.feature-page-header { padding-bottom:30px; border-bottom:1px solid var(--line); }
+.feature-page-header .section-label { margin-bottom:20px; }
+.feature-page h1 { font:400 clamp(34px,3.6vw,49px)/1.17 Georgia,'Times New Roman',serif; letter-spacing:-1.1px; margin:0 0 25px; text-wrap:balance; }
+.feature-lead { font-size:19px; line-height:1.7; margin:0 0 21px; }
+.audience { font-size:14px; color:var(--muted); margin:0; }
+.audience strong { font-weight:500; color:var(--ink); }
+.feature-page-section { padding-top:32px; }
+.feature-page-section h2 { font-size:25px; letter-spacing:-.35px; margin-bottom:17px; }
+.feature-page-section p,.feature-page-section li { font-size:16px; color:#4e565e; line-height:1.8; }
+.feature-page-section p { margin:0 0 16px; }
+.feature-page-section ul { padding-left:22px; margin:0; }
+.feature-page-section li { padding-left:3px; margin-bottom:8px; }
+.feature-questions { display:grid; gap:21px; }
+.feature-questions h3 { font-size:17px; font-weight:600; line-height:1.55; margin:0 0 8px; }
+.feature-questions p { margin:0; }
+.source-section { margin-top:31px; border-top:1px solid var(--line); }
+.source-section h2 { font-size:19px; }
+.source-section p,.source-section li { font-size:13px; }
+.source-section a { overflow-wrap:anywhere; }
+.feature-next { margin-top:33px; background:var(--surface); padding:25px; }
+.feature-next h2 { font-size:23px; }
+.feature-next p { color:var(--muted); font-size:15px; margin:13px 0 20px; }
+.related-features { padding-top:32px; }
+.related-features h2 { font-size:20px; margin-bottom:15px; }
+.related-features>a { display:flex; align-items:baseline; justify-content:space-between; gap:20px; font-size:15px; padding:14px 0; border-top:1px solid var(--line); color:var(--blue); }
+@media(max-width:1000px) {
+  .feature-page-layout { grid-template-columns:210px minmax(0,1fr); gap:35px; }
+  .feature-directory { column-gap:35px; }
+}
+@media(max-width:760px) {
+  .feature-directory { grid-template-columns:1fr; }
+  .feature-directory article { padding:25px 0; gap:17px; }
+  .feature-directory h3 { font-size:22px; }
+  .feature-page-layout { display:flex; flex-direction:column; gap:38px; }
+  .feature-article { order:0; }
+  .feature-navigation { order:1; }
+  .breadcrumbs { margin:24px 0 32px; font-size:12px; }
+  .feature-page h1 { font-size:36px; letter-spacing:-.7px; }
+  .feature-lead { font-size:18px; }
+  .feature-page-section h2 { font-size:23px; }
+  .feature-next { padding:22px; }
+  .feature-page { padding-bottom:45px; }
+}

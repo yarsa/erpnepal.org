@@ -30,3 +30,12 @@ Applied the [Vercel web design review skill](https://github.com/vercel-labs/agen
 ## Publishing
 
 Source is in `yarsa/erpnepal.org`. Pages enablement remains blocked by GitHub account access: SSH permits pushing the repository, but the workflow cannot create the Pages site, and the in-app browser is signed out. Enable Pages with GitHub Actions once using an account with repository administration rights. No DNS or custom-domain settings were changed.
+
+
+## Feature-page expansion
+
+The next revision adds seven source-backed feature guides and moves accounting, billing, and payroll ahead of dates on the homepage. The same three reviewers challenged page overlap, verified repository paths, checked build/link safety, and reviewed desktop accounting and mobile payroll screenshots. All reviewers passed the result.
+
+Verified eight content pages plus the 404 page. Local, GitHub Pages subpath, and custom-domain builds passed. The checker validates every local link, cross-page anchor, asset, unique title/description, structured-data block, canonical, and sitemap entry. Temporary broken-anchor and unsafe-slug fixtures were correctly rejected. All seven feature pages rendered at 320px with no horizontal overflow, broken images, or JavaScript errors; keyboard navigation between features and mobile menu/Escape behavior passed.
+
+Screenshots prefixed `feature-` show this revision. See [Search and AI discovery](../SEARCH.md) for implementation details and the remaining hosting/indexing steps. No ranking deadline or AI-answer inclusion is promised.

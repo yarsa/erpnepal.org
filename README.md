@@ -12,7 +12,7 @@ npm run check
 npm run preview
 ```
 
-Open http://127.0.0.1:4173. Edit `index.html`, `styles.css`, or `app.js`, then rebuild and refresh. Typography uses local Georgia and Arial/Helvetica system fonts. No external fonts or other third-party resources are requested.
+Open http://127.0.0.1:4173. Edit `index.html`, `styles.css`, or `app.js`, then rebuild and refresh. Feature guide content is in `content/features.mjs`; `scripts/feature-pages.mjs` renders seven standalone feature pages. Typography uses local Georgia and Arial/Helvetica system fonts. No external fonts or other third-party resources are requested.
 
 ## Publish on GitHub Pages
 
@@ -50,3 +50,7 @@ Feature and installation content was checked against `yarsa/nepal-compliance` at
 - Local professional review is recommended before using accounting/payroll configuration in production.
 
 The repository’s original Apache-2.0 license is preserved. The product itself is GPL-3.0. See `NOTICE.md` for the reused product icon.
+
+## Search and feature pages
+
+See [Search and AI discovery](docs/SEARCH.md) for page coverage, canonical URLs, structured data, sitemap generation, and the remaining publication/indexing steps. Search rankings and inclusion in AI answers are not guaranteed.

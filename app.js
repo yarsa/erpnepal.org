@@ -23,7 +23,7 @@ document.addEventListener('click', event => {
   if (!event.target.closest('.nav-wrap')) closeMenu();
 });
 const copy = document.querySelector('.copy-button');
-if (navigator.clipboard && window.isSecureContext) {
+if (copy && navigator.clipboard && window.isSecureContext) {
   copy.hidden = false;
   copy.addEventListener('click', async () => {
     const status = document.querySelector('#copy-status');
