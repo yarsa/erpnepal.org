@@ -49,7 +49,9 @@ jobs:
           enablement: true
       - name: Build and validate static website
         env:
-          SITE_URL: ${{ steps.pages.outputs.base_url }}
+          # Pages can report an HTTP base_url before HTTPS enforcement is enabled.
+          # Keep metadata on HTTPS while retaining the actual host and project path.
+          SITE_URL: https://${{ steps.pages.outputs.host }}${{ steps.pages.outputs.base_path }}
         run: |
           npm run build
           npm run check
