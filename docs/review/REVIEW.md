@@ -29,7 +29,7 @@ Applied the [Vercel web design review skill](https://github.com/vercel-labs/agen
 
 ## Publishing
 
-Source is in `yarsa/erpnepal.org`. Pages enablement remains blocked by GitHub account access: SSH permits pushing the repository, but the workflow cannot create the Pages site, and the in-app browser is signed out. Enable Pages with GitHub Actions once using an account with repository administration rights. No DNS or custom-domain settings were changed.
+Source is in `yarsa/erpnepal.org`. GitHub Pages is enabled and deployments pass. The custom domain has authoritative GitHub Pages DNS records and valid HTTPS; local DNS propagation remains to be observed. No DNS or custom-domain settings were changed by this agent.
 
 
 ## Feature-page expansion
@@ -39,3 +39,11 @@ The next revision adds seven source-backed feature guides and moves accounting, 
 Verified eight content pages plus the 404 page. Local, GitHub Pages subpath, and custom-domain builds passed. The checker validates every local link, cross-page anchor, asset, unique title/description, structured-data block, canonical, and sitemap entry. Temporary broken-anchor and unsafe-slug fixtures were correctly rejected. All seven feature pages rendered at 320px with no horizontal overflow, broken images, or JavaScript errors; keyboard navigation between features and mobile menu/Escape behavior passed.
 
 Screenshots prefixed `feature-` show this revision. See [Search and AI discovery](../SEARCH.md) for implementation details and the remaining hosting/indexing steps. No ranking deadline or AI-answer inclusion is promised.
+
+## Add-ons, workflow selector, and official favicon
+
+Added nine dedicated integration pages and a separate homepage add-on directory. The core feature selector filters only the seven core guides. Keyboard checks passed for Accounting (3), Billing (4), and Payroll & HR (3); all nine add-ons remain visible, focus stays on the control, and Back restores the previous selection. Repeated selection does not add a duplicate history entry.
+
+All nine add-on pages rendered at 320px without horizontal overflow or broken images, and no browser JavaScript errors were reported. Desktop directory, desktop workflow, and mobile integration screenshots are retained alongside this report.
+
+Build validation covers 17 content pages plus 404. Local, project-subpath, and custom-domain configurations passed. Official upstream app-icon.svg replaces the placeholder favicon, with a 96×96 PNG fallback. Search Console submission remains an account step; no indexing or ranking result is claimed.

@@ -5,3 +5,5 @@
 Frappe, ERPNext, and Frappe HR names identify their respective open-source projects. Website text links to their upstream repositories and credits Frappe Technologies.
 
 The site uses system fonts only. No font binaries are bundled or requested from third parties.
+
+`assets/favicon.svg` is copied from the upstream `nepal_compliance/public/icon/app-icon.svg` on 2026-09-27. `assets/favicon.png` is a 96×96 raster rendering of that same icon. Both retain the upstream GPL-3.0 license reproduced in `assets/nepal-compliance-LICENSE.txt`.

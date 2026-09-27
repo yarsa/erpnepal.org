@@ -18,7 +18,8 @@ export function renderFeaturePage(feature, features) {
   <meta property="og:title" content="${e(feature.title)}">
   <meta property="og:description" content="${e(feature.description)}">
   <meta name="twitter:card" content="summary">
-  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="96x96" href="../../assets/favicon.png">
+  <link rel="icon" type="image/svg+xml" sizes="any" href="../../assets/favicon.svg">
   <link rel="stylesheet" href="../../styles.css">
   <script src="../../app.js" defer></script>
 </head>
@@ -27,7 +28,7 @@ export function renderFeaturePage(feature, features) {
 <header class="site-header"><div class="container nav-wrap">
   <a class="brand" href="../../" aria-label="Nepal Compliance home"><img src="../../assets/nepal-compliance.svg" width="35" height="35" alt=""><span>Nepal Compliance</span></a>
   <button class="menu-toggle" aria-expanded="false" aria-controls="navigation" hidden>Menu <span aria-hidden="true">≡</span></button>
-  <nav id="navigation" aria-label="Main navigation"><a href="../../#features">Features</a><a href="../../#get-started">Installation</a><a href="../../#faq">FAQ</a><a href="https://github.com/yarsa/nepal-compliance">GitHub <span aria-hidden="true">↗</span></a></nav>
+  <nav id="navigation" aria-label="Main navigation"><a href="../../#features">Features</a><a href="../../#addons">Add-ons</a><a href="../../#get-started">Installation</a><a href="../../#faq">FAQ</a><a href="https://github.com/yarsa/nepal-compliance">GitHub <span aria-hidden="true">↗</span></a></nav>
 </div></header>
 <main id="main" class="container feature-page">
   <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="../../">Home</a></li><li><a href="../../#features">Features</a></li><li aria-current="page">${e(feature.title)}</li></ol></nav>
@@ -35,6 +36,7 @@ export function renderFeaturePage(feature, features) {
     <aside class="feature-navigation"><nav aria-label="Feature pages"><p class="section-label">Features</p>${features.map(item => `<a href="../${e(item.slug)}/"${item.slug === feature.slug ? ' aria-current="page"' : ''}>${e(labels[item.slug] || item.title)}</a>`).join('\n')}</nav><p>Requires ERPNext and Frappe HR. <a href="../../#get-started">Installation requirements</a></p></aside>
     <article class="feature-article">
       <header class="feature-page-header"><p class="section-label">Nepal Compliance / Feature guide</p><h1>${e(feature.title)}</h1><p class="feature-lead">${e(feature.intro)}</p><p class="audience"><strong>For:</strong> ${e(feature.audience.replace(/^For /, ''))}</p></header>
+      <nav class="page-contents" aria-label="On this page"><span>On this page</span>${feature.sections.map((section,index)=>`<a href="#section-${index+1}">${e(section.heading)}</a>`).join('')}</nav>
       ${feature.sections.map((section, index) => `<section class="feature-page-section" id="section-${index + 1}"><h2>${e(section.heading)}</h2><p>${e(section.body)}</p>${section.items?.length ? `<ul>${section.items.map(item => `<li>${e(item)}</li>`).join('')}</ul>` : ''}</section>`).join('\n')}
       <section class="feature-page-section"><h2>Questions about this feature</h2><div class="feature-questions">${feature.questions.map(question => `<section><h3>${e(question.question)}</h3><p>${e(question.answer)}</p></section>`).join('')}</div></section>
       <section class="feature-page-section source-section"><h2>Project references</h2><p>Reviewed against <a href="https://github.com/yarsa/nepal-compliance/tree/fbb9e95be233631713703b09bcb727044894c5c5">project source fbb9e95</a> in September 2026. Availability depends on your installed version and configuration. This page does not claim regulatory certification.</p><ul>${feature.sources.map(source => `<li><a href="${e(source.url)}">${e(source.label)}</a></li>`).join('')}</ul></section>

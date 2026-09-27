@@ -2,6 +2,7 @@ import { readFile, readdir, stat, access } from 'node:fs/promises';
 import { resolve, relative, sep } from 'node:path';
 import assert from 'node:assert/strict';
 import { features } from '../content/features.mjs';
+import { addons } from '../content/addons.mjs';
 
 const root = resolve('dist');
 const base = process.env.SITE_URL ? new URL(process.env.SITE_URL.replace(/\/$/, '') + '/') : new URL('https://local.invalid/');
@@ -28,6 +29,7 @@ for (const file of await walk(root)) {
 const titles = new Set();
 const descriptions = new Set();
 const canonicalUrls = [];
+const contentPaths = [];
 for (const [file, { html }] of documents) {
   const relativeFile = relative(root, file).split(sep).join('/');
   const is404 = relativeFile === '404.html';
@@ -39,6 +41,7 @@ for (const [file, { html }] of documents) {
   titles.add(title);
   const meta = [...html.matchAll(/<meta\b[^>]*>/gi)].map(match => attrs(match[0]));
   if (!is404) {
+    contentPaths.push(path);
     const description = meta.find(tag => tag.name === 'description')?.content?.trim();
     assert(description, `Missing description: ${file}`);
     assert(!descriptions.has(description), `Duplicate description: ${file}`);
@@ -59,6 +62,10 @@ for (const [file, { html }] of documents) {
         assert.equal(item.position, index + 1, `Invalid breadcrumb position: ${file}`);
         assert(item.name && item.item, `Incomplete breadcrumb: ${file}`);
       });
+      const section = path.startsWith('addons/') ? 'addons' : 'features';
+      assert.equal(breadcrumbs.itemListElement[1].name, section === 'addons' ? 'Add-ons' : 'Features', `Incorrect breadcrumb section: ${file}`);
+      assert.equal(breadcrumbs.itemListElement[1].item, process.env.SITE_URL ? new URL(`#${section}`, base).href : `/#${section}`, `Incorrect breadcrumb section URL: ${file}`);
+      assert.equal(breadcrumbs.itemListElement[2].item, process.env.SITE_URL ? pageUrl.href : `/${path}`, `Incorrect breadcrumb page URL: ${file}`);
     }
     const canonicals = [...html.matchAll(/<link\b[^>]*>/gi)].map(match => attrs(match[0])).filter(tag => tag.rel === 'canonical');
     if (process.env.SITE_URL) {
@@ -91,18 +98,22 @@ for (const [file, { html }] of documents) {
   }
 }
 for (const feature of features) assert(documents.has(resolve(root, `features/${feature.slug}/index.html`)), `Missing feature page: ${feature.slug}`);
-assert.equal(documents.size, features.length + 2, 'Unexpected number of HTML pages');
+for (const addon of addons) assert(documents.has(resolve(root, `addons/${addon.slug}/index.html`)), `Missing add-on page: ${addon.slug}`);
+assert.equal(documents.size, features.length + addons.length + 2, 'Unexpected number of HTML pages');
+assert(!documents.get(resolve(root, 'index.html')).html.includes('<!-- ADDON_DIRECTORY -->'), 'Add-on directory was not rendered');
 const notFound = documents.get(resolve(root, '404.html'))?.html;
 const homeTag = [...notFound.matchAll(/<a\b[^>]*>/gi)].map(match => attrs(match[0])).find(tag => tag.id === 'home');
 assert.equal(homeTag?.href, base.pathname, '404 homepage link must match deployment path');
 assert(!/<script\b/i.test(notFound), '404 navigation must work without JavaScript');
 const llms = await readFile(resolve(root, 'llms.txt'), 'utf8');
 for (const feature of features) assert(llms.includes(`features/${feature.slug}/`), `Missing discovery link: ${feature.slug}`);
+for (const addon of addons) assert(llms.includes(`addons/${addon.slug}/`), `Missing add-on discovery link: ${addon.slug}`);
+const sitemap = await readFile(resolve(root, 'sitemap.xml'), 'utf8');
+const locations = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => decode(match[1]));
+const expectedSitemapUrls = process.env.SITE_URL ? canonicalUrls : contentPaths.map(path => new URL(path, 'https://erpnepal.org/').href);
+assert.deepEqual(locations.sort(), expectedSitemapUrls.sort(), 'Sitemap must contain every content page exactly once');
 if (process.env.SITE_URL) {
-  const sitemap = await readFile(resolve(root, 'sitemap.xml'), 'utf8');
-  const locations = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => decode(match[1]));
-  assert.deepEqual(locations.sort(), canonicalUrls.sort(), 'Sitemap must match canonical content pages');
   const robots = await readFile(resolve(root, 'robots.txt'), 'utf8');
   assert(robots.includes(`Sitemap: ${new URL('sitemap.xml', base).href}`), 'Incorrect sitemap address in robots.txt');
 }
-console.log(`Passed: ${documents.size} HTML pages, local links and cross-page anchors, assets, unique metadata, structured data, discovery index, and 404 navigation${process.env.SITE_URL ? ', canonical URLs and sitemap' : ''}.`);
+console.log(`Passed: ${documents.size} HTML pages, local links and cross-page anchors, assets, unique metadata, structured data, discovery index, sitemap, and 404 navigation${process.env.SITE_URL ? ', canonical URLs' : ''}.`);

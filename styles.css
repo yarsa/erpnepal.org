@@ -964,3 +964,36 @@ button[hidden] {
   .feature-next { padding:22px; }
   .feature-page { padding-bottom:45px; }
 }
+
+/* Core feature interaction is independent from add-on browsing. */
+[hidden] { display:none !important; }
+.workflow-explorer { padding:24px; margin:0 0 32px; background:var(--surface); border:1px solid var(--line); }
+.workflow-explorer h3 { font-size:17px; font-weight:500; margin:0 0 17px; }
+.workflow-buttons { display:flex; flex-wrap:wrap; gap:9px; }
+.workflow-buttons button { border:1px solid #b6bdc4; background:#fff; color:var(--ink); border-radius:3px; min-height:44px; padding:9px 18px; font-size:14px; }
+.workflow-buttons button:hover { border-color:var(--ink); }
+.workflow-buttons button[aria-pressed='true'] { background:var(--ink); color:#fff; border-color:var(--ink); }
+#workflow-description { margin:18px 0 5px; color:var(--muted); font-size:15px; }
+.workflow-status { font-size:13px; color:var(--muted); margin:0; }
+.addon-section { border-top:1px solid var(--ink); }
+.addon-directory { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:0 35px; }
+.addon-directory article { display:flex; align-items:flex-start; flex-direction:column; padding:27px 0 31px; border-top:1px solid var(--line); }
+.addon-category { color:var(--muted); font-size:12px; margin:0 0 12px; }
+.addon-directory h3 { font-weight:400; font-size:22px; line-height:1.35; letter-spacing:-.3px; margin:0 0 15px; }
+.addon-directory h3 a { text-decoration:none; }
+.addon-directory h3 a:hover { text-decoration:underline; }
+.addon-directory article>p:not(.addon-category) { color:var(--muted); font-size:15px; margin:0 0 20px; }
+.addon-directory .text-link { margin-top:auto; }
+.integration-scope { border-left:2px solid var(--blue); background:var(--surface); padding:17px 22px; margin-top:25px; }
+.integration-scope strong { font-size:14px; font-weight:600; }
+.integration-scope p { font-size:14px; color:var(--muted); margin:7px 0 0; }
+.page-contents { display:flex; flex-wrap:wrap; gap:9px 19px; padding:22px 0 5px; font-size:13px; }
+.page-contents>span { width:100%; font-weight:600; margin-bottom:3px; }
+.page-contents a { color:var(--blue); }
+@media(max-width:1000px) { .addon-directory { grid-template-columns:1fr 1fr; } }
+@media(max-width:760px) {
+  .addon-directory { grid-template-columns:1fr; }
+  .workflow-explorer { padding:20px; }
+  .workflow-buttons button { padding-inline:13px; }
+  .integration-scope { padding:15px 18px; }
+}
