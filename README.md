@@ -12,7 +12,7 @@ npm run check
 npm run preview
 ```
 
-Open http://127.0.0.1:4173. Edit `index.html`, `styles.css`, or `app.js`, then rebuild and refresh. Feature guide content is in `content/features.mjs`; `scripts/feature-pages.mjs` renders seven standalone feature pages. Add-on content is in `content/addons.mjs`; `scripts/addon-pages.mjs` renders the separate directory and nine integration pages. Typography uses local Georgia and Arial/Helvetica system fonts. No external fonts or other third-party resources are requested.
+Open http://127.0.0.1:4173. Edit `index.html`, `styles.css`, or `app.js`, then rebuild and refresh. Feature guide content is in `content/features.mjs`; `scripts/feature-pages.mjs` renders seven standalone feature pages. Add-on content is in `content/addons.mjs`; `scripts/addon-pages.mjs` renders the separate directory and nine integration pages. The Nepal HRMS beta preview is authored in `nepal-hrms.html` and generated at `/nepal-hrms/`. Typography uses local Georgia and Arial/Helvetica system fonts. No external fonts or other third-party resources are requested.
 
 ## Publish on GitHub Pages
 

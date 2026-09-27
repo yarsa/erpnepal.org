@@ -49,7 +49,7 @@ export function renderAddonPage(addon, addons) {
     </article>
   </div>
 </main>
-<footer class="site-footer"><div class="container"><div class="footer-top"><div><a class="brand" href="../../"><img src="../../assets/nepal-compliance.svg" width="30" height="30" alt=""><span>Nepal Compliance</span></a><p>An open-source app for ERPNext and Frappe HR.</p></div><nav aria-label="Project resources"><a href="../../#features">Core features</a><a href="../../#addons">Add-ons</a><a href="../../sitemap.xml">Sitemap</a></nav></div><div class="footer-bottom"><p>A project by <a href="https://github.com/yarsa">Yarsa</a> and contributors. Provider product names identify their respective services.</p><a href="https://github.com/yarsa/nepal-compliance/blob/master/LICENSE">Core app: GPL-3.0</a></div></div></footer>
+<footer class="site-footer"><div class="container"><div class="footer-top"><div><a class="brand" href="../../"><img src="../../assets/nepal-compliance.svg" width="30" height="30" alt=""><span>Nepal Compliance</span></a><p>An open-source app for ERPNext and Frappe HR.</p></div><nav aria-label="Project resources"><a href="../../nepal-hrms/">Nepal HRMS · Beta</a><a href="../../#features">Core features</a><a href="../../#addons">Add-ons</a><a href="../../sitemap.xml">Sitemap</a></nav></div><div class="footer-bottom"><p>A project by <a href="https://github.com/yarsa">Yarsa</a> and contributors. Provider product names identify their respective services.</p><a href="https://github.com/yarsa/nepal-compliance/blob/master/LICENSE">Core app: GPL-3.0</a></div></div></footer>
 </body>
 </html>`;
 }

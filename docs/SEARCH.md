@@ -2,7 +2,7 @@
 
 ## What is implemented
 
-The homepage introduces accounting, invoicing, payroll, and employee workflows. Seven feature pages answer distinct product questions. Nine dedicated add-on pages cover payments, QR devices, SMS, attendance, ecommerce, and custom integrations, with provider references and explicit scope. Nepali dates are a supporting feature.
+The homepage introduces accounting, invoicing, payroll, and employee workflows. Seven feature pages answer distinct product questions. Nine dedicated add-on pages cover payments, QR devices, SMS, attendance, ecommerce, and custom integrations, with provider references and explicit scope. Nepali dates are a supporting feature. The Nepal HRMS preview at `/nepal-hrms/` explains its beta status and planned inclusion in Nepal Compliance, with repository screenshots and no release-date claim.
 
 | Page | Example search intent |
 | --- | --- |
@@ -21,7 +21,7 @@ These are relevant query examples, not measured keyword volumes or ranking predi
 - Feature pages have distinct titles, descriptions, explanatory headings, source references, questions and answers, and related links.
 - The homepage links directly to every feature page. Each guide links to all other guides and the installation section.
 - The production build creates canonical URLs and Open Graph URLs from the actual GitHub Pages deployment address. It supports a repository subpath and a custom domain.
-- `sitemap.xml` includes all 17 content pages. `robots.txt` permits crawling and points to the sitemap. The error page is excluded and marked noindex.
+- `sitemap.xml` includes all 18 content pages. `robots.txt` permits crawling and points to the sitemap. The error page is excluded and marked noindex.
 - JSON-LD describes the website and source project, plus feature pages and breadcrumbs. It contains no fabricated ratings, prices, certifications, or guaranteed rich-result claims.
 - `llms.txt` is a small optional text index generated from the same feature data. It is not a Google ranking signal or a guarantee of inclusion in any AI answer.
 - The official repository icon is served as SVG and 96×96 PNG, with crawlable favicon links on all content pages.

@@ -47,3 +47,11 @@ Added nine dedicated integration pages and a separate homepage add-on directory.
 All nine add-on pages rendered at 320px without horizontal overflow or broken images, and no browser JavaScript errors were reported. Desktop directory, desktop workflow, and mobile integration screenshots are retained alongside this report.
 
 Build validation covers 17 content pages plus 404. Local, project-subpath, and custom-domain configurations passed. Official upstream app-icon.svg replaces the placeholder favicon, with a 96×96 PNG fallback. Search Console submission remains an account step; no indexing or ranking result is claimed.
+
+## Nepal HRMS beta preview
+
+Added a dedicated `/nepal-hrms/` page, homepage introduction, and links from feature/add-on footers. The copy follows the owner's clarification: Nepal HRMS is part of the Nepal Compliance roadmap, tested separately before planned incorporation. It is not represented as shipped or given a release date.
+
+The supplied repository at commit `3df172b1b13e5e90812b69494215e7b1e810a75c` provided the feature descriptions, logo, and four unmodified screenshots. Its README identifies screenshot employees as made-up. License and copyright notice are retained. The remote repository returned a public 404, so the site does not send visitors to unavailable source links.
+
+Local, project-subpath, and custom-domain checks passed for 18 content pages plus 404. Desktop, 390px and 320px layouts checked; no horizontal overflow. Images have dimensions, descriptive alt text, and full-size links; below-fold gallery images load lazily. The sitemap and optional discovery index include the preview with beta wording.

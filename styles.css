@@ -997,3 +997,23 @@ button[hidden] {
   .workflow-buttons button { padding-inline:13px; }
   .integration-scope { padding:15px 18px; }
 }
+
+/* Nepal HRMS preview uses repository screenshots and explicit beta status. */
+.hrms-page { padding-bottom: 64px; }
+.hrms-hero { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 88px; align-items: start; padding: 48px 0 64px; }
+.hrms-hero h1 { display: flex; align-items: center; gap: 18px; font: 400 clamp(2.4rem, 5vw, 4rem)/1.12 Georgia, serif; margin: 20px 0 28px; }
+.hrms-hero h1 img { flex: 0 0 64px; }
+.hrms-hero p { max-width: 680px; }
+.hrms-status { padding: 20px 0; border-top: 1px solid #d8dcde; border-bottom: 1px solid #d8dcde; margin: 24px 0; }
+.hrms-phone { margin: 0; }
+.hrms-phone img { width: 100%; height: auto; display: block; border: 1px solid #e0e3e5; }
+.hrms-page figcaption { font-size: 14px; line-height: 1.6; color: #596168; margin-top: 14px; }
+.hrms-screen { margin: 0 0 48px; }
+.hrms-screen img { display: block; width: 100%; height: auto; border: 1px solid #e0e3e5; }
+.hrms-screen:first-of-type { max-width: 900px; margin-inline: auto; }
+.hrms-availability { max-width: 820px; }
+.hrms-teaser { display: grid; grid-template-columns: 1fr 2fr; gap: 40px; border-top: 1px solid #d8dcde; padding-block: 48px; }
+.hrms-teaser h2 { margin-top: 0; }
+.hrms-teaser p { max-width: 730px; }
+@media (max-width: 900px) { .hrms-hero { gap: 36px; grid-template-columns: minmax(0, 1fr) 240px; } }
+@media (max-width: 640px) { .hrms-hero, .hrms-teaser { grid-template-columns: 1fr; gap: 28px; } .hrms-phone { width: min(100%, 300px); margin-inline: auto; } .hrms-hero h1 { gap: 12px; } .hrms-hero h1 img { width: 48px; height: 48px; flex-basis: 48px; } }

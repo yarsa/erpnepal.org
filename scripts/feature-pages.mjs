@@ -45,7 +45,7 @@ export function renderFeaturePage(feature, features) {
     </article>
   </div>
 </main>
-<footer class="site-footer"><div class="container"><div class="footer-top"><div><a class="brand" href="../../"><img src="../../assets/nepal-compliance.svg" width="30" height="30" alt=""><span>Nepal Compliance</span></a><p>An open-source app for ERPNext and Frappe HR.</p></div><nav aria-label="Project resources"><a href="https://github.com/yarsa/nepal-compliance">Repository</a><a href="https://github.com/yarsa/nepal-compliance/discussions">Community</a><a href="../../#features">All features</a></nav></div><div class="footer-bottom"><p>A project by <a href="https://github.com/yarsa">Yarsa</a> and contributors. Built on software by <a href="https://frappe.io">Frappe Technologies</a>.</p><a href="https://github.com/yarsa/nepal-compliance/blob/master/LICENSE">GPL-3.0</a></div></div></footer>
+<footer class="site-footer"><div class="container"><div class="footer-top"><div><a class="brand" href="../../"><img src="../../assets/nepal-compliance.svg" width="30" height="30" alt=""><span>Nepal Compliance</span></a><p>An open-source app for ERPNext and Frappe HR.</p></div><nav aria-label="Project resources"><a href="../../nepal-hrms/">Nepal HRMS · Beta</a><a href="https://github.com/yarsa/nepal-compliance">Repository</a><a href="https://github.com/yarsa/nepal-compliance/discussions">Community</a><a href="../../#features">All features</a></nav></div><div class="footer-bottom"><p>A project by <a href="https://github.com/yarsa">Yarsa</a> and contributors. Built on software by <a href="https://frappe.io">Frappe Technologies</a>.</p><a href="https://github.com/yarsa/nepal-compliance/blob/master/LICENSE">GPL-3.0</a></div></div></footer>
 </body>
 </html>`;
 }
