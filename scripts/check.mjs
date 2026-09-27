@@ -42,6 +42,18 @@ for (const [file, { html }] of documents) {
   const meta = [...html.matchAll(/<meta\b[^>]*>/gi)].map(match => attrs(match[0]));
   if (!is404) {
     contentPaths.push(path);
+    assert(!/<link\b[^>]*rel="stylesheet"/i.test(html), `Render-blocking stylesheet request: ${file}`);
+    assert(!/<script\b[^>]*\bsrc=/i.test(html), `Unexpected external script request: ${file}`);
+    assert.equal((html.match(/<style data-site-styles>/g) || []).length, 1, `Missing shared inline styles: ${file}`);
+    assert.equal((html.match(/<script data-site-script>/g) || []).length, 1, `Missing shared inline script: ${file}`);
+    assert(html.indexOf('<script data-site-script>') > html.lastIndexOf('</footer>'), `Shared script must run after page controls: ${file}`);
+    for (const image of html.matchAll(/<img\b[^>]*>/gi)) {
+      const src = attrs(image[0]).src || '';
+      assert(!src.endsWith('/nepal-compliance.svg'), `Brand icon still requires a request: ${file}`);
+      if (src.startsWith('data:image/svg+xml,')) {
+        assert.equal(decodeURIComponent(src.slice('data:image/svg+xml,'.length)), (await readFile('assets/nepal-compliance.svg', 'utf8')).trim(), `Embedded brand icon differs from source: ${file}`);
+      }
+    }
     const description = meta.find(tag => tag.name === 'description')?.content?.trim();
     assert(description, `Missing description: ${file}`);
     assert(!descriptions.has(description), `Duplicate description: ${file}`);

@@ -11,6 +11,33 @@ if (siteUrl && (siteUrl.protocol !== 'https:' || siteUrl.username || siteUrl.pas
 const base = siteUrl ? siteUrl.href.replace(/\/$/, '') + '/' : null;
 const escapeAttribute = value => value.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 const jsonScript = value => JSON.stringify(value).replace(/</g, '\\u003c');
+// These small shared resources travel with the HTML to avoid a blocking CSS
+// round trip and GitHub Pages' short cache lifetime for separate asset requests.
+const [stylesheet, clientScript, brandIcon] = await Promise.all([
+  readFile('styles.css', 'utf8'),
+  readFile('app.js', 'utf8'),
+  readFile('assets/nepal-compliance.svg', 'utf8'),
+]);
+if (/<\/style/i.test(stylesheet) || /<\/script/i.test(clientScript)) {
+  throw new Error('Inline resources must not contain HTML closing tags');
+}
+if (/@import\b|url\s*\(/i.test(stylesheet)) {
+  throw new Error('Inline stylesheet needs review before adding external or relative CSS resources');
+}
+const brandDataUrl = `data:image/svg+xml,${encodeURIComponent(brandIcon.trim())}`;
+function inlineSharedResources(html) {
+  const cssLink = /<link rel="stylesheet" href="(?:\.\.\/|\.\/)*styles\.css">/g;
+  const scriptTag = /<script src="(?:\.\.\/|\.\/)*app\.js" defer><\/script>/g;
+  if ([...html.matchAll(cssLink)].length !== 1 || [...html.matchAll(scriptTag)].length !== 1) {
+    throw new Error('Expected one shared stylesheet and script per content page');
+  }
+  return html
+    .replace(cssLink, () => `<style data-site-styles>\n${stylesheet}\n</style>`)
+    .replace(scriptTag, '')
+    .replace(/src="(?:\.\.\/|\.\/)*assets\/nepal-compliance\.svg"/g, () => `src="${brandDataUrl}"`)
+    // Run after the document's controls exist, matching the previous defer behavior.
+    .replace('</body>', () => `<script data-site-script>\n${clientScript}\n</script>\n</body>`);
+}
 for (const collection of [features, addons]) {
   const slugs = new Set();
   for (const entry of collection) {
@@ -60,13 +87,13 @@ for (const addon of addons) {
 // Copy only public website assets, never the repository or reference documents.
 await rm('dist', { recursive: true, force: true });
 await mkdir('dist', { recursive: true });
-for (const file of ['styles.css', 'app.js', '404.html']) await copyFile(file, `dist/${file}`);
+await copyFile('404.html', 'dist/404.html');
 await cp('assets', 'dist/assets', { recursive: true });
 await writeFile('dist/.nojekyll', '');
 for (const page of pages) {
   if (!page.html.includes('</head>')) throw new Error(`Missing HTML head: ${page.path}`);
   const canonical = base ? `  <link rel="canonical" href="${escapeAttribute(address(page.path))}">\n  <meta property="og:url" content="${escapeAttribute(address(page.path))}">\n` : '';
-  const html = page.html.replace('</head>', () => `${canonical}  <script type="application/ld+json">${jsonScript(page.schema)}</script>\n</head>`);
+  const html = inlineSharedResources(page.html).replace('</head>', () => `${canonical}  <script type="application/ld+json">${jsonScript(page.schema)}</script>\n</head>`);
   await mkdir(`dist/${page.path}`, { recursive: true });
   await writeFile(`dist/${page.path}index.html`, html);
 }

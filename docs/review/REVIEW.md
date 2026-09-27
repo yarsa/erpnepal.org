@@ -55,3 +55,9 @@ Added a dedicated `/nepal-hrms/` page, homepage introduction, and links from fea
 The supplied repository at commit `3df172b1b13e5e90812b69494215e7b1e810a75c` provided the feature descriptions, logo, and four unmodified screenshots. Its README identifies screenshot employees as made-up. License and copyright notice are retained. The remote repository returned a public 404, so the site does not send visitors to unavailable source links.
 
 Local, project-subpath, and custom-domain checks passed for 18 content pages plus 404. Desktop, 390px and 320px layouts checked; no horizontal overflow. Images have dimensions, descriptive alt text, and full-size links; below-fold gallery images load lazily. The sitemap and optional discovery index include the preview with beta wording.
+
+## PageSpeed request-chain fix
+
+Embedded the small shared stylesheet, script, and product SVG during the build. This removes the homepage CSS critical request chain and all three separate asset requests highlighted in the supplied PageSpeed report. The generated homepage is 12,516 bytes gzipped locally. Build checks reject reintroduced external styles/scripts and verify embedded logo integrity and script placement.
+
+All 19 HTML documents passed local, project-subpath, and custom-domain validation. In-app browser confirmed zero external stylesheet/script elements, a loaded embedded logo, working workflow selection and mobile menu/Escape, and no JavaScript errors. Mobile screenshot retained as `inline-assets-mobile.png`. A fresh PageSpeed score was not measured. Larger images and favicons retain GitHub Pages cache policy.

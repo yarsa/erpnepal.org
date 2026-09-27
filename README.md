@@ -54,3 +54,7 @@ The repository’s original Apache-2.0 license is preserved. The product itself 
 ## Search and feature pages
 
 See [Search and AI discovery](docs/SEARCH.md) for page coverage, canonical URLs, structured data, sitemap generation, and the remaining publication/indexing steps. Search rankings and inclusion in AI answers are not guaranteed.
+
+## Small shared resources
+
+The build embeds `styles.css`, `app.js`, and the small product SVG into each content page. CSS is available with the HTML; the script runs after the page controls. This removes three asset round trips and their short GitHub Pages cache lifetimes, at the cost of repeating these small resources between pages. Larger screenshots and favicons stay separate. Their cache headers remain controlled by the hosting provider.
