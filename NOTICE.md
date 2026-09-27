@@ -4,4 +4,4 @@
 
 Frappe, ERPNext, and Frappe HR names identify their respective open-source projects. Website text links to their upstream repositories and credits Frappe Technologies.
 
-DM Sans and Manrope are requested from Google Fonts and have system font fallbacks. No font binaries are bundled.
+The site uses system fonts only. No font binaries are bundled or requested from third parties.

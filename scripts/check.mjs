@@ -14,5 +14,9 @@ for (const [, path] of html.matchAll(/(?:src|href)="\.\/([^"]+)"/g)) {
 assert(html.includes('name="description"'), 'Missing description');
 assert(html.includes('lang="en"'), 'Missing document language');
 assert(!/href=["'](?:#|javascript:)["']/.test(html), 'Placeholder action');
-await access('dist/404.html');
-console.log('Passed: local links, assets, heading, metadata, and no placeholder actions.');
+const notFound = await readFile('dist/404.html', 'utf8');
+const homePath = process.env.SITE_URL ? new URL(process.env.SITE_URL).pathname.replace(/\/$/, '') + '/' : '/';
+const safeHomePath = homePath.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+assert(notFound.includes(`id="home" href="${safeHomePath}"`), '404 homepage link must match deployment path');
+assert(!/<script\b/i.test(notFound), '404 navigation must work without JavaScript');
+console.log('Passed: local links, assets, heading, metadata, placeholder actions, and 404 navigation.');

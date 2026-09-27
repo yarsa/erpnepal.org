@@ -12,7 +12,7 @@ npm run check
 npm run preview
 ```
 
-Open http://127.0.0.1:4173. Edit `index.html`, `styles.css`, or `app.js`, then rebuild and refresh. Google Fonts supplies DM Sans and Manrope; system fonts work if the font service is unavailable.
+Open http://127.0.0.1:4173. Edit `index.html`, `styles.css`, or `app.js`, then rebuild and refresh. Typography uses local Georgia and Arial/Helvetica system fonts. No external fonts or other third-party resources are requested.
 
 ## Publish on GitHub Pages
 
@@ -45,7 +45,7 @@ Feature and installation content was checked against `yarsa/nepal-compliance` at
 
 - `README.md`: implemented date, billing, accounting, HR, and payroll features; biometric attendance remains planned.
 - `docs/manual-install.md` and `docs/docker-install.md`: prerequisites and installation paths.
-- Hero workflow is an original illustrative presentation, not a screenshot or a live ERP instance.
+- The homepage feature index links to documented capabilities; it does not simulate a product interface.
 - No claims of regulatory certification, guaranteed compliance, customer adoption, or commercial support are made.
 - Local professional review is recommended before using accounting/payroll configuration in production.
 
