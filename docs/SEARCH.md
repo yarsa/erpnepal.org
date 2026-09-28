@@ -21,7 +21,7 @@ These are relevant query examples, not measured keyword volumes or ranking predi
 - Feature pages have distinct titles, descriptions, explanatory headings, source references, questions and answers, and related links.
 - The homepage links directly to every feature page. Each guide links to all other guides and the installation section.
 - The production build creates canonical URLs and Open Graph URLs from the actual GitHub Pages deployment address. It supports a repository subpath and a custom domain.
-- `sitemap.xml` includes all 18 content pages. `robots.txt` permits crawling and points to the sitemap. The error page is excluded and marked noindex.
+- `sitemap.xml` includes all 28 content pages. `robots.txt` permits crawling and points to the sitemap. The error page is excluded and marked noindex.
 - JSON-LD describes the website and source project, plus feature pages and breadcrumbs. It contains no fabricated ratings, prices, certifications, or guaranteed rich-result claims.
 - `llms.txt` is a small optional text index generated from the same feature data. It is not a Google ranking signal or a guarantee of inclusion in any AI answer.
 - The official repository icon is served as SVG and 96×96 PNG, with crawlable favicon links on all content pages.
@@ -60,3 +60,9 @@ References reviewed September 2026:
 Feature content lives in `content/features.mjs`; add-on content lives in `content/addons.mjs`. `scripts/feature-pages.mjs` supplies the shared page layout. `scripts/build.mjs` generates the pages and discovery files.
 
 Run `npm run build && npm run check` for local validation. For deployment metadata checks, set the same `SITE_URL` for both commands. Validation checks every HTML document, local asset, cross-page link and fragment, unique metadata, JSON-LD, sitemap, canonical URL, and the 404 homepage link.
+
+## Practical guide library — 28 September 2026
+
+Nine distinct guides and their index add practical selection, configuration, reconciliation, attendance, migration, and recovery help. Articles contain a direct answer, original examples/checklists, section references, visible attribution and dates, and related links. Article schema describes the visible content; the index uses CollectionPage. All are included in the sitemap and optional discovery index.
+
+Topic selection used public questions and search results, not measured keyword volumes. See [Topic research](TOPIC-RESEARCH.md). The editorial approach is public at `/guides/#editorial`, including AI-assisted preparation and limits of review.

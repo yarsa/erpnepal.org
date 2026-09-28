@@ -31,7 +31,7 @@ export function renderAddonPage(addon, addons) {
 <header class="site-header"><div class="container nav-wrap">
   <a class="brand" href="../../" aria-label="Nepal Compliance home"><img src="../../assets/nepal-compliance.svg" width="35" height="35" alt=""><span>Nepal Compliance</span></a>
   <button class="menu-toggle" aria-expanded="false" aria-controls="navigation" hidden>Menu <span aria-hidden="true">≡</span></button>
-  <nav id="navigation" aria-label="Main navigation"><a href="../../#features">Features</a><a href="../../#addons">Add-ons</a><a href="../../#get-started">Installation</a><a href="../../#faq">FAQ</a><a href="https://github.com/yarsa/nepal-compliance">GitHub <span aria-hidden="true">↗</span></a></nav>
+  <nav id="navigation" aria-label="Main navigation"><a href="../../#features">Features</a><a href="../../#addons">Add-ons</a><a href="../../#get-started">Installation</a><a href="../../guides/">Guides</a><a href="https://github.com/yarsa/nepal-compliance">GitHub <span aria-hidden="true">↗</span></a></nav>
 </div></header>
 <main id="main" class="container feature-page addon-page">
   <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="../../">Home</a></li><li><a href="../../#addons">Add-ons</a></li><li aria-current="page">${e(addon.shortTitle)}</li></ol></nav>

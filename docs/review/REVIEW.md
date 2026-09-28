@@ -61,3 +61,9 @@ Local, project-subpath, and custom-domain checks passed for 18 content pages plu
 Embedded the small shared stylesheet, script, and product SVG during the build. This removes the homepage CSS critical request chain and all three separate asset requests highlighted in the supplied PageSpeed report. The generated homepage is 12,516 bytes gzipped locally. Build checks reject reintroduced external styles/scripts and verify embedded logo integrity and script placement.
 
 All 19 HTML documents passed local, project-subpath, and custom-domain validation. In-app browser confirmed zero external stylesheet/script elements, a loaded embedded logo, working workflow selection and mobile menu/Escape, and no JavaScript errors. Mobile screenshot retained as `inline-assets-mobile.png`. A fresh PageSpeed score was not measured. Larger images and favicons retain GitHub Pages cache policy.
+
+## Practical guide library — 28 September 2026
+
+Published nine original operational guides (roughly 660–770 words each), based on qualitative question research and primary documentation. All 36 distinct published source URLs returned HTTP 200 during a HEAD-link check. The inaccessible IRD PDF was omitted in favor of its technical notice. Corrected existing CBMS expansion to Central Billing Monitoring System.
+
+The library and articles have source-linked sections, original examples, tables, questions, attribution, and related pages. AI assistance and review limits are disclosed. Local, subpath, and custom-domain builds validate 28 content pages plus 404. Browser checks at 320px found no page overflow in any guide; comparison tables scroll within their containers. Mobile contents disclosure works; no JavaScript errors recorded. Desktop index/article and mobile article screenshots are retained here.

@@ -3,6 +3,7 @@ import { resolve, relative, sep } from 'node:path';
 import assert from 'node:assert/strict';
 import { features } from '../content/features.mjs';
 import { addons } from '../content/addons.mjs';
+import { guides, guideDate } from '../content/guides.mjs';
 
 const root = resolve('dist');
 const base = process.env.SITE_URL ? new URL(process.env.SITE_URL.replace(/\/$/, '') + '/') : new URL('https://local.invalid/');
@@ -67,16 +68,28 @@ for (const [file, { html }] of documents) {
     }
     const expectedTypes = path ? ['WebPage', 'BreadcrumbList'] : ['WebSite', 'SoftwareSourceCode'];
     for (const type of expectedTypes) assert(schemas.some(schema => schema['@type'] === type), `Missing ${type} schema: ${file}`);
+    if (path.startsWith('guides/') && path !== 'guides/') {
+      const article = schemas.find(schema => schema['@type'] === 'Article');
+      assert(article?.headline && article?.author?.name === 'ERP Nepal', `Missing article attribution: ${file}`);
+      assert.equal(article.datePublished, guideDate, `Incorrect publication date: ${file}`);
+      assert.equal(article.mainEntityOfPage, process.env.SITE_URL ? pageUrl.href : `/${path}`, `Incorrect article URL: ${file}`);
+      assert(article.citation?.length, `Missing article sources: ${file}`);
+    }
     const breadcrumbs = schemas.find(schema => schema['@type'] === 'BreadcrumbList');
     if (breadcrumbs) {
       const isHrmsPage = path === 'nepal-hrms/';
-      assert.equal(breadcrumbs.itemListElement.length, isHrmsPage ? 2 : 3, `Invalid breadcrumbs: ${file}`);
+      const isGuideIndex = path === 'guides/';
+      const isGuide = path.startsWith('guides/');
+      assert.equal(breadcrumbs.itemListElement.length, isHrmsPage || isGuideIndex ? 2 : 3, `Invalid breadcrumbs: ${file}`);
       breadcrumbs.itemListElement.forEach((item, index) => {
         assert.equal(item.position, index + 1, `Invalid breadcrumb position: ${file}`);
         assert(item.name && item.item, `Incomplete breadcrumb: ${file}`);
       });
       if (isHrmsPage) {
         assert.equal(breadcrumbs.itemListElement[1].name, 'Nepal HRMS', `Incorrect HRMS breadcrumb: ${file}`);
+      } else if (isGuide) {
+        assert.equal(breadcrumbs.itemListElement[1].name, 'Guides', `Incorrect guide breadcrumb: ${file}`);
+        assert.equal(breadcrumbs.itemListElement[1].item, process.env.SITE_URL ? new URL('guides/', base).href : '/guides/', `Incorrect guide index URL: ${file}`);
       } else {
         const section = path.startsWith('addons/') ? 'addons' : 'features';
         assert.equal(breadcrumbs.itemListElement[1].name, section === 'addons' ? 'Add-ons' : 'Features', `Incorrect breadcrumb section: ${file}`);
@@ -117,13 +130,25 @@ for (const [file, { html }] of documents) {
 for (const feature of features) assert(documents.has(resolve(root, `features/${feature.slug}/index.html`)), `Missing feature page: ${feature.slug}`);
 for (const addon of addons) assert(documents.has(resolve(root, `addons/${addon.slug}/index.html`)), `Missing add-on page: ${addon.slug}`);
 assert(documents.has(resolve(root, 'nepal-hrms/index.html')), 'Missing Nepal HRMS page');
-assert.equal(documents.size, features.length + addons.length + 3, 'Unexpected number of HTML pages');
+assert.equal(documents.size, features.length + addons.length + guides.length + 4, 'Unexpected number of HTML pages');
+for (const guide of guides) {
+  assert(documents.has(resolve(root, `guides/${guide.slug}/index.html`)), `Missing guide: ${guide.slug}`);
+  const ids = new Set(guide.sources.map(s => s.id));
+  assert.equal(ids.size, guide.sources.length, `Duplicate source ID: ${guide.slug}`);
+  for (const section of guide.sections) {
+    assert(section.paragraphs.length, `Empty section: ${guide.slug}`);
+    for (const id of section.sources || []) assert(ids.has(id), `Unknown section source: ${guide.slug}/${id}`);
+    if (section.table) for (const row of section.table.rows) assert.equal(row.length, section.table.headers.length, `Uneven table row: ${guide.slug}`);
+  }
+  for (const source of guide.sources) assert.equal(new URL(source.url).protocol, 'https:', `Invalid source URL: ${guide.slug}`);
+}
 assert(!documents.get(resolve(root, 'index.html')).html.includes('<!-- ADDON_DIRECTORY -->'), 'Add-on directory was not rendered');
 const notFound = documents.get(resolve(root, '404.html'))?.html;
 const homeTag = [...notFound.matchAll(/<a\b[^>]*>/gi)].map(match => attrs(match[0])).find(tag => tag.id === 'home');
 assert.equal(homeTag?.href, base.pathname, '404 homepage link must match deployment path');
 assert(!/<script\b/i.test(notFound), '404 navigation must work without JavaScript');
 const llms = await readFile(resolve(root, 'llms.txt'), 'utf8');
+for (const guide of guides) assert(llms.includes(`guides/${guide.slug}/`), `Missing guide discovery link: ${guide.slug}`);
 for (const feature of features) assert(llms.includes(`features/${feature.slug}/`), `Missing discovery link: ${feature.slug}`);
 for (const addon of addons) assert(llms.includes(`addons/${addon.slug}/`), `Missing add-on discovery link: ${addon.slug}`);
 assert(llms.includes('nepal-hrms/') && llms.includes('Nepal HRMS (Beta)'), 'Missing beta HRMS discovery entry');

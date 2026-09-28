@@ -3,6 +3,8 @@ import { features } from '../content/features.mjs';
 import { renderFeaturePage } from './feature-pages.mjs';
 import { addons } from '../content/addons.mjs';
 import { renderAddonPage, renderAddonDirectory } from './addon-pages.mjs';
+import { guides, guideDate } from '../content/guides.mjs';
+import { renderGuidePage, renderGuideIndex } from './guide-pages.mjs';
 
 const siteUrl = process.env.SITE_URL ? new URL(process.env.SITE_URL) : null;
 if (siteUrl && (siteUrl.protocol !== 'https:' || siteUrl.username || siteUrl.password || siteUrl.search || siteUrl.hash)) {
@@ -38,7 +40,7 @@ function inlineSharedResources(html) {
     // Run after the document's controls exist, matching the previous defer behavior.
     .replace('</body>', () => `<script data-site-script>\n${clientScript}\n</script>\n</body>`);
 }
-for (const collection of [features, addons]) {
+for (const collection of [features, addons, guides]) {
   const slugs = new Set();
   for (const entry of collection) {
     if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(entry.slug) || slugs.has(entry.slug)) throw new Error(`Invalid or duplicate page slug: ${entry.slug}`);
@@ -54,6 +56,26 @@ const pages = [{ path: '', html: homepage.replace('<!-- ADDON_DIRECTORY -->', ()
   { '@context': schemaContext, '@type': 'WebSite', name: 'Nepal Compliance', url: address('') },
   { '@context': schemaContext, '@type': 'SoftwareSourceCode', name: 'Nepal Compliance', codeRepository: 'https://github.com/yarsa/nepal-compliance', license: 'https://www.gnu.org/licenses/gpl-3.0.html', description: 'An open-source app extending ERPNext and Frappe HR with Nepal-specific date, accounting, HR, and payroll workflows.' },
 ] }];
+pages.push({ path: 'guides/', html: renderGuideIndex(guides), schema: [
+  { '@context': schemaContext, '@type': 'WebPage', name: 'Practical ERP guides for Nepal', url: address('guides/') },
+  { '@context': schemaContext, '@type': 'CollectionPage', name: 'Practical ERP guides for Nepal', url: address('guides/'), hasPart: guides.map(g => ({ '@type': 'Article', headline: g.title, url: address(`guides/${g.slug}/`) })) },
+  { '@context': schemaContext, '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: address('') },
+    { '@type': 'ListItem', position: 2, name: 'Guides', item: address('guides/') },
+  ] },
+] });
+for (const guide of guides) {
+  const path = `guides/${guide.slug}/`;
+  pages.push({ path, html: renderGuidePage(guide, guides), schema: [
+    { '@context': schemaContext, '@type': 'WebPage', name: guide.title, description: guide.description, url: address(path) },
+    { '@context': schemaContext, '@type': 'Article', headline: guide.title, description: guide.description, mainEntityOfPage: address(path), datePublished: guideDate, dateModified: guideDate, author: { '@type': 'Organization', name: 'ERP Nepal', url: address('guides/#editorial') }, citation: guide.sources.map(s => s.url), inLanguage: 'en' },
+    { '@context': schemaContext, '@type': 'BreadcrumbList', itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: address('') },
+      { '@type': 'ListItem', position: 2, name: 'Guides', item: address('guides/') },
+      { '@type': 'ListItem', position: 3, name: guide.title, item: address(path) },
+    ] },
+  ] });
+}
 pages.push({ path: 'nepal-hrms/', html: await readFile('nepal-hrms.html', 'utf8'), schema: [
   { '@context': schemaContext, '@type': 'WebPage', name: 'Nepal HRMS — HR and Payroll for Nepal (Beta)', description: 'An overview of Nepal HRMS: upcoming HR and payroll capabilities for Nepal Compliance, currently tested in a separate beta app before planned incorporation.', url: address('nepal-hrms/'), isPartOf: { '@type': 'WebSite', name: 'Nepal Compliance', url: address('') } },
   { '@context': schemaContext, '@type': 'BreadcrumbList', itemListElement: [
@@ -112,3 +134,4 @@ if (base) {
 const markdown = value => value.replace(/[\r\n]+/g, ' ').replace(/([\\[\]])/g, '\\$1');
 await writeFile('dist/llms.txt', `# Nepal Compliance\n\n> An open-source app for Nepal-specific workflows in ERPNext and Frappe HR.\n\nThis file is an optional plain-text index of this website. Feature pages describe the upstream project; they do not establish regulatory certification or guarantee compliance.\n\n## Website\n\n- [Overview](${base || './'})\n${features.map(feature => `- [${markdown(feature.title)}](${base || './'}features/${feature.slug}/): ${markdown(feature.description)}`).join('\n')}\n\n## Nepal HRMS (Beta)\n\n- [Nepal HRMS — HR and Payroll for Nepal (Beta)](${base || './'}nepal-hrms/): Upcoming HR and payroll capabilities for Nepal Compliance, currently tested in a separate beta app before planned incorporation. Review the page for scope and evaluation guidance.\n\n## Add-ons\n\nThese pages describe related applications and integration considerations. Listing an application does not establish that it is bundled with Nepal Compliance or that a specific integration is available or tested. Review each page and its project references for scope and requirements.\n\n${addons.map(addon => `- [${markdown(addon.title)}](${base || './'}addons/${addon.slug}/): ${markdown(addon.description)}`).join('\n')}\n\n## Project\n\n- [Source code](https://github.com/yarsa/nepal-compliance)\n- [Installation guide](https://github.com/yarsa/nepal-compliance/blob/master/docs/manual-install.md)\n`);
 console.log(`Static website built in dist/ (${pages.length} content pages).`);
+await writeFile('dist/llms.txt', `\n## Practical guides\n\n- [All guides](${base || './'}guides/): Source-linked operational guides. Published 28 September 2026; examples are illustrative, not individualized tax or legal advice.\n${guides.map(g => `- [${markdown(g.title)}](${base || './'}guides/${g.slug}/): ${markdown(g.description)}`).join('\n')}\n`, { flag: 'a' });

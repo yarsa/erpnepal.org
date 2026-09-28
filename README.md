@@ -58,3 +58,7 @@ See [Search and AI discovery](docs/SEARCH.md) for page coverage, canonical URLs,
 ## Small shared resources
 
 The build embeds `styles.css`, `app.js`, and the small product SVG into each content page. CSS is available with the HTML; the script runs after the page controls. This removes three asset round trips and their short GitHub Pages cache lifetimes, at the cost of repeating these small resources between pages. Larger screenshots and favicons stay separate. Their cache headers remain controlled by the hosting provider.
+
+## Practical guides
+
+Nine source-linked articles and the `/guides/` index are generated from `content/guides-*.mjs` through `scripts/guide-pages.mjs`. The index explains the editorial method and AI assistance. Update the publication/review dates only when the content is actually reviewed. See [Topic research](docs/TOPIC-RESEARCH.md) for question evidence and the limits of qualitative demand research.

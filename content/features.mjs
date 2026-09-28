@@ -43,7 +43,7 @@ export const features = [
     slug: 'cbms',
     title: 'IRD CBMS integration for ERPNext in Nepal',
     description: 'Understand Nepal Compliance CBMS configuration, invoice and return submission code, recorded responses, and checks before connecting an ERPNext installation.',
-    intro: 'Nepal Compliance includes integration code for the Inland Revenue Department’s Central Billing Management System (CBMS). The integration prepares sales invoice and return data and records service responses. It requires configuration in your ERPNext installation and verification against the requirements that apply to your business.',
+    intro: 'Nepal Compliance includes integration code for the Inland Revenue Department’s Central Billing Monitoring System (CBMS). The integration prepares sales invoice and return data and records service responses. It requires configuration in your ERPNext installation and verification against the requirements that apply to your business.',
     audience: 'For accounts managers and administrators assessing an ERPNext connection to Nepal’s billing service.',
     sections: [
       { heading: 'Configure the connection', body: 'The CBMS Settings form includes an enable option, a username, a password, the business PAN/VAT number, and separate service addresses for sales and credit notes. The integration checks for these values before proceeding. Installing the app alone does not establish a working connection.', items: ['Enable CBMS configuration in the application settings.', 'Provide the relevant account credentials and business identifier.', 'Review the sales and credit note service configuration with your administrator.'] },
