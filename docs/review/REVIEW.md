@@ -67,3 +67,9 @@ All 19 HTML documents passed local, project-subpath, and custom-domain validatio
 Published nine original operational guides (roughly 660–770 words each), based on qualitative question research and primary documentation. All 36 distinct published source URLs returned HTTP 200 during a HEAD-link check. The inaccessible IRD PDF was omitted in favor of its technical notice. Corrected existing CBMS expansion to Central Billing Monitoring System.
 
 The library and articles have source-linked sections, original examples, tables, questions, attribution, and related pages. AI assistance and review limits are disclosed. Local, subpath, and custom-domain builds validate 28 content pages plus 404. Browser checks at 320px found no page overflow in any guide; comparison tables scroll within their containers. Mobile contents disclosure works; no JavaScript errors recorded. Desktop index/article and mobile article screenshots are retained here.
+
+## SME navigation and feature reel — 28 September 2026
+
+Added Features, Add-ons, and For your business pages. Main navigation links to pages throughout the site, with a build check rejecting fragment links in that navigation. Reworked CTAs and feature copy around daily business workflows. Technical setup remains available in a disclosure.
+
+Verified next/previous hero controls, paused state, and offscreen link tab order in the in-app browser. The reel respects reduced motion and pauses for focus, hover, hidden documents, and when outside the viewport. Checked mobile layouts and the Billing filter (four features). All 31 content pages plus 404 pass link, metadata, schema, sitemap, and asset checks. Screenshots: sme-homepage-desktop.png and sme-homepage-mobile.png.

@@ -31,12 +31,12 @@ export function renderAddonPage(addon, addons) {
 <header class="site-header"><div class="container nav-wrap">
   <a class="brand" href="../../" aria-label="Nepal Compliance home"><img src="../../assets/nepal-compliance.svg" width="35" height="35" alt=""><span>Nepal Compliance</span></a>
   <button class="menu-toggle" aria-expanded="false" aria-controls="navigation" hidden>Menu <span aria-hidden="true">≡</span></button>
-  <nav id="navigation" aria-label="Main navigation"><a href="../../#features">Features</a><a href="../../#addons">Add-ons</a><a href="../../#get-started">Installation</a><a href="../../guides/">Guides</a><a href="https://github.com/yarsa/nepal-compliance">GitHub <span aria-hidden="true">↗</span></a></nav>
+  <nav id="navigation" aria-label="Main navigation"><a href="../../features/">Features</a><a href="../../addons/">Add-ons</a><a href="../../#get-started">Installation</a><a href="../../guides/">Guides</a><a href="https://github.com/yarsa/nepal-compliance">GitHub <span aria-hidden="true">↗</span></a></nav>
 </div></header>
 <main id="main" class="container feature-page addon-page">
-  <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="../../">Home</a></li><li><a href="../../#addons">Add-ons</a></li><li aria-current="page">${e(addon.shortTitle)}</li></ol></nav>
+  <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="../../">Home</a></li><li><a href="../../addons/">Add-ons</a></li><li aria-current="page">${e(addon.shortTitle)}</li></ol></nav>
   <div class="feature-page-layout">
-    <aside class="feature-navigation"><nav aria-label="Add-on pages"><p class="section-label">Add-on integrations</p>${addons.map(item => `<a href="../${e(item.slug)}/"${item.slug === addon.slug ? ' aria-current="page"' : ''}>${e(item.shortTitle)}</a>`).join('\n')}</nav><p>Looking for the app’s included capabilities? <a href="../../#features">Browse core features</a>.</p></aside>
+    <aside class="feature-navigation"><nav aria-label="Add-on pages"><p class="section-label">Add-on integrations</p>${addons.map(item => `<a href="../${e(item.slug)}/"${item.slug === addon.slug ? ' aria-current="page"' : ''}>${e(item.shortTitle)}</a>`).join('\n')}</nav><p>Looking for the app’s included capabilities? <a href="../../features/">Browse core features</a>.</p></aside>
     <article class="feature-article">
       <header class="feature-page-header"><p class="section-label">${e(addon.category)} / Add-on guide</p><h1>${e(addon.title)}</h1><p class="feature-lead">${e(addon.intro)}</p><p class="audience"><strong>For:</strong> ${e(addon.audience.replace(/^For /, ''))}</p></header>
       <div class="integration-scope"><strong>Integration scope</strong><p>This is a separate integration option, not a feature included with the public Nepal Compliance installation. Confirm availability, compatible versions, provider access, and any implementation or service fees before proceeding.</p></div>
@@ -49,7 +49,7 @@ export function renderAddonPage(addon, addons) {
     </article>
   </div>
 </main>
-<footer class="site-footer"><div class="container"><div class="footer-top"><div><a class="brand" href="../../"><img src="../../assets/nepal-compliance.svg" width="30" height="30" alt=""><span>Nepal Compliance</span></a><p>An open-source app for ERPNext and Frappe HR.</p></div><nav aria-label="Project resources"><a href="../../nepal-hrms/">Nepal HRMS · Beta</a><a href="../../#features">Core features</a><a href="../../#addons">Add-ons</a><a href="../../sitemap.xml">Sitemap</a></nav></div><div class="footer-bottom"><p>A project by <a href="https://github.com/yarsa">Yarsa</a> and contributors. Provider product names identify their respective services.</p><a href="https://github.com/yarsa/nepal-compliance/blob/master/LICENSE">Core app: GPL-3.0</a></div></div></footer>
+<footer class="site-footer"><div class="container"><div class="footer-top"><div><a class="brand" href="../../"><img src="../../assets/nepal-compliance.svg" width="30" height="30" alt=""><span>Nepal Compliance</span></a><p>An open-source app for ERPNext and Frappe HR.</p></div><nav aria-label="Project resources"><a href="../../nepal-hrms/">Nepal HRMS · Beta</a><a href="../../features/">Core features</a><a href="../../addons/">Add-ons</a><a href="../../sitemap.xml">Sitemap</a></nav></div><div class="footer-bottom"><p>A project by <a href="https://github.com/yarsa">Yarsa</a> and contributors. Provider product names identify their respective services.</p><a href="https://github.com/yarsa/nepal-compliance/blob/master/LICENSE">Core app: GPL-3.0</a></div></div></footer>
 </body>
 </html>`;
 }

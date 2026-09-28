@@ -64,7 +64,7 @@ if (explorer) {
     }
     for (const button of buttons) button.setAttribute('aria-pressed', String(button.dataset.workflow === key));
     document.querySelector('#workflow-description').textContent = groups[key].description;
-    document.querySelector('#workflow-status').textContent = `${groups[key].label}: ${count} feature guides`;
+    document.querySelector('#workflow-status').textContent = `${groups[key].label}: ${count} features`;
     if (updateUrl) {
       const url = new URL(location.href);
       if (key === 'all') url.searchParams.delete('workflow');
@@ -76,4 +76,58 @@ if (explorer) {
   selectWorkflow(new URLSearchParams(location.search).get('workflow') || 'all');
   for (const button of buttons) button.addEventListener('click', () => selectWorkflow(button.dataset.workflow, true));
   window.addEventListener('popstate', () => selectWorkflow(new URLSearchParams(location.search).get('workflow') || 'all'));
+}
+
+// A quiet, controllable feature reel. All links remain available without JS.
+const spotlight = document.querySelector('.feature-spotlight');
+if (spotlight) {
+  const rows = [...spotlight.querySelectorAll('.spotlight-item')];
+  const track = spotlight.querySelector('.spotlight-track');
+  const controls = spotlight.querySelector('.spotlight-controls');
+  const toggle = controls.querySelector('[data-spotlight="toggle"]');
+  const motion = matchMedia('(prefers-reduced-motion: reduce)');
+  let selected = 0;
+  let paused = motion.matches;
+  let hovering = false;
+  let visible = true;
+  let timer;
+  function draw() {
+    const first = Math.max(0, Math.min(selected - 1, rows.length - 3));
+    const height = rows[0].getBoundingClientRect().height;
+    track.style.transform = `translateY(-${first * height}px)`;
+    rows.forEach((row, index) => {
+      row.classList.toggle('is-highlighted', index === selected);
+      const outside = index < first || index >= first + 3;
+      row.inert = outside;
+      row.tabIndex = outside ? -1 : 0;
+      if (outside) row.setAttribute('aria-hidden', 'true');
+      else row.removeAttribute('aria-hidden');
+    });
+    spotlight.querySelector('.spotlight-count').textContent = `${String(selected + 1).padStart(2, '0')} / ${String(rows.length).padStart(2, '0')}`;
+    toggle.textContent = paused ? 'Start rotation' : 'Pause rotation';
+  }
+  function schedule() {
+    clearTimeout(timer);
+    if (!paused && !hovering && visible && !document.hidden && !spotlight.contains(document.activeElement)) {
+      timer = setTimeout(() => { selected = (selected + 1) % rows.length; draw(); schedule(); }, 5000);
+    }
+  }
+  spotlight.classList.add('is-enhanced');
+  controls.hidden = false;
+  controls.addEventListener('click', event => {
+    const action = event.target.closest('button')?.dataset.spotlight;
+    if (!action) return;
+    if (action === 'toggle') paused = !paused;
+    else { paused = true; selected = (selected + (action === 'next' ? 1 : -1) + rows.length) % rows.length; }
+    draw(); schedule();
+  });
+  spotlight.addEventListener('mouseenter', () => { hovering = true; schedule(); });
+  spotlight.addEventListener('mouseleave', () => { hovering = false; schedule(); });
+  spotlight.addEventListener('focusin', schedule);
+  spotlight.addEventListener('focusout', () => setTimeout(schedule, 0));
+  document.addEventListener('visibilitychange', schedule);
+  motion.addEventListener('change', () => { paused = motion.matches; draw(); schedule(); });
+  window.addEventListener('resize', draw);
+  if ('IntersectionObserver' in window) new IntersectionObserver(entries => { visible = entries[0].isIntersecting; schedule(); }).observe(spotlight);
+  draw(); schedule();
 }

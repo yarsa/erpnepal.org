@@ -5,6 +5,7 @@ import { addons } from '../content/addons.mjs';
 import { renderAddonPage, renderAddonDirectory } from './addon-pages.mjs';
 import { guides, guideDate } from '../content/guides.mjs';
 import { renderGuidePage, renderGuideIndex } from './guide-pages.mjs';
+import { renderFeatureIndex, renderAddonIndex, renderBusinessPage } from './collection-pages.mjs';
 
 const siteUrl = process.env.SITE_URL ? new URL(process.env.SITE_URL) : null;
 if (siteUrl && (siteUrl.protocol !== 'https:' || siteUrl.username || siteUrl.password || siteUrl.search || siteUrl.hash)) {
@@ -56,6 +57,19 @@ const pages = [{ path: '', html: homepage.replace('<!-- ADDON_DIRECTORY -->', ()
   { '@context': schemaContext, '@type': 'WebSite', name: 'Nepal Compliance', url: address('') },
   { '@context': schemaContext, '@type': 'SoftwareSourceCode', name: 'Nepal Compliance', codeRepository: 'https://github.com/yarsa/nepal-compliance', license: 'https://www.gnu.org/licenses/gpl-3.0.html', description: 'An open-source app extending ERPNext and Frappe HR with Nepal-specific date, accounting, HR, and payroll workflows.' },
 ] }];
+for (const [path, name, html] of [
+  ['features/', 'Features', renderFeatureIndex(features)],
+  ['addons/', 'Add-ons', renderAddonIndex(addons)],
+  ['for-your-business/', 'For your business', renderBusinessPage()],
+]) {
+  pages.push({ path, html, schema: [
+    { '@context': schemaContext, '@type': 'WebPage', name, url: address(path) },
+    { '@context': schemaContext, '@type': 'BreadcrumbList', itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: address('') },
+      { '@type': 'ListItem', position: 2, name, item: address(path) },
+    ] },
+  ] });
+}
 pages.push({ path: 'guides/', html: renderGuideIndex(guides), schema: [
   { '@context': schemaContext, '@type': 'WebPage', name: 'Practical ERP guides for Nepal', url: address('guides/') },
   { '@context': schemaContext, '@type': 'CollectionPage', name: 'Practical ERP guides for Nepal', url: address('guides/'), hasPart: guides.map(g => ({ '@type': 'Article', headline: g.title, url: address(`guides/${g.slug}/`) })) },
@@ -89,7 +103,7 @@ for (const feature of features) {
     { '@context': schemaContext, '@type': 'WebPage', name: feature.title, description: feature.description, url: address(path), isPartOf: { '@type': 'WebSite', name: 'Nepal Compliance', url: address('') } },
     { '@context': schemaContext, '@type': 'BreadcrumbList', itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: address('') },
-      { '@type': 'ListItem', position: 2, name: 'Features', item: address('#features') },
+      { '@type': 'ListItem', position: 2, name: 'Features', item: address('features/') },
       { '@type': 'ListItem', position: 3, name: feature.title, item: address(path) },
     ] },
   ] });
@@ -100,7 +114,7 @@ for (const addon of addons) {
     { '@context': schemaContext, '@type': 'WebPage', name: addon.title, description: addon.description, url: address(path), isPartOf: { '@type': 'WebSite', name: 'Nepal Compliance', url: address('') } },
     { '@context': schemaContext, '@type': 'BreadcrumbList', itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: address('') },
-      { '@type': 'ListItem', position: 2, name: 'Add-ons', item: address('#addons') },
+      { '@type': 'ListItem', position: 2, name: 'Add-ons', item: address('addons/') },
       { '@type': 'ListItem', position: 3, name: addon.title, item: address(path) },
     ] },
   ] });
@@ -115,7 +129,11 @@ await writeFile('dist/.nojekyll', '');
 for (const page of pages) {
   if (!page.html.includes('</head>')) throw new Error(`Missing HTML head: ${page.path}`);
   const canonical = base ? `  <link rel="canonical" href="${escapeAttribute(address(page.path))}">\n  <meta property="og:url" content="${escapeAttribute(address(page.path))}">\n` : '';
-  const html = inlineSharedResources(page.html).replace('</head>', () => `${canonical}  <script type="application/ld+json">${jsonScript(page.schema)}</script>\n</head>`);
+  const prefix = page.path ? '../'.repeat(page.path.split('/').filter(Boolean).length) : './';
+  const navigation = [['features/', 'Features'], ['addons/', 'Add-ons'], ['nepal-hrms/', 'Nepal HRMS'], ['guides/', 'Guides'], ['for-your-business/', 'For your business']];
+  const navHtml = `<nav id="navigation" aria-label="Main navigation">${navigation.map(([path, label]) => `<a href="${prefix}${path}"${page.path === path ? ' aria-current="page"' : ''}>${label}</a>`).join('')}</nav>`;
+  const withNavigation = page.html.replace(/<nav id="navigation"[^>]*>[\s\S]*?<\/nav>/, () => navHtml);
+  const html = inlineSharedResources(withNavigation).replace('</head>', () => `${canonical}  <script type="application/ld+json">${jsonScript(page.schema)}</script>\n</head>`);
   await mkdir(`dist/${page.path}`, { recursive: true });
   await writeFile(`dist/${page.path}index.html`, html);
 }
@@ -135,3 +153,5 @@ const markdown = value => value.replace(/[\r\n]+/g, ' ').replace(/([\\[\]])/g, '
 await writeFile('dist/llms.txt', `# Nepal Compliance\n\n> An open-source app for Nepal-specific workflows in ERPNext and Frappe HR.\n\nThis file is an optional plain-text index of this website. Feature pages describe the upstream project; they do not establish regulatory certification or guarantee compliance.\n\n## Website\n\n- [Overview](${base || './'})\n${features.map(feature => `- [${markdown(feature.title)}](${base || './'}features/${feature.slug}/): ${markdown(feature.description)}`).join('\n')}\n\n## Nepal HRMS (Beta)\n\n- [Nepal HRMS — HR and Payroll for Nepal (Beta)](${base || './'}nepal-hrms/): Upcoming HR and payroll capabilities for Nepal Compliance, currently tested in a separate beta app before planned incorporation. Review the page for scope and evaluation guidance.\n\n## Add-ons\n\nThese pages describe related applications and integration considerations. Listing an application does not establish that it is bundled with Nepal Compliance or that a specific integration is available or tested. Review each page and its project references for scope and requirements.\n\n${addons.map(addon => `- [${markdown(addon.title)}](${base || './'}addons/${addon.slug}/): ${markdown(addon.description)}`).join('\n')}\n\n## Project\n\n- [Source code](https://github.com/yarsa/nepal-compliance)\n- [Installation guide](https://github.com/yarsa/nepal-compliance/blob/master/docs/manual-install.md)\n`);
 console.log(`Static website built in dist/ (${pages.length} content pages).`);
 await writeFile('dist/llms.txt', `\n## Practical guides\n\n- [All guides](${base || './'}guides/): Source-linked operational guides. Published 28 September 2026; examples are illustrative, not individualized tax or legal advice.\n${guides.map(g => `- [${markdown(g.title)}](${base || './'}guides/${g.slug}/): ${markdown(g.description)}`).join('\n')}\n`, { flag: 'a' });
+
+await writeFile('dist/llms.txt', `\n## Explore the product\n\n- [Features](${base || './'}features/)\n- [Add-ons](${base || './'}addons/)\n- [For your business](${base || './'}for-your-business/)\n`, { flag: 'a' });

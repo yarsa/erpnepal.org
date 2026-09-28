@@ -1,14 +1,14 @@
 const e = value => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;');
-function shell(title, description, prefix, body) {
+export function shell(title, description, prefix, body, titleSuffix = 'ERP Nepal Guides') {
   return `<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#ffffff"><meta name="referrer" content="strict-origin-when-cross-origin">
-<title>${e(title)} | ERP Nepal Guides</title><meta name="description" content="${e(description)}">
+<title>${e(title)} | ${e(titleSuffix)}</title><meta name="description" content="${e(description)}">
 <meta property="og:type" content="website"><meta property="og:title" content="${e(title)}"><meta property="og:description" content="${e(description)}"><meta name="twitter:card" content="summary">
 <link rel="icon" type="image/png" sizes="96x96" href="${prefix}assets/favicon.png"><link rel="icon" type="image/svg+xml" sizes="any" href="${prefix}assets/favicon.svg">
 <link rel="stylesheet" href="${prefix}styles.css"><script src="${prefix}app.js" defer></script>
 </head><body><a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header"><div class="container nav-wrap"><a class="brand" href="${prefix}" aria-label="Nepal Compliance home"><img src="${prefix}assets/nepal-compliance.svg" width="35" height="35" alt=""><span>Nepal Compliance</span></a><button class="menu-toggle" aria-expanded="false" aria-controls="navigation" hidden>Menu <span aria-hidden="true">≡</span></button><nav id="navigation" aria-label="Main navigation"><a href="${prefix}#features">Features</a><a href="${prefix}#addons">Add-ons</a><a href="${prefix}nepal-hrms/">Nepal HRMS</a><a href="${prefix}guides/">Guides</a><a href="${prefix}#get-started">Installation</a></nav></div></header>
+<header class="site-header"><div class="container nav-wrap"><a class="brand" href="${prefix}" aria-label="Nepal Compliance home"><img src="${prefix}assets/nepal-compliance.svg" width="35" height="35" alt=""><span>Nepal Compliance</span></a><button class="menu-toggle" aria-expanded="false" aria-controls="navigation" hidden>Menu <span aria-hidden="true">≡</span></button><nav id="navigation" aria-label="Main navigation"><a href="${prefix}features/">Features</a><a href="${prefix}addons/">Add-ons</a><a href="${prefix}nepal-hrms/">Nepal HRMS</a><a href="${prefix}guides/">Guides</a><a href="${prefix}#get-started">Installation</a></nav></div></header>
 <main id="main" class="container feature-page">${body}</main>
 <footer class="site-footer"><div class="container"><div class="footer-top"><a class="brand" href="${prefix}">Nepal Compliance</a><nav aria-label="Project resources"><a href="${prefix}guides/">All guides</a><a href="${prefix}guides/#editorial">Editorial approach</a><a href="${prefix}sitemap.xml">Sitemap</a></nav></div><div class="footer-bottom"><p>Published by ERP Nepal. Practical guidance with linked sources.</p><a href="https://github.com/yarsa/erpnepal.org/issues">Suggest a correction</a></div></div></footer>
 </body></html>`;

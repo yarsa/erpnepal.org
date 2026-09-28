@@ -43,6 +43,9 @@ for (const [file, { html }] of documents) {
   const meta = [...html.matchAll(/<meta\b[^>]*>/gi)].map(match => attrs(match[0]));
   if (!is404) {
     contentPaths.push(path);
+    const mainNav = html.match(/<nav id="navigation"[^>]*>([\s\S]*?)<\/nav>/)?.[1];
+    assert(mainNav, `Missing main navigation: ${file}`);
+    assert(!/href="[^"]*#/.test(mainNav), `Main navigation must link to pages: ${file}`);
     assert(!/<link\b[^>]*rel="stylesheet"/i.test(html), `Render-blocking stylesheet request: ${file}`);
     assert(!/<script\b[^>]*\bsrc=/i.test(html), `Unexpected external script request: ${file}`);
     assert.equal((html.match(/<style data-site-styles>/g) || []).length, 1, `Missing shared inline styles: ${file}`);
@@ -79,21 +82,24 @@ for (const [file, { html }] of documents) {
     if (breadcrumbs) {
       const isHrmsPage = path === 'nepal-hrms/';
       const isGuideIndex = path === 'guides/';
+      const isCollection = ['features/', 'addons/', 'for-your-business/'].includes(path);
       const isGuide = path.startsWith('guides/');
-      assert.equal(breadcrumbs.itemListElement.length, isHrmsPage || isGuideIndex ? 2 : 3, `Invalid breadcrumbs: ${file}`);
+      assert.equal(breadcrumbs.itemListElement.length, isHrmsPage || isGuideIndex || isCollection ? 2 : 3, `Invalid breadcrumbs: ${file}`);
       breadcrumbs.itemListElement.forEach((item, index) => {
         assert.equal(item.position, index + 1, `Invalid breadcrumb position: ${file}`);
         assert(item.name && item.item, `Incomplete breadcrumb: ${file}`);
       });
       if (isHrmsPage) {
         assert.equal(breadcrumbs.itemListElement[1].name, 'Nepal HRMS', `Incorrect HRMS breadcrumb: ${file}`);
+      } else if (isCollection) {
+        assert(['Features', 'Add-ons', 'For your business'].includes(breadcrumbs.itemListElement[1].name), `Invalid collection breadcrumb: ${file}`);
       } else if (isGuide) {
         assert.equal(breadcrumbs.itemListElement[1].name, 'Guides', `Incorrect guide breadcrumb: ${file}`);
         assert.equal(breadcrumbs.itemListElement[1].item, process.env.SITE_URL ? new URL('guides/', base).href : '/guides/', `Incorrect guide index URL: ${file}`);
       } else {
         const section = path.startsWith('addons/') ? 'addons' : 'features';
         assert.equal(breadcrumbs.itemListElement[1].name, section === 'addons' ? 'Add-ons' : 'Features', `Incorrect breadcrumb section: ${file}`);
-        assert.equal(breadcrumbs.itemListElement[1].item, process.env.SITE_URL ? new URL(`#${section}`, base).href : `/#${section}`, `Incorrect breadcrumb section URL: ${file}`);
+        assert.equal(breadcrumbs.itemListElement[1].item, process.env.SITE_URL ? new URL(`${section}/`, base).href : `/${section}/`, `Incorrect breadcrumb section URL: ${file}`);
       }
       assert.equal(breadcrumbs.itemListElement.at(-1).item, process.env.SITE_URL ? pageUrl.href : `/${path}`, `Incorrect breadcrumb page URL: ${file}`);
     }
@@ -130,7 +136,7 @@ for (const [file, { html }] of documents) {
 for (const feature of features) assert(documents.has(resolve(root, `features/${feature.slug}/index.html`)), `Missing feature page: ${feature.slug}`);
 for (const addon of addons) assert(documents.has(resolve(root, `addons/${addon.slug}/index.html`)), `Missing add-on page: ${addon.slug}`);
 assert(documents.has(resolve(root, 'nepal-hrms/index.html')), 'Missing Nepal HRMS page');
-assert.equal(documents.size, features.length + addons.length + guides.length + 4, 'Unexpected number of HTML pages');
+assert.equal(documents.size, features.length + addons.length + guides.length + 7, 'Unexpected number of HTML pages');
 for (const guide of guides) {
   assert(documents.has(resolve(root, `guides/${guide.slug}/index.html`)), `Missing guide: ${guide.slug}`);
   const ids = new Set(guide.sources.map(s => s.id));

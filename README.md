@@ -62,3 +62,7 @@ The build embeds `styles.css`, `app.js`, and the small product SVG into each con
 ## Practical guides
 
 Nine source-linked articles and the `/guides/` index are generated from `content/guides-*.mjs` through `scripts/guide-pages.mjs`. The index explains the editorial method and AI assistance. Update the publication/review dates only when the content is actually reviewed. See [Topic research](docs/TOPIC-RESEARCH.md) for question evidence and the limits of qualitative demand research.
+
+## Business navigation
+
+`/features/` and `/addons/` are standalone directories, and `/for-your-business/` helps SME owners evaluate everyday workflows. `scripts/collection-pages.mjs` renders these pages; the build shares page-based main navigation across the site. The homepage feature reel supports manual controls, pauses on hover or keyboard focus, and respects reduced-motion preferences. Installation resources remain in a collapsed technical section.

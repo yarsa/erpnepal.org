@@ -35,7 +35,7 @@ export const guidesAccounting = [
       {
         heading: 'Ask what “Nepal support” includes',
         paragraphs: [
-          'Ask for the installed app names and versions, the reports demonstrated, and the configuration still required. Nepal Compliance lists local registers, invoice controls, Nepali dates, and a CBMS connection. Its maintainers also note that the feature checklist can lag the code. A listed feature is therefore a starting point for a test, not the test result.',
+          'Ask for the installed app names and versions, the reports demonstrated, and the configuration still required. Nepal Compliance supports local registers, invoice controls, Nepali dates, and CBMS integration. Test the workflows in the version you intend to use, with your own sample transactions.',
           'Keep three questions separate: can the software represent your workflow, has your installation been configured correctly, and have the current requirements for your business been confirmed? A product name, a local calendar, or a successful demonstration cannot answer all three.',
         ],
         items: ['Request a sample report produced from your demonstration transactions.', 'Identify any separate add-on, provider enrollment, or custom development.', 'Ask your accountant which current invoicing and reporting requirements need verification.'],
@@ -104,7 +104,7 @@ export const guidesAccounting = [
       {
         heading: 'Test corrections and reconcile a small reporting period',
         paragraphs: [
-          'Add a return and a correction scenario to the same test set. ERPNext documents credit notes against original invoices. Nepal Compliance also lists cancellation records and invoice reprint controls. Confirm the installed workflow and the roles allowed to use it rather than improvising a correction after a live invoice is issued.',
+          'Add a return and a correction scenario to the same test set. ERPNext documents credit notes against original invoices. Nepal Compliance also provides cancellation records and invoice reprint controls. Confirm the installed workflow and the roles allowed to use it rather than improvising a correction after a live invoice is issued.',
           'Give your reviewer a short list of expected documents and totals. Run the relevant register for exactly that company and date range. When totals differ, first check document status, return treatment, filters, and dates. Do not change tax rates merely to force a report to match a spreadsheet.',
         ],
         items: ['Trace a return to its original invoice.', 'Check how cancelled documents appear in the selected report.', 'Explain each difference between the sample invoice list and the register.'],
@@ -157,7 +157,7 @@ export const guidesAccounting = [
         paragraphs: [
           'Build a small test list with an ordinary invoice, a discounted invoice, and a return linked to its original. Add other cases your business genuinely uses. Agree the permitted test destination before submitting sample records; a production service should not receive invented transactions as an experiment.',
           'For each case, write down the expected company, invoice reference, fiscal period, date, taxable amount, tax, and total. Compare those expectations with the data prepared for sending. A correctly printed bill does not show every value in an integration request.',
-          'The reviewed app code builds different data for invoices and returns. Ask the implementer to demonstrate both paths, including the original-invoice reference for a return. Treat source inspection as evidence of intended behavior, not proof that your installed connection works.',
+          'Invoices and returns follow different submission paths. Ask the implementer to demonstrate both, including the original-invoice reference for a return, and verify the response from your configured connection.',
         ],
         sources: ['cbms-code'],
       },

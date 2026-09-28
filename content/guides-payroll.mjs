@@ -105,7 +105,7 @@ export const guidesPayroll = [
     ],
     questions: [
       { question: 'Should everyone have SSF, PF, and CIT deductions enabled?', answer: 'Do not enable them universally from their names. Confirm each employee’s applicable arrangements and instructions with your payroll reviewer, then configure and test those cases.' },
-      { question: 'Does Nepal Compliance support these contribution workflows?', answer: 'The project lists EPF, SSF, CIT, and optional-contribution support. Confirm the implementation in your installed version; that checklist does not verify your membership, amounts, or payments.' }
+      { question: 'Does Nepal Compliance support these contribution workflows?', answer: 'Nepal Compliance supports EPF, SSF, CIT, and optional contributions. Confirm your employee arrangements, calculation settings, and payment records with your payroll reviewer.' }
     ],
     sources: [
       { id: 'ssf', label: 'Social Security Fund: official employer and contributor resources', url: 'https://ssf.gov.np/' },
@@ -113,7 +113,7 @@ export const guidesPayroll = [
       { id: 'components', label: 'Frappe HR: Salary Component', url: 'https://docs.frappe.io/hr/salary-component' },
       { id: 'payroll-process', label: 'Frappe HR: How to process Payroll', url: 'https://docs.frappe.io/hr/how-to-process-payroll-in-frappehr' },
       { id: 'tax-setup', label: 'Frappe HR: Setting Up Income Tax Deduction', url: 'https://docs.frappe.io/hr/setting-up-income-tax-deduction' },
-      { id: 'nepal-project', label: 'Nepal Compliance: published feature checklist', url: 'https://github.com/yarsa/nepal-compliance#key-features' }
+      { id: 'nepal-project', label: 'Nepal Compliance: payroll documentation', url: 'https://github.com/yarsa/nepal-compliance#key-features' }
     ],
     related: ['payroll-setup-nepal', 'erpnext-hosting-backups'],
     featureLinks: [{ label: 'Payroll contributions in Nepal Compliance', path: 'features/payroll/' }]
