@@ -73,3 +73,5 @@ The library and articles have source-linked sections, original examples, tables,
 Added Features, Add-ons, and For your business pages. Main navigation links to pages throughout the site, with a build check rejecting fragment links in that navigation. Reworked CTAs and feature copy around daily business workflows. Technical setup remains available in a disclosure.
 
 Verified next/previous hero controls, paused state, and offscreen link tab order in the in-app browser. The reel respects reduced motion and pauses for focus, hover, hidden documents, and when outside the viewport. Checked mobile layouts and the Billing filter (four features). All 31 content pages plus 404 pass link, metadata, schema, sitemap, and asset checks. Screenshots: sme-homepage-desktop.png and sme-homepage-mobile.png.
+
+Follow-up: removed visible rotation controls and hover pausing at the owner’s request. Automatic rotation now advances every three seconds, retaining reduced-motion, keyboard-focus, and visibility handling.

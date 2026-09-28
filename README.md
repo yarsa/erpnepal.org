@@ -65,4 +65,4 @@ Nine source-linked articles and the `/guides/` index are generated from `content
 
 ## Business navigation
 
-`/features/` and `/addons/` are standalone directories, and `/for-your-business/` helps SME owners evaluate everyday workflows. `scripts/collection-pages.mjs` renders these pages; the build shares page-based main navigation across the site. The homepage feature reel supports manual controls, pauses on hover or keyboard focus, and respects reduced-motion preferences. Installation resources remain in a collapsed technical section.
+`/features/` and `/addons/` are standalone directories, and `/for-your-business/` helps SME owners evaluate everyday workflows. `scripts/collection-pages.mjs` renders these pages; the build shares page-based main navigation across the site. The homepage feature reel rotates automatically every three seconds, pauses on keyboard focus, and respects reduced-motion preferences. Installation resources remain in a collapsed technical section.

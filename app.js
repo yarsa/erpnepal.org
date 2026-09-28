@@ -78,17 +78,14 @@ if (explorer) {
   window.addEventListener('popstate', () => selectWorkflow(new URLSearchParams(location.search).get('workflow') || 'all'));
 }
 
-// A quiet, controllable feature reel. All links remain available without JS.
+// Automatic feature reel. All links remain available without JS.
 const spotlight = document.querySelector('.feature-spotlight');
 if (spotlight) {
   const rows = [...spotlight.querySelectorAll('.spotlight-item')];
   const track = spotlight.querySelector('.spotlight-track');
-  const controls = spotlight.querySelector('.spotlight-controls');
-  const toggle = controls.querySelector('[data-spotlight="toggle"]');
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
   let selected = 0;
   let paused = motion.matches;
-  let hovering = false;
   let visible = true;
   let timer;
   function draw() {
@@ -104,25 +101,14 @@ if (spotlight) {
       else row.removeAttribute('aria-hidden');
     });
     spotlight.querySelector('.spotlight-count').textContent = `${String(selected + 1).padStart(2, '0')} / ${String(rows.length).padStart(2, '0')}`;
-    toggle.textContent = paused ? 'Start rotation' : 'Pause rotation';
   }
   function schedule() {
     clearTimeout(timer);
-    if (!paused && !hovering && visible && !document.hidden && !spotlight.contains(document.activeElement)) {
-      timer = setTimeout(() => { selected = (selected + 1) % rows.length; draw(); schedule(); }, 5000);
+    if (!paused && visible && !document.hidden && !spotlight.contains(document.activeElement)) {
+      timer = setTimeout(() => { selected = (selected + 1) % rows.length; draw(); schedule(); }, 3000);
     }
   }
   spotlight.classList.add('is-enhanced');
-  controls.hidden = false;
-  controls.addEventListener('click', event => {
-    const action = event.target.closest('button')?.dataset.spotlight;
-    if (!action) return;
-    if (action === 'toggle') paused = !paused;
-    else { paused = true; selected = (selected + (action === 'next' ? 1 : -1) + rows.length) % rows.length; }
-    draw(); schedule();
-  });
-  spotlight.addEventListener('mouseenter', () => { hovering = true; schedule(); });
-  spotlight.addEventListener('mouseleave', () => { hovering = false; schedule(); });
   spotlight.addEventListener('focusin', schedule);
   spotlight.addEventListener('focusout', () => setTimeout(schedule, 0));
   document.addEventListener('visibilitychange', schedule);
