@@ -1,6 +1,7 @@
 export const features = [
   {
     "slug": "accounting-and-vat",
+    "shortTitle": "Accounting and VAT",
     "title": "Nepal accounting and VAT reports for ERPNext",
     "description": "Sales, purchase, return, and VAT reports for Nepal businesses using ERPNext, with customer and supplier registers and balance confirmation.",
     "intro": "Review sales, purchases, returns, and customer or supplier balances from the transactions your team records in ERPNext. Nepal Compliance adds value-added tax (VAT) registers and reporting tools for your accounting work in Nepal.",
@@ -66,6 +67,7 @@ export const features = [
   },
   {
     "slug": "invoicing",
+    "shortTitle": "Invoicing and billing",
     "title": "Nepal invoicing and billing controls for ERPNext",
     "description": "Sequential invoice numbering, cancellation records, printed copy counts, and Nepali invoice formats for ERPNext billing.",
     "intro": "Keep invoice numbers, cancelled transactions, and printed copies traceable in ERPNext. Nepal Compliance adds sequential numbering, cancellation records, and reprint copy counts to help billing staff and accounts managers review the same transaction history.",
@@ -131,6 +133,7 @@ export const features = [
   },
   {
     "slug": "cbms",
+    "shortTitle": "IRD CBMS integration",
     "title": "IRD CBMS integration for ERPNext in Nepal",
     "description": "Connect ERPNext billing to IRD CBMS with configured credentials, sales and return submissions, and recorded responses for your accounts team to review.",
     "intro": "Connect sales invoices and returns to the Inland Revenue Department’s Central Billing Monitoring System (CBMS). Nepal Compliance prepares the billing data and records responses on the invoice, giving your accounts team a place to review the result. Setup and verification are required for your business.",
@@ -196,6 +199,7 @@ export const features = [
   },
   {
     "slug": "payroll",
+    "shortTitle": "Payroll and contributions",
     "title": "Nepal payroll configuration for ERPNext and Frappe HR",
     "description": "Nepal payroll contributions, salary components, tax slab configuration, gratuity, and employee grades for ERPNext and Frappe HR.",
     "intro": "Configure earnings, deductions, and payroll contributions for employees in Nepal. Nepal Compliance extends Frappe HR with provident fund and social security support, optional contributions, tax slabs, gratuity, employee grades, and basic salary settings.",
@@ -261,6 +265,7 @@ export const features = [
   },
   {
     "slug": "hr-and-leave",
+    "shortTitle": "Employee records and leave",
     "title": "Nepal employee records and leave for Frappe HR",
     "description": "Employee records, sick and home leave allocation, and Nepali attendance and holiday dates for ERPNext and Frappe HR.",
     "intro": "Manage employee information, leave allocation, attendance dates, and holidays in Frappe HR. Nepal Compliance adds local employee fields and sick and home leave workflows, including configurable monthly allocation using Nepal’s Bikram Sambat calendar.",
@@ -326,6 +331,7 @@ export const features = [
   },
   {
     "slug": "audit-and-reports",
+    "shortTitle": "Audit trails and records",
     "title": "ERPNext audit trails and document history for Nepal",
     "description": "Audit trails, document changes, cancellation records, and reports to help accounts teams review ERPNext transaction history.",
     "intro": "Review changes to business documents, invoice cancellations, and recorded user activity in ERPNext. Nepal Compliance provides audit reports that help accounts managers investigate a transaction and understand the changes recorded against it.",
@@ -395,6 +401,7 @@ export const features = [
   },
   {
     "slug": "nepali-dates",
+    "shortTitle": "Nepali dates and fiscal years",
     "title": "Bikram Sambat dates for ERPNext in Nepal",
     "description": "Bikram Sambat dates for ERPNext forms, fiscal years, lists, reports, and printed business documents.",
     "intro": "Use Bikram Sambat dates when entering transactions, reviewing reports, and printing documents in ERPNext. Nepal Compliance adds Nepal’s calendar to supported forms, fiscal years, lists, and related accounting and human resources workflows.",
