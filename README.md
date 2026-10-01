@@ -66,3 +66,7 @@ Nine source-linked articles and the `/guides/` index are generated from `content
 ## Business navigation
 
 `/features/` and `/addons/` are standalone directories, and `/for-your-business/` helps SME owners evaluate everyday workflows. `scripts/collection-pages.mjs` renders these pages; the build shares page-based main navigation across the site. The homepage feature reel rotates automatically every three seconds, pauses on keyboard focus, and respects reduced-motion preferences. Installation resources remain in a collapsed technical section.
+
+### Deployment verification
+
+Use GitHub Actions as the Pages source. If branch publishing is also enabled, its built-in workflow can overwrite the generated site with raw source files. Our workflow republishes the generated site after that branch workflow completes. Every deployment then verifies the live XML sitemap, robots.txt, and every sitemap page; a missing file or source-only deployment fails the check.

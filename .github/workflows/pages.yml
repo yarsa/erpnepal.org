@@ -6,6 +6,12 @@ on:
   pull_request:
     branches: [master]
   workflow_dispatch:
+  # If branch publishing is enabled, publish the generated site after it finishes.
+  # This prevents the branch publisher from overwriting dist/ with source files.
+  workflow_run:
+    workflows: ["pages build and deployment"]
+    types: [completed]
+    branches: [master]
 
 permissions:
   contents: read
@@ -28,7 +34,7 @@ jobs:
           npm run check
   deploy:
     needs: validate
-    if: github.event_name != 'pull_request'
+    if: github.event_name != 'pull_request' && (github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success')
     permissions:
       contents: read
       pages: write
@@ -61,3 +67,7 @@ jobs:
       - name: Deploy website
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Verify live sitemap and crawlable pages
+        env:
+          SITE_URL: https://${{ steps.pages.outputs.host }}${{ steps.pages.outputs.base_path }}
+        run: node scripts/check-live.mjs
