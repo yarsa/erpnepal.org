@@ -3,8 +3,12 @@ name: Develop build check
 on:
   push:
     branches: [develop]
+    # Markdown never reaches the build (README, NOTICE, docs/), so skip those commits.
+    paths-ignore: ['**/*.md', 'docs/**']
   pull_request:
     branches: [develop]
+    # Markdown never reaches the build (README, NOTICE, docs/), so skip those commits.
+    paths-ignore: ['**/*.md', 'docs/**']
   workflow_dispatch:
 
 permissions:
