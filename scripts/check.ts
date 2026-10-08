@@ -32,19 +32,18 @@ const visibleText = (html: string) =>
       .replace(/<!-- -->/g, ''),
   )
 
-// 1. URL set: exactly the previous site's pages, plus the Nepali draft.
+// 1. URL set: exactly the previous site's pages, plus the Nepali homepage.
 const expected = [
   '',
   'features/',
   'addons/',
   'guides/',
-  'for-your-business/',
+  'workflows/',
   'nepal-hrms/',
   ...features.map((f) => `features/${f.slug}/`),
   ...addons.map((a) => `addons/${a.slug}/`),
   ...guides.map((g) => `guides/${g.slug}/`),
 ].sort()
-const drafts = homeNe.draft ? ['ne/'] : []
 async function htmlDirs(dir = ''): Promise<string[]> {
   const out: string[] = []
   for (const entry of await readdir(new URL(dir || '.', dist), { withFileTypes: true })) {
@@ -55,8 +54,15 @@ async function htmlDirs(dir = ''): Promise<string[]> {
   return out
 }
 const all = [...expected, 'ne/'].sort()
-const indexed = all.filter((p) => !drafts.includes(p))
-assert.deepEqual((await htmlDirs()).sort(), all, 'built pages differ from the expected URL set')
+const indexed = all
+const redirects: Record<string, string> = { 'for-your-business/': 'workflows/' }
+assert.deepEqual((await htmlDirs()).sort(), [...all, ...Object.keys(redirects)].sort(), 'built pages differ from the expected URL set')
+for (const [from, to] of Object.entries(redirects)) {
+  const html = await read(`${from}index.html`)
+  assert(all.includes(to), `/${from} redirects to missing page /${to}`)
+  assert.match(html, new RegExp(`http-equiv="refresh" content="0; url=/${to}"`), `/${from}: missing redirect to /${to}`)
+  assert.match(html, /<meta name="robots" content="noindex">/, `/${from}: redirect page must be noindex`)
+}
 const sitemap = await read('sitemap.xml')
 const sitemapPaths = [...sitemap.matchAll(/<loc>https:\/\/[^/]+\/([^<]*)<\/loc>/g)].map((m) => m[1]).sort()
 assert.deepEqual(sitemapPaths, indexed, 'sitemap does not list exactly the indexed pages')
@@ -77,8 +83,7 @@ let maxKb = 0
 for (const [path, html] of pages) {
   const where = `/${path}`
   assert.match(html, path.startsWith('ne/') ? /<html lang="ne"/ : /<html lang="en"/, `${where}: wrong or missing lang`)
-  const noindex = /<meta name="robots" content="noindex"/.test(html)
-  assert.equal(noindex, drafts.includes(path), `${where}: noindex should be ${drafts.includes(path)}`)
+  assert(!/<meta name="robots" content="noindex"/.test(html), `${where}: page is noindex`)
   assert.match(html, /<link rel="canonical" href="https:\/\//, `${where}: missing canonical`)
   assert.match(html, /<script>window\.__STATS__=.*window\.__PAGE__=/, `${where}: missing page data for hydration`)
   const title = decode(html.match(/<title>([^<]*)<\/title>/)?.[1] ?? '')
@@ -137,7 +142,7 @@ const homeStrings = (t: typeof home) => [
   t.footer.tagline,
 ]
 let checked = expectText('', homeStrings(home))
-checked += expectText('ne/', [homeNe.draft, ...homeStrings(homeNe)])
+checked += expectText('ne/', homeStrings(homeNe))
 type Detail = {
   title: string
   intro: string
@@ -182,5 +187,5 @@ checked += expectText(
 )
 
 console.log(
-  `Passed: ${pages.size} pages (${drafts.length} draft, noindex) + 404, URLs match the previous site, ${checked} content strings pre-rendered, all same-site links and anchors resolve, max JS+CSS ${maxKb.toFixed(1)} KB gzip (budget ${BUDGET_KB} KB).`,
+  `Passed: ${pages.size} pages + 404, URL set as expected (${Object.keys(redirects).length} redirect), ${checked} content strings pre-rendered, all same-site links and anchors resolve, max JS+CSS ${maxKb.toFixed(1)} KB gzip (budget ${BUDGET_KB} KB).`,
 )

@@ -5,6 +5,7 @@ import { cn } from '../lib/cn'
 import { homePath, useStrings } from '../lib/i18n'
 import { compact, useStats } from '../lib/stats'
 import { MobileMenuSlot } from './MobileMenuSlot'
+import { SearchSlot } from './SearchSlot'
 import { Button, LinkButton } from './ui/button'
 
 // The next 6 am or 6 pm, when the automatic day/night theme takes over again.
@@ -77,6 +78,7 @@ export function SiteHeader({ path }: { path: string }) {
         </nav>
 
         <div className="ml-auto flex shrink-0 items-center gap-1 sm:gap-2">
+          <SearchSlot />
           <nav className="hidden items-center rounded-full bg-muted p-0.5 text-sm sm:flex" aria-label={ui.a11y.language}>
             {(['en', 'ne'] as const).map((l) =>
               l === locale ? (
@@ -119,7 +121,7 @@ export function SiteHeader({ path }: { path: string }) {
             href={repo}
             rel="noopener"
             aria-label={stars ? `${ui.a11y.github}, ${stars} ${ui.a11y.stars}` : ui.a11y.github}
-            className="inline-flex h-8 items-center gap-1.5 rounded-lg px-2 text-fg-2 text-sm transition-colors hover:bg-muted hover:text-fg"
+            className="max-sm:hidden inline-flex h-8 items-center gap-1.5 rounded-lg bg-fg/5 px-2.5 text-fg-2 text-sm transition-colors hover:bg-fg/10 hover:text-fg"
           >
             <IconBrandGithub className="size-4" aria-hidden="true" />
             {stars && (

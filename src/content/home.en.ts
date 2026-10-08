@@ -11,14 +11,15 @@ export default {
     fiscalStart: { bs: '1 Shrawan 2083', ad: '17 Jul 2026' },
     slipPeriod: { bs: 'Ashwin 2083', ad: 'Sep–Oct 2026' },
   },
-
-  draft: '',
   hero: {
     eyebrow: 'Free IRD Certified E-Billing Software with CBMS',
+    eyebrowHref: '/features/cbms/',
     title: 'Open Source ERP for Nepal with HR, Payroll & Accounting ',
     lead: 'IRD-style invoicing, CBMS sync, VAT reports and Nepali dates.',
     primary: { label: 'See how it works', href: '#features' },
     secondary: { label: 'Install', href: '#get-started' },
+    // Reassurance under the buttons; each item restates a fact shown elsewhere on the page.
+    assurance: ['No licence fee', 'Open source (GPL-3.0)', 'Runs on your server'],
   },
   proof: {
     label: 'Project facts',
@@ -271,7 +272,7 @@ export default {
       { label: 'Add-ons', href: '/addons/' },
       { label: 'Guides', href: '/guides/' },
       { label: 'Nepal HRMS', badge: 'Beta', href: '/nepal-hrms/' },
-      { label: 'For your business', href: '/for-your-business/' },
+      { label: 'Workflows', href: '/workflows/' },
     ],
     links: [
       { label: 'GitHub', href: repo },

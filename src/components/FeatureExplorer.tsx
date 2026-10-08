@@ -2,13 +2,29 @@ import { Tabs } from '@base-ui/react/tabs'
 import { Toggle } from '@base-ui/react/toggle'
 import { ToggleGroup } from '@base-ui/react/toggle-group'
 import { IconArrowRight, IconCheck } from '@tabler/icons-react'
+import { useEffect, useState } from 'react'
 import { type Calendar, useCalendar } from '../lib/calendar'
+import { useFeatureTab } from '../lib/featureTab'
 import { useStrings } from '../lib/i18n'
 import { ContentIcon } from '../lib/icons'
 import { Donut, grays } from './Donut'
 import { InvoiceCard } from './InvoiceCard'
 import { SlipCard } from './SlipCard'
 import { Badge } from './ui/badge'
+
+// Tabs read vertically beside the panel on wide screens, as a row on phones.
+// Orientation only changes arrow-key handling; layout follows the lg: classes.
+function useWide() {
+  const [wide, setWide] = useState(false)
+  useEffect(() => {
+    const query = window.matchMedia('(min-width: 1024px)')
+    const update = () => setWide(query.matches)
+    update()
+    query.addEventListener('change', update)
+    return () => query.removeEventListener('change', update)
+  }, [])
+  return wide
+}
 
 const segment =
   'rounded-md px-2.5 py-1 text-sm text-fg-3 transition-colors hover:text-fg data-pressed:bg-surface data-pressed:text-fg data-pressed:shadow-sm'
@@ -41,11 +57,15 @@ function DemoPanel({ value }: { value: string }) {
           <p className="mt-1 font-medium text-fg text-lg">
             {t.demo.leave.fiscalYear} {d.fiscalStart[calendar]}
           </p>
-          <dl className="mt-5 text-sm">
+          <dl className="mt-5 divide-y divide-line rounded-lg border border-line text-sm">
             {t.demo.leave.rows.map((row) => (
-              <div key={row.label} className="flex justify-between gap-4 border-line border-t py-2.5">
+              <div key={row.label} className="flex items-center justify-between gap-4 px-3 py-2.5">
                 <dt className="text-fg-2">{row.label}</dt>
-                <dd className="text-fg tabular-nums">{row.value}</dd>
+                <dd>
+                  <Badge size="sm" className="tabular-nums">
+                    {row.value}
+                  </Badge>
+                </dd>
               </div>
             ))}
           </dl>
@@ -74,16 +94,25 @@ function DemoPanel({ value }: { value: string }) {
     default:
       return (
         <div className="p-6">
-          <p className="text-fg-4 text-sm">{t.demo.audit.heading}</p>
-          <ol className="mt-4 text-sm">
+          <div className="flex items-center gap-2">
+            <p className="text-fg-4 text-sm">{t.demo.audit.heading}</p>
+            <Badge size="sm" className="tabular-nums">
+              {t.demo.audit.rows.length}
+            </Badge>
+          </div>
+          <ol className="mt-4 divide-y divide-line rounded-lg border border-line text-sm">
             {t.demo.audit.rows.map((row) => (
-              <li key={`${row.doc}-${row.action}`} className="grid gap-0.5 border-line border-t py-2.5">
-                <span className="font-medium text-fg">
-                  {row.doc} · {row.action}
-                </span>
-                <span className="text-fg-4">
-                  {d.invoice[calendar]} · {row.user}
-                </span>
+              <li key={`${row.doc}-${row.action}`} className="flex items-center justify-between gap-3 px-3 py-2.5">
+                <div className="min-w-0 flex-1">
+                  <p className="truncate font-medium text-fg tabular-nums">{row.doc}</p>
+                  <p className="truncate text-fg-4 text-xs">
+                    {d.invoice[calendar]} · {row.user}
+                  </p>
+                </div>
+                {/* Green only for the CBMS sync, the one success state; the rest are neutral. */}
+                <Badge size="sm" tone={row.action === t.demo.invoice.status ? 'green' : 'gray'} className="shrink-0">
+                  {row.action}
+                </Badge>
               </li>
             ))}
           </ol>
@@ -96,6 +125,8 @@ export function FeatureExplorer() {
   const { t } = useStrings()
   const { calendar, setCalendar } = useCalendar()
   const f = t.features
+  const { active, select } = useFeatureTab()
+  const wide = useWide()
 
   return (
     <section id="features" className="bg-subtle" aria-labelledby="features-title">
@@ -127,20 +158,28 @@ export function FeatureExplorer() {
           </div>
         </div>
 
-        <Tabs.Root defaultValue="billing" className="mt-10">
-          <div className="overflow-x-auto pb-1">
-            <Tabs.List aria-label={f.tabsLabel} className="relative z-0 inline-flex gap-1 rounded-lg bg-muted p-0.5">
+        <Tabs.Root
+          value={active}
+          onValueChange={(v) => select(String(v))}
+          orientation={wide ? 'vertical' : 'horizontal'}
+          className="mt-10 lg:grid lg:grid-cols-[13rem_minmax(0,1fr)] lg:items-start lg:gap-10"
+        >
+          <div className="overflow-x-auto pb-1 lg:sticky lg:top-24 lg:overflow-visible lg:pb-0">
+            <Tabs.List
+              aria-label={f.tabsLabel}
+              className="relative z-0 inline-flex gap-1 rounded-lg bg-muted p-0.5 lg:flex lg:flex-col lg:bg-transparent lg:p-0"
+            >
               {f.tabs.map((tab) => (
                 <Tabs.Tab
                   key={tab.value}
                   value={tab.value}
-                  className="flex items-center gap-1.5 whitespace-nowrap rounded-md px-3 py-1.5 text-fg-3 text-sm transition-colors hover:text-fg focus-visible:outline-2 focus-visible:outline-fg data-active:text-fg"
+                  className="flex items-center gap-1.5 whitespace-nowrap rounded-md px-3 py-1.5 text-fg-3 text-sm transition-colors hover:text-fg focus-visible:outline-2 focus-visible:outline-fg data-active:font-medium data-active:text-fg lg:gap-2.5 lg:rounded-lg lg:py-2.5 lg:text-base lg:hover:bg-muted lg:data-active:hover:bg-transparent"
                 >
-                  <ContentIcon name={tab.icon} className="size-4" />
+                  <ContentIcon name={tab.icon} className="size-4 lg:size-5" />
                   {tab.label}
                 </Tabs.Tab>
               ))}
-              <Tabs.Indicator className="-z-10 absolute top-(--active-tab-top) left-(--active-tab-left) h-(--active-tab-height) w-(--active-tab-width) rounded-md bg-surface shadow-sm transition-all duration-200" />
+              <Tabs.Indicator className="-z-10 absolute top-(--active-tab-top) left-(--active-tab-left) h-(--active-tab-height) w-(--active-tab-width) rounded-md bg-surface shadow-sm transition-all duration-200 lg:rounded-lg" />
             </Tabs.List>
           </div>
 
@@ -150,9 +189,10 @@ export function FeatureExplorer() {
               key={tab.value}
               value={tab.value}
               keepMounted
-              className="panel-in mt-8 grid items-start gap-10 lg:grid-cols-[1fr_1.05fr]"
+              className="panel-in mt-8 grid items-start gap-10 lg:col-start-2 lg:row-start-1 lg:mt-0 xl:grid-cols-[1fr_1.05fr]"
             >
-              <div>
+              {/* Anchor for the hero chips' #feature-<tab> links. */}
+              <div id={`feature-${tab.value}`}>
                 <h3 className="heading text-2xl">{tab.label}</h3>
                 {tab.nepali && (
                   <p lang="ne" className="mt-1 text-fg-4 text-lg">

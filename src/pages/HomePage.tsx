@@ -8,19 +8,25 @@ import { HomeHero } from '../components/HomeHero'
 import { OpenSource } from '../components/OpenSource'
 import { ProofStrip } from '../components/ProofStrip'
 import { CalendarProvider } from '../lib/calendar'
+import { FeatureTabProvider } from '../lib/featureTab'
+import { useStrings } from '../lib/i18n'
 
 export default function HomePage() {
+  const { t } = useStrings()
+  const tabs = t.features.tabs.map((tab) => tab.value)
   return (
     <CalendarProvider>
-      <HomeHero />
-      <ProofStrip />
-      <FeatureExplorer />
-      <ComplianceMap />
-      <OpenSource />
-      <GetStarted />
-      <FaqList />
-      <ExploreMore />
-      <CommunityBand />
+      <FeatureTabProvider initial={tabs[0]} tabs={tabs}>
+        <HomeHero />
+        <ProofStrip />
+        <FeatureExplorer />
+        <ComplianceMap />
+        <OpenSource />
+        <GetStarted />
+        <FaqList />
+        <ExploreMore />
+        <CommunityBand />
+      </FeatureTabProvider>
     </CalendarProvider>
   )
 }

@@ -180,13 +180,13 @@ body {
     background:
       linear-gradient(
         90deg,
-        transparent 30%,
-        color-mix(in srgb, var(--fg) 15%, transparent) 38%,
-        color-mix(in srgb, var(--fg) 60%, transparent) 45%,
+        transparent 25%,
+        color-mix(in srgb, var(--fg) 25%, transparent) 35%,
+        color-mix(in srgb, var(--fg) 75%, transparent) 43%,
         var(--fg) 50%,
-        color-mix(in srgb, var(--fg) 60%, transparent) 55%,
-        color-mix(in srgb, var(--fg) 15%, transparent) 62%,
-        transparent 70%
+        color-mix(in srgb, var(--fg) 75%, transparent) 57%,
+        color-mix(in srgb, var(--fg) 25%, transparent) 65%,
+        transparent 75%
       )
       0 0 / 300% 100% no-repeat;
     mask:
