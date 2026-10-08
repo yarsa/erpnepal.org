@@ -1,0 +1,135 @@
+@import "tailwindcss";
+@import "@fontsource-variable/inter/wght.css";
+
+@font-face {
+  font-family: "Noto Sans Devanagari Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("../node_modules/@fontsource-variable/noto-sans-devanagari/files/noto-sans-devanagari-devanagari-wght-normal.woff2")
+    format("woff2-variations");
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B09;
+}
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme inline {
+  --font-sans: "Inter Variable", "Noto Sans Devanagari Variable", ui-sans-serif, system-ui, sans-serif;
+  --color-page: var(--page);
+  --color-surface: var(--surface);
+  --color-subtle: var(--subtle);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-fg: var(--fg);
+  --color-fg-2: var(--fg-2);
+  --color-fg-3: var(--fg-3);
+  --color-fg-4: var(--fg-4);
+  --color-inverse: var(--inverse);
+  --color-on-inverse: var(--on-inverse);
+}
+
+:root {
+  --page: #ffffff;
+  --surface: #ffffff;
+  --subtle: #f8f8f8;
+  --muted: #f0f0f0;
+  --line: #ededed;
+  --line-strong: #dcdcdc;
+  --fg: #171717;
+  --fg-2: #383838;
+  --fg-3: #6b6b6b;
+  --fg-4: #8f8f8f;
+  --inverse: #171717;
+  --on-inverse: #ffffff;
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --page: #141414;
+  --surface: #1c1c1c;
+  --subtle: #181818;
+  --muted: #262626;
+  --line: #2a2a2a;
+  --line-strong: #3a3a3a;
+  --fg: #f5f5f5;
+  --fg-2: #d4d4d4;
+  --fg-3: #a3a3a3;
+  --fg-4: #7a7a7a;
+  --inverse: #f5f5f5;
+  --on-inverse: #171717;
+  color-scheme: dark;
+}
+
+html {
+  scroll-padding-top: 72px;
+  -webkit-font-smoothing: antialiased;
+  interpolate-size: allow-keywords;
+}
+
+body {
+  background: var(--page);
+  color: var(--fg);
+}
+
+:lang(ne) {
+  font-family: "Noto Sans Devanagari Variable", "Inter Variable", sans-serif;
+}
+
+@utility heading {
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+:lang(ne) .heading {
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
+@utility card-link {
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  transition:
+    box-shadow 150ms,
+    transform 150ms,
+    border-color 150ms;
+  &:hover {
+    border-color: var(--fg-4);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+  &:focus-within {
+    outline: 2px solid var(--fg);
+    outline-offset: 2px;
+  }
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.panel-in {
+  animation: panel-in 180ms ease-out;
+}
+
+/* !important is deliberate: reduced motion must beat every component's own timing. */
+/* biome-ignore-start lint/complexity/noImportantStyles: see above */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+/* biome-ignore-end lint/complexity/noImportantStyles: see above */

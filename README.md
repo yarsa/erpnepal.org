@@ -1,72 +1,45 @@
-# Nepal Compliance marketing website
+# erpnepal.org — `develop` (React stack)
 
-The public website for [Nepal Compliance](https://github.com/yarsa/nepal-compliance). Responsive static HTML, CSS, and JavaScript, designed for free GitHub Pages hosting. No runtime server, database, package dependencies, sign-up forms, or analytics.
+Rebuild of the [Nepal Compliance](https://github.com/yarsa/nepal-compliance) marketing site on a React stack, page-for-page with the Frappe UI build on `frappe-ui-rebuild`: 31 English pages, the Nepali homepage draft and a 404 page. Production (erpnepal.org) still publishes from `master`.
 
-## Preview
+## Stack
 
-Requires Node.js 22+ and Python 3:
+| Layer | Choice |
+| --- | --- |
+| UI | React 19, TypeScript 7, Vite 8 |
+| Styling | Tailwind CSS 4 (tokens in `src/styles.css`) |
+| Primitives | Base UI (`@base-ui/react`): Tabs, Accordion, Toggle Group, Menu, Toast, Separator |
+| Icons | Tabler Icons (`@tabler/icons-react`) |
+| Class utilities | CVA, clsx, tailwind-merge (`src/lib/cn.ts`, `src/components/ui/`) |
+| Fonts | Inter and Noto Sans Devanagari, self-hosted variable fonts |
+| Tooling | Biome (lint + format), tsx for scripts |
+| Hosting | GitHub Pages (static files in `dist/`) |
+
+## Develop
+
+Requires Node.js 24.
 
 ```sh
-npm run build
-npm run check
-npm run preview
+npm install
+npm run dev      # http://localhost:5173, client-rendered, with live project numbers
+npm run build    # type-check, client + SSR build, pre-render to dist/
+npm run check    # validate dist/
+npm run preview  # http://localhost:4173, serves the pre-rendered build
+npm run lint     # Biome; `npm run format` applies fixes
 ```
 
-Open http://127.0.0.1:4173. Edit `index.html`, `styles.css`, or `app.js`, then rebuild and refresh. Feature guide content is in `content/features.mjs`; `scripts/feature-pages.mjs` renders seven standalone feature pages. Add-on content is in `content/addons.mjs`; `scripts/addon-pages.mjs` renders the separate directory and nine integration pages. The Nepal HRMS beta preview is authored in `nepal-hrms.html` and generated at `/nepal-hrms/`. Typography uses local Georgia and Arial/Helvetica system fonts. No external fonts or other third-party resources are requested.
+## How it works
 
-## Publish on GitHub Pages
+- **Pages.** `src/routes.ts` lists every URL with its title and description; the URL set matches the previous site. Page components live in `src/pages/`, one lazy chunk per page type, so a page downloads only the text it shows.
+- **Pre-rendered HTML.** `scripts/prerender.ts` renders every route with `renderToString` into `dist/`, at the `<!--app-head-->` and `<!--app-html-->` markers in `index.html` (it stops if either is missing). It adds title, description, canonical, Open Graph and JSON-LD (breadcrumbs, and Article for guides), and writes `sitemap.xml`, `robots.txt`, `llms.txt` and `404.html`. React then hydrates. All copy, including hidden feature tabs and closed FAQ answers, is in the static HTML.
+- **Content.** Homepage and site text: `src/content/*.ts` (English and Nepali). Feature, add-on and guide text: `content/*.mjs`. Hand-written pages: `src/pages/ForYourBusinessPage.tsx` and `NepalHrmsPage.tsx`. Icon keys in content (`lucide-*`) map to Tabler in `src/lib/icons.tsx`.
+- **Project numbers.** Stars, forks, Docker pulls and contributors are fetched at build time (`scripts/stats.ts`) and in `vite dev`. A failed request hides the number. Local builds reuse the last result for an hour; CI fetches fresh with `GITHUB_TOKEN`.
+- **Static files.** `public/` (favicons, logos, Nepal HRMS screenshots and licence notices, `CNAME`) is copied to `dist/` as is.
+- **Checks.** `npm run check` confirms the URL set, sitemap, robots and llms.txt, unique titles and descriptions, valid JSON-LD, no third-party resources, every same-site link and anchor, ~720 content strings in the static HTML, and a 150 KB gzip budget for the JS + CSS each page loads up front. Base UI Menu (~33 KB) and Toast load on demand.
+- **Nepali draft.** `/ne/` is `noindex` and out of the sitemap while `draft` is set in `src/content/home.ne.ts`.
+- **Links are root-relative** (`/features/`), which suits the custom domain. Serving from a sub-path would need a base path.
 
-The repository is `yarsa/erpnepal.org`. In its **Settings → Pages**, choose **GitHub Actions** as the publishing source. Push to `master`; `.github/workflows/pages.yml` builds, checks, and publishes only `dist/`.
+## CI
 
-The default public address is https://yarsa.github.io/erpnepal.org/ unless an organization-level or repository-level custom domain changes it. The workflow obtains the real Pages URL and uses it for the canonical URL, social URL, sitemap, and robots.txt. A local build deliberately has no assumed canonical domain.
-
-The workflow attempts automatic Pages enablement, but GitHub may require an administrator to enable Pages first. No paid hosting is needed for a public repository. This hosts the marketing site; the ERP application needs its own server.
-
-## Optional custom domain: erpnepal.org
-
-1. Verify domain ownership in the GitHub organization’s Pages settings.
-2. Set `erpnepal.org` under repository **Settings → Pages → Custom domain**.
-3. At the domain’s DNS provider, configure `@` A records pointing to:
-   - `185.199.108.153`
-   - `185.199.109.153`
-   - `185.199.110.153`
-   - `185.199.111.153`
-4. For `www`, add a CNAME pointing to `yarsa.github.io` (no repository path).
-5. Once GitHub verifies DNS and issues the certificate, turn on **Enforce HTTPS**.
-6. Rerun the Pages workflow so metadata uses the new domain.
-
-Do not overwrite existing email records or unrelated DNS records. Configure the domain in GitHub before pointing DNS to it. A repository `CNAME` file is not required or used by this Actions deployment. Domain registration/renewal is separate from free website hosting.
-
-Official references: [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages), [custom domain configuration](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site).
-
-## Content and provenance
-
-Feature and installation content was checked against `yarsa/nepal-compliance` at commit `fbb9e95be233631713703b09bcb727044894c5c5` on 2026-09-27:
-
-- `README.md`: implemented date, billing, accounting, HR, and payroll features; biometric attendance remains planned.
-- `docs/manual-install.md` and `docs/docker-install.md`: prerequisites and installation paths.
-- The homepage feature index links to documented capabilities; it does not simulate a product interface.
-- No claims of regulatory certification, guaranteed compliance, customer adoption, or commercial support are made.
-- Local professional review is recommended before using accounting/payroll configuration in production.
-
-The repository’s original Apache-2.0 license is preserved. The product itself is GPL-3.0. See `NOTICE.md` for the reused product icon.
-
-## Search and feature pages
-
-See [Search and AI discovery](docs/SEARCH.md) for page coverage, canonical URLs, structured data, sitemap generation, and the remaining publication/indexing steps. Search rankings and inclusion in AI answers are not guaranteed.
-
-## Small shared resources
-
-The build embeds `styles.css`, `app.js`, and the small product SVG into each content page. CSS is available with the HTML; the script runs after the page controls. This removes three asset round trips and their short GitHub Pages cache lifetimes, at the cost of repeating these small resources between pages. Larger screenshots and favicons stay separate. Their cache headers remain controlled by the hosting provider.
-
-## Practical guides
-
-Nine source-linked articles and the `/guides/` index are generated from `content/guides-*.mjs` through `scripts/guide-pages.mjs`. The index explains the editorial method and AI assistance. Update the publication/review dates only when the content is actually reviewed. See [Topic research](docs/TOPIC-RESEARCH.md) for question evidence and the limits of qualitative demand research.
-
-## Business navigation
-
-`/features/` and `/addons/` are standalone directories, and `/for-your-business/` helps SME owners evaluate everyday workflows. `scripts/collection-pages.mjs` renders these pages; the build shares page-based main navigation across the site. The homepage feature reel rotates automatically every three seconds, pauses on keyboard focus, and respects reduced-motion preferences. Installation resources remain in a collapsed technical section.
-
-### Deployment verification
-
-Use GitHub Actions as the Pages source. If branch publishing is also enabled, its built-in workflow can overwrite the generated site with raw source files. Our workflow republishes the generated site after that branch workflow completes. Every deployment then verifies the live XML sitemap, robots.txt, and every sitemap page; a missing file or source-only deployment fails the check.
+- `.github/workflows/develop.yml` lints, builds and checks every push to `develop`, and uploads `dist/` as an artifact. No deploy.
+- `.github/workflows/pages.yml` runs on `master` only: lint, build, check, deploy to GitHub Pages, then `npm run check:live` confirms the live sitemap and pages. Merging `develop` into `master` switches production to this build.
