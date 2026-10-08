@@ -31,7 +31,7 @@ export default function AddonPage({ slug }: { slug: string }) {
           </a>
           .
         </SideNav>
-        <article className="order-1 min-w-0 max-w-3xl lg:order-2">
+        <article className="measure order-1 min-w-0 max-w-3xl lg:order-2">
           <PageIntro
             eyebrow={`${addon.category} / ${ui.addon.eyebrowSuffix}`}
             title={addon.title}

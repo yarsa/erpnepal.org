@@ -11,7 +11,8 @@
   unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B09;
 }
 
-@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+/* `.inverse` panels (open-source block, footer) take the dark tokens in both themes. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *, .inverse, .inverse *));
 
 @theme inline {
   --font-sans: "Inter Variable", "Noto Sans Devanagari Variable", ui-sans-serif, system-ui, sans-serif;
@@ -29,6 +30,33 @@
   --color-on-inverse: var(--on-inverse);
 }
 
+/* Type scale: line-height and tracking tighten as size grows. */
+@theme {
+  --font-weight-medium: 550;
+  --text-xl--line-height: 1.35;
+  --text-xl--letter-spacing: -0.01em;
+  --text-2xl--line-height: 1.25;
+  --text-2xl--letter-spacing: -0.015em;
+  --text-3xl--line-height: 1.15;
+  --text-3xl--letter-spacing: -0.02em;
+  --text-4xl--line-height: 1.12;
+  --text-4xl--letter-spacing: -0.025em;
+  --text-5xl--line-height: 1.08;
+  --text-5xl--letter-spacing: -0.03em;
+  --text-6xl--line-height: 1.06;
+  --text-6xl--letter-spacing: -0.035em;
+
+  /* Two depths: a soft raised card and its hover; each carries a hairline ring. */
+  --shadow-sm: 0 0 0 1px var(--ring), 0 1px 2px rgb(0 0 0 / 0.04);
+  --shadow-md: 0 0 0 1px var(--ring), 0 1px 2px rgb(0 0 0 / 0.04), 0 8px 24px -8px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 0 0 1px var(--ring), 0 2px 4px rgb(0 0 0 / 0.04), 0 16px 40px -12px rgb(0 0 0 / 0.14);
+
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --default-transition-duration: 180ms;
+  --default-transition-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Three text tones: fg, fg-2, fg-3. fg-4 is kept as an alias so it meets 4.5:1. */
 :root {
   --page: #ffffff;
   --surface: #ffffff;
@@ -38,14 +66,16 @@
   --line-strong: #dcdcdc;
   --fg: #171717;
   --fg-2: #383838;
-  --fg-3: #6b6b6b;
-  --fg-4: #8f8f8f;
+  --fg-3: #636363;
+  --fg-4: var(--fg-3);
   --inverse: #171717;
   --on-inverse: #ffffff;
+  --ring: rgb(0 0 0 / 0.05);
   color-scheme: light;
 }
 
-[data-theme="dark"] {
+[data-theme="dark"],
+.inverse {
   --page: #141414;
   --surface: #1c1c1c;
   --subtle: #181818;
@@ -55,9 +85,10 @@
   --fg: #f5f5f5;
   --fg-2: #d4d4d4;
   --fg-3: #a3a3a3;
-  --fg-4: #7a7a7a;
+  --fg-4: var(--fg-3);
   --inverse: #f5f5f5;
   --on-inverse: #171717;
+  --ring: rgb(255 255 255 / 0.07);
   color-scheme: dark;
 }
 
@@ -70,16 +101,24 @@ html {
 body {
   background: var(--page);
   color: var(--fg);
+  font-feature-settings: "cv11", "ss01";
 }
 
 :lang(ne) {
   font-family: "Noto Sans Devanagari Variable", "Inter Variable", sans-serif;
 }
 
+/* One visible focus ring for every control; components may refine it. */
+@layer base {
+  :where(a, button, summary, [tabindex]):focus-visible {
+    outline: 2px solid var(--fg);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
 @utility heading {
   font-weight: 600;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
   text-wrap: balance;
 }
 
@@ -88,18 +127,23 @@ body {
   letter-spacing: 0;
 }
 
+/* Comfortable reading width for running text. */
+@utility measure {
+  & p {
+    max-width: 65ch;
+  }
+}
+
 @utility card-link {
   border-radius: var(--radius-2xl);
   border: 1px solid var(--line-strong);
   background: var(--surface);
   transition:
-    box-shadow 150ms,
-    transform 150ms,
-    border-color 150ms;
+    box-shadow var(--default-transition-duration) var(--ease-out),
+    border-color var(--default-transition-duration) var(--ease-out);
   &:hover {
-    border-color: var(--fg-4);
+    border-color: color-mix(in srgb, var(--fg) 22%, transparent);
     box-shadow: var(--shadow-md);
-    transform: translateY(-2px);
   }
   &:focus-within {
     outline: 2px solid var(--fg);
@@ -118,7 +162,58 @@ body {
   }
 }
 .panel-in {
-  animation: panel-in 180ms ease-out;
+  animation: panel-in var(--default-transition-duration) var(--ease-out);
+}
+
+/* A soft highlight that travels along a rounded outline, left to right. The mask
+   keeps it to the 1 px border ring, so the label inside never shimmers. */
+@utility outline-sweep {
+  position: relative;
+  isolation: isolate;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    padding: 1px;
+    border-radius: inherit;
+    /* Eased falloff on both sides of the highlight, so it has no hard edges. */
+    background:
+      linear-gradient(
+        90deg,
+        transparent 25%,
+        color-mix(in srgb, var(--fg) 25%, transparent) 35%,
+        color-mix(in srgb, var(--fg) 75%, transparent) 43%,
+        var(--fg) 50%,
+        color-mix(in srgb, var(--fg) 75%, transparent) 57%,
+        color-mix(in srgb, var(--fg) 25%, transparent) 65%,
+        transparent 75%
+      )
+      0 0 / 300% 100% no-repeat;
+    mask:
+      linear-gradient(#000 0 0) content-box exclude,
+      linear-gradient(#000 0 0);
+    animation: outline-sweep 4s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+    will-change: background-position, opacity;
+    pointer-events: none;
+  }
+}
+
+/* Fades in as it enters on the left and out as it leaves on the right. */
+@keyframes outline-sweep {
+  0% {
+    background-position: 100% 0;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    background-position: 0 0;
+    opacity: 0;
+  }
 }
 
 /* !important is deliberate: reduced motion must beat every component's own timing. */
@@ -130,6 +225,12 @@ body {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .outline-sweep::before {
+    animation: none !important;
+    opacity: 0;
   }
 }
 /* biome-ignore-end lint/complexity/noImportantStyles: see above */

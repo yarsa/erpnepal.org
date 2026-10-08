@@ -15,12 +15,12 @@ export function ProofStrip() {
   ].filter(Boolean) as { icon: Icon; value: string; label: string }[]
 
   return (
-    <section aria-label={t.proof.label} className="border-line border-b">
+    <section aria-label={t.proof.label}>
       <dl className="mx-auto grid max-w-6xl grid-cols-2 gap-y-8 px-5 py-10 sm:grid-cols-3 md:px-8 lg:grid-cols-5">
         {items.map(({ icon: Icon, value, label }) => (
           <div key={label} className="flex flex-col items-center gap-1 text-center">
             <dt className="order-2 text-fg-4 text-sm">{label}</dt>
-            <dd className="heading order-1 flex items-center gap-2 text-3xl">
+            <dd className="order-1 flex items-center gap-2 font-medium text-3xl tabular-nums">
               <Icon className="size-5 text-fg-4" stroke={1.75} aria-hidden="true" />
               {value}
             </dd>

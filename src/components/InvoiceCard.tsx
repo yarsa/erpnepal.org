@@ -22,7 +22,7 @@ export function InvoiceCard() {
           <dd className="mt-0.5 text-fg">{inv.customer}</dd>
         </div>
       </dl>
-      <table className="mt-5 w-full text-[15px]">
+      <table className="mt-5 w-full text-sm">
         <tbody>
           {inv.lines.map((line) => (
             <tr key={line.label} className="border-line border-t">

@@ -3,10 +3,10 @@ import { CardGrid } from '../components/page/LinkCard'
 import { PageShell, prose } from '../components/page/PageShell'
 import { LinkButton } from '../components/ui/button'
 
-export default function ForYourBusinessPage() {
+export default function WorkflowsPage() {
   return (
     <PageShell
-      crumb="For your business"
+      crumb="Workflows"
       eyebrow="For small and growing businesses"
       heading="Find the workflows that fit your business"
       lead="Start with billing, accounts, or payroll."

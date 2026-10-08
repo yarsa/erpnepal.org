@@ -3,8 +3,7 @@ export default {
     { label: 'Features', href: '/features/' },
     { label: 'Add-ons', href: '/addons/' },
     { label: 'Guides', href: '/guides/' },
-    { label: 'Nepal HRMS', href: '/nepal-hrms/' },
-    { label: 'For your business', href: '/for-your-business/' },
+    { label: 'Workflows', href: '/workflows/' },
   ],
   install: { label: 'Install', href: '/#get-started' },
   home: 'Home',
@@ -18,7 +17,7 @@ export default {
     questions: 'Questions about this feature',
     references: 'Technical references',
     referencesNote: 'For your implementation team.',
-    next: { title: 'Does it fit your business?', body: 'See where to start.', label: 'Find your starting point', href: '/for-your-business/' },
+    next: { title: 'Does it fit your business?', body: 'See where to start.', label: 'Find your starting point', href: '/workflows/' },
     related: 'Related features',
   },
   addon: {
@@ -51,6 +50,13 @@ export default {
     tableSuffix: 'comparison',
   },
   breadcrumbs: { features: 'Features', addons: 'Add-ons', guides: 'Guides' },
+  search: {
+    label: 'Search',
+    placeholder: 'Search guides, features and add-ons…',
+    empty: 'No matches. Try a shorter word.',
+    hint: 'Enter to open · Esc to close',
+    groups: { pages: 'Pages', features: 'Features', guides: 'Guides', addons: 'Add-ons' },
+  },
   a11y: {
     skip: 'Skip to content',
     main: 'Main',

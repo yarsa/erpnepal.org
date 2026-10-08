@@ -19,7 +19,7 @@ export const loaders: Record<PageKind, () => Promise<{ default: PageComponent }>
   addon: () => import('./AddonPage'),
   guides: () => import('./GuidesPage'),
   guide: () => import('./GuidePage'),
-  'for-your-business': () => import('./ForYourBusinessPage'),
+  workflows: () => import('./WorkflowsPage'),
   'nepal-hrms': () => import('./NepalHrmsPage'),
   'not-found': () => import('./NotFoundPage'),
 }

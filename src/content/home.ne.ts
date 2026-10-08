@@ -11,13 +11,14 @@ export default {
     fiscalStart: { bs: '१ श्रावण २०८३', ad: '१७ जुलाई २०२६' },
     slipPeriod: { bs: 'आश्विन २०८३', ad: 'सेप्टेम्बर–अक्टोबर २०२६' },
   },
-  draft: 'यो नेपाली अनुवाद अझै जाँच हुँदैछ।',
   hero: {
-    eyebrow: 'नेपाली व्यवसायका लागि ओपन सोर्स ERP',
+    eyebrow: 'निःशुल्क IRD सूचीकृत ई-बिलिङ सफ्टवेयर, CBMS सहित',
+    eyebrowHref: '/features/cbms/',
     title: 'IRD अनुसार बिल, भ्याट, र तलब मिलाउनुहोस्।',
     lead: 'ERP मै IRD अनुसारको बिल, CBMS, भ्याट रिपोर्ट र नेपाली मिति।',
     primary: { label: 'कसरी चल्छ, हेर्नुहोस्', href: '#features' },
     secondary: { label: 'इन्स्टल गर्नुहोस्', href: '#get-started' },
+    assurance: ['लाइसेन्स शुल्क छैन', 'ओपन सोर्स (GPL-3.0)', 'तपाईंकै सर्भरमा चल्छ'],
   },
   proof: {
     label: 'प्रोजेक्टका तथ्यहरू',
@@ -266,7 +267,7 @@ export default {
       { label: 'एड-अन', href: '/addons/' },
       { label: 'गाइड', href: '/guides/' },
       { label: 'Nepal HRMS', badge: 'बिटा', href: '/nepal-hrms/' },
-      { label: 'तपाईंको व्यवसायका लागि', href: '/for-your-business/' },
+      { label: 'वर्कफ्लो', href: '/workflows/' },
     ],
     links: [
       { label: 'GitHub', href: repo },

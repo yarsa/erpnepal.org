@@ -4,7 +4,7 @@ import { IconLanguage, IconMenu2, IconMoon, IconSun } from '@tabler/icons-react'
 import { useEffect, useRef } from 'react'
 import { homePath, useStrings } from '../lib/i18n'
 
-const item = 'flex items-center gap-2 rounded-lg px-3 py-2 outline-none data-highlighted:bg-muted'
+const item = 'flex items-center gap-2 rounded-lg px-3 py-2.5 outline-none data-highlighted:bg-muted'
 
 export default function MobileMenu({
   className,
@@ -33,7 +33,7 @@ export default function MobileMenu({
       </Menu.Trigger>
       <Menu.Portal>
         <Menu.Positioner align="end" sideOffset={6} className="z-50">
-          <Menu.Popup className="min-w-52 rounded-xl border border-line bg-surface p-1 text-fg text-sm shadow-lg outline-none">
+          <Menu.Popup className="min-w-52 origin-(--transform-origin) rounded-2xl bg-surface p-1 text-fg text-sm shadow-lg outline-none transition-[opacity,scale] data-ending-style:scale-97 data-ending-style:opacity-0 data-starting-style:scale-97 data-starting-style:opacity-0">
             {ui.nav.map((link) => (
               <Menu.LinkItem key={link.href} href={link.href} className={item}>
                 {link.label}

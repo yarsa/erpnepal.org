@@ -13,9 +13,9 @@ export const buttonVariants = cva(
         ghost: 'text-fg-2 hover:bg-muted hover:text-fg',
       },
       size: {
-        sm: 'h-7 px-2.5 text-[13px]',
+        sm: 'h-7 px-2.5 text-xs',
         md: 'h-8 px-3 text-sm',
-        lg: 'h-10 px-4 text-[15px]',
+        lg: 'h-10 px-4 text-base',
         xl: 'h-12 px-5 text-base',
         icon: 'size-8',
       },

@@ -22,12 +22,12 @@ export function GetStarted() {
   }
   return (
     <>
-      <section id="get-started" className="border-line border-b bg-subtle" aria-labelledby="start-title">
+      <section id="get-started" className="bg-subtle" aria-labelledby="start-title">
         <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
           <h2 id="start-title" className="heading text-3xl md:text-4xl">
             {g.title}
           </h2>
-          <p className="mt-3 text-fg-3 text-lg">{g.lead}</p>
+          <p className="mt-3 max-w-2xl text-fg-3 text-lg">{g.lead}</p>
 
           <div className="mt-10 grid gap-4 lg:grid-cols-2">
             <article className={card}>
@@ -49,8 +49,8 @@ export function GetStarted() {
               <IconTerminal2 className="size-6 text-fg-2" stroke={1.75} aria-hidden="true" />
               <h3 className="heading mt-4 text-2xl">{g.technical.title}</h3>
               <p className="mt-3 text-fg-3 text-lg">{g.technical.body}</p>
-              <div className="mt-5 rounded-xl bg-neutral-900 p-4 dark:bg-muted">
-                <pre className="overflow-x-auto text-neutral-100 text-sm leading-6 dark:text-fg">
+              <div className="inverse mt-5 rounded-lg bg-surface p-4">
+                <pre className="overflow-x-auto text-fg text-sm leading-6">
                   <code>{commands}</code>
                 </pre>
                 <div className="mt-3 flex justify-end">

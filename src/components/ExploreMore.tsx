@@ -6,7 +6,7 @@ import { Badge } from './ui/badge'
 export function ExploreMore() {
   const { t } = useStrings()
   return (
-    <section className="border-line border-b" aria-labelledby="explore-title">
+    <section aria-labelledby="explore-title">
       <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
         <h2 id="explore-title" className="heading text-3xl md:text-4xl">
           {t.explore.title}

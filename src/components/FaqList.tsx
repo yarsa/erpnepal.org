@@ -5,7 +5,7 @@ import { useStrings } from '../lib/i18n'
 export function FaqList() {
   const { t } = useStrings()
   return (
-    <section className="border-line border-b" aria-labelledby="faq-title">
+    <section aria-labelledby="faq-title">
       <div className="mx-auto grid max-w-6xl gap-8 px-5 py-16 md:grid-cols-[1fr_2fr] md:px-8 md:py-24">
         <h2 id="faq-title" className="heading text-3xl md:text-4xl">
           {t.faq.title}

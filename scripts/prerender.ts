@@ -17,7 +17,7 @@ const abs = (path: string) => new URL(path, siteUrl).href
 const dist = new URL('../dist/', import.meta.url)
 const ssr = new URL('../dist-ssr/entry-server.js', import.meta.url)
 const server: typeof Server = await import(ssr.href)
-const { render, routes, notFound, sections, features, addons, guides, guideDate, homeNe } = server
+const { render, routes, notFound, redirects, sections, features, addons, guides, guideDate } = server
 
 const template = await readFile(new URL('index.html', dist), 'utf8')
 // Without these markers every page would ship as an empty shell.
@@ -46,7 +46,7 @@ const pageModule: Record<Route['kind'], string> = {
   addon: 'AddonPage',
   guides: 'GuidesPage',
   guide: 'GuidePage',
-  'for-your-business': 'ForYourBusinessPage',
+  workflows: 'WorkflowsPage',
   'nepal-hrms': 'NepalHrmsPage',
   'not-found': 'NotFoundPage',
 }
@@ -141,12 +141,19 @@ async function writePage(route: Route) {
   await writeFile(new URL('index.html', dir), html)
 }
 
-const draftNe = Boolean(homeNe.draft)
-for (const route of routes) await writePage({ ...route, noindex: route.locale === 'ne' ? draftNe : route.noindex })
+for (const route of routes) await writePage(route)
 await writePage(notFound)
+for (const [from, to] of Object.entries(redirects)) {
+  const target = abs(to)
+  await mkdir(new URL(from, dist), { recursive: true })
+  await writeFile(
+    new URL(`${from}index.html`, dist),
+    `<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<title>Moved to ${target}</title>\n<link rel="canonical" href="${target}">\n<meta name="robots" content="noindex">\n<meta http-equiv="refresh" content="0; url=/${to}">\n</head>\n<body><p>This page has moved to <a href="/${to}">/${to}</a>.</p></body>\n</html>\n`,
+  )
+}
 
-// Indexed pages only: the Nepali draft and the 404 page stay out.
-const indexed = routes.filter((r) => !(r.locale === 'ne' ? draftNe : r.noindex))
+// Indexed pages only: the 404 page stays out.
+const indexed = routes.filter((r) => !r.noindex)
 await writeFile(
   new URL('sitemap.xml', dist),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${indexed

@@ -3,17 +3,7 @@
 import type { Locale } from './lib/i18n'
 import { addons, features, guides } from './lib/site'
 
-export type PageKind =
-  | 'home'
-  | 'features'
-  | 'feature'
-  | 'addons'
-  | 'addon'
-  | 'guides'
-  | 'guide'
-  | 'for-your-business'
-  | 'nepal-hrms'
-  | 'not-found'
+export type PageKind = 'home' | 'features' | 'feature' | 'addons' | 'addon' | 'guides' | 'guide' | 'workflows' | 'nepal-hrms' | 'not-found'
 
 export interface Route {
   /** Path without the leading slash: '' for the homepage, 'features/' … */
@@ -38,7 +28,7 @@ export const routes: Route[] = [
     path: '',
     kind: 'home',
     locale: 'en',
-    title: 'Nepal Compliance for ERPNext — IRD billing, VAT and Nepal payroll',
+    title: 'Nepal Compliance — IRD billing, VAT and Nepal payroll',
     description:
       'Open-source app that adds IRD-style billing, CBMS sync, VAT reports, Nepal payroll and Bikram Sambat dates to ERPNext and Frappe HR. No licence fee; runs on your own server.',
     suffix: false,
@@ -47,9 +37,8 @@ export const routes: Route[] = [
     path: 'ne/',
     kind: 'home',
     locale: 'ne',
-    title: 'Nepal Compliance — ERPNext का लागि IRD बिलिङ, भ्याट र तलब',
-    description:
-      'ERPNext र Frappe HR मा IRD शैलीको बिलिङ, CBMS सिंक, भ्याट रिपोर्ट, नेपाली तलब र विक्रम संवत् मिति थप्ने खुला स्रोत एप। लाइसेन्स शुल्क छैन।',
+    title: 'Nepal Compliance — IRD बिलिङ, भ्याट र तलब',
+    description: 'IRD शैलीको बिलिङ, CBMS सिंक, भ्याट रिपोर्ट, नेपाली तलब र विक्रम संवत् मिति थप्ने खुला स्रोत एप । लाइसेन्स शुल्क छैन',
     suffix: false,
   },
   {
@@ -113,8 +102,8 @@ export const routes: Route[] = [
     }),
   ),
   {
-    path: 'for-your-business/',
-    kind: 'for-your-business',
+    path: 'workflows/',
+    kind: 'workflows',
     locale: 'en',
     title: 'Is Nepal Compliance right for your business?',
     description:
@@ -148,10 +137,15 @@ export function routeFor(pathname: string): Route {
   return routes.find((r) => r.path === withSlash) ?? notFound
 }
 
+/** Old paths kept as redirect pages, so existing links still land somewhere. */
+export const redirects: Record<string, string> = {
+  'for-your-business/': 'workflows/',
+}
+
 export const sections: Record<string, string> = {
   features: 'Features',
   addons: 'Add-ons',
   guides: 'Guides',
-  'for-your-business': 'For your business',
+  workflows: 'Workflows',
   'nepal-hrms': 'Nepal HRMS',
 }

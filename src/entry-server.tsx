@@ -8,13 +8,13 @@ import AddonPage from './pages/AddonPage'
 import AddonsPage from './pages/AddonsPage'
 import FeaturePage from './pages/FeaturePage'
 import FeaturesPage from './pages/FeaturesPage'
-import ForYourBusinessPage from './pages/ForYourBusinessPage'
 import GuidePage from './pages/GuidePage'
 import GuidesPage from './pages/GuidesPage'
 import HomePage from './pages/HomePage'
 import NepalHrmsPage from './pages/NepalHrmsPage'
 import NotFoundPage from './pages/NotFoundPage'
 import type { PageComponent } from './pages/registry'
+import WorkflowsPage from './pages/WorkflowsPage'
 import type { PageKind, Route } from './routes'
 
 const pages: Record<PageKind, PageComponent> = {
@@ -25,7 +25,7 @@ const pages: Record<PageKind, PageComponent> = {
   addon: AddonPage,
   guides: GuidesPage,
   guide: GuidePage,
-  'for-your-business': ForYourBusinessPage,
+  workflows: WorkflowsPage,
   'nepal-hrms': NepalHrmsPage,
   'not-found': NotFoundPage,
 }
@@ -42,5 +42,4 @@ export function render(route: Route, stats: Stats) {
 }
 
 export { addons, features, guideDate, guides } from './lib/site'
-export { notFound, routes, sections } from './routes'
-export const homeNe = ne.t
+export { notFound, redirects, routes, sections } from './routes'

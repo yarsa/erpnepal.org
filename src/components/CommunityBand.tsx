@@ -6,7 +6,7 @@ export function CommunityBand() {
   return (
     <section aria-labelledby="community-title">
       <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-20">
-        <div className="flex flex-col gap-6 rounded-3xl bg-muted p-6 md:flex-row md:items-center md:justify-between md:p-10">
+        <div className="flex flex-col gap-6 rounded-2xl bg-muted p-6 md:flex-row md:items-center md:justify-between md:p-10">
           <div className="max-w-xl">
             <h2 id="community-title" className="heading text-2xl">
               {t.community.title}

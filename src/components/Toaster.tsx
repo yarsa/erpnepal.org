@@ -10,7 +10,11 @@ function Viewport() {
     <Toast.Portal>
       <Toast.Viewport className="fixed right-4 bottom-4 z-50 flex w-72 flex-col gap-2">
         {toasts.map((toast) => (
-          <Toast.Root key={toast.id} toast={toast} className="rounded-xl bg-inverse px-4 py-3 text-on-inverse text-sm shadow-lg">
+          <Toast.Root
+            key={toast.id}
+            toast={toast}
+            className="rounded-2xl bg-inverse px-4 py-3 text-on-inverse text-sm shadow-lg transition-[opacity,translate] data-ending-style:opacity-0 data-starting-style:translate-y-2 data-starting-style:opacity-0"
+          >
             <Toast.Title />
           </Toast.Root>
         ))}
