@@ -5,10 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/assets/favicon.png" type="image/png" />
+    <!-- Light 06:00-17:59 and dark otherwise, by the visitor's clock, applied before first paint.
+         A toggle choice holds until the next 6 am / 6 pm switch (see toggleTheme in SiteHeader). -->
     <script>
       try {
+        var h = new Date().getHours()
         var t = localStorage.getItem('theme')
-        if (t === 'dark' || (!t && matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.dataset.theme = 'dark'
+        var until = Number(localStorage.getItem('themeUntil')) || 0
+        var mode = t && Date.now() < until ? t : h >= 6 && h < 18 ? 'light' : 'dark'
+        if (mode === 'dark') document.documentElement.dataset.theme = 'dark'
       } catch (e) {}
     </script>
     <!--app-head-->

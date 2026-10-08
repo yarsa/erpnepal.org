@@ -26,7 +26,7 @@ export function HomeHero() {
           {hero.title}
           {hero.titleTail && <span className="text-fg-4"> {hero.titleTail}</span>}
         </h1>
-        <p className="mx-auto mt-5 max-w-xl text-fg-3 text-xl">{hero.lead}</p>
+        <p className="mx-auto mt-5 max-w-2xl text-fg-3 text-xl">{hero.lead}</p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <LinkButton href={hero.primary.href} variant="solid" size="xl">
             {hero.primary.label}

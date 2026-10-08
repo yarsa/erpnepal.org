@@ -7,6 +7,14 @@ import { compact, useStats } from '../lib/stats'
 import { MobileMenuSlot } from './MobileMenuSlot'
 import { Button, LinkButton } from './ui/button'
 
+// The next 6 am or 6 pm, when the automatic day/night theme takes over again.
+function nextSwitch(now = new Date()) {
+  const next = new Date(now)
+  const hour = now.getHours()
+  next.setHours(hour < 6 ? 6 : hour < 18 ? 18 : 30, 0, 0, 0)
+  return next.getTime()
+}
+
 function toggleTheme() {
   const root = document.documentElement
   const dark = root.dataset.theme !== 'dark'
@@ -14,6 +22,7 @@ function toggleTheme() {
   else delete root.dataset.theme
   try {
     localStorage.setItem('theme', dark ? 'dark' : 'light')
+    localStorage.setItem('themeUntil', String(nextSwitch()))
   } catch {}
 }
 
