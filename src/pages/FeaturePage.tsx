@@ -30,7 +30,7 @@ export default function FeaturePage({ slug }: { slug: string }) {
             {ui.feature.sideNoteLink}
           </a>
         </SideNav>
-        <article className="order-1 min-w-0 max-w-3xl lg:order-2">
+        <article className="measure order-1 min-w-0 max-w-3xl lg:order-2">
           <PageIntro
             eyebrow={ui.feature.eyebrow}
             title={feature.title}

@@ -41,7 +41,7 @@ function DemoPanel({ value }: { value: string }) {
           <p className="mt-1 font-medium text-fg text-lg">
             {t.demo.leave.fiscalYear} {d.fiscalStart[calendar]}
           </p>
-          <dl className="mt-5 text-[15px]">
+          <dl className="mt-5 text-sm">
             {t.demo.leave.rows.map((row) => (
               <div key={row.label} className="flex justify-between gap-4 border-line border-t py-2.5">
                 <dt className="text-fg-2">{row.label}</dt>
@@ -55,7 +55,7 @@ function DemoPanel({ value }: { value: string }) {
       return (
         <div className="p-6">
           <p className="text-fg-4 text-sm">{t.demo.calendar.heading}</p>
-          <dl className="mt-5 text-[15px]">
+          <dl className="mt-5 text-sm">
             {t.demo.calendar.rows.map((row) => (
               <div key={row.key} className="grid grid-cols-[1fr_auto_auto] items-baseline gap-4 border-line border-t py-2.5">
                 <dt className="text-fg-2">{row.label}</dt>
@@ -98,7 +98,7 @@ export function FeatureExplorer() {
   const f = t.features
 
   return (
-    <section id="features" className="border-line border-b bg-subtle" aria-labelledby="features-title">
+    <section id="features" className="bg-subtle" aria-labelledby="features-title">
       <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-2xl">

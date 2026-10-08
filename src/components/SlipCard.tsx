@@ -11,7 +11,7 @@ export function SlipCard() {
     <div className="p-6">
       <p className="text-fg-4 text-sm">{slip.heading}</p>
       <p className="mt-1 font-medium text-fg text-lg">{t.dates.slipPeriod[calendar]}</p>
-      <table className="mt-5 w-full text-[15px]">
+      <table className="mt-5 w-full text-sm">
         <tbody>
           {slip.lines.map((line) => {
             const strong = 'strong' in line && line.strong

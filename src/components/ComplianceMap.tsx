@@ -19,7 +19,7 @@ export function ComplianceMap() {
     .filter((s) => s.value)
 
   return (
-    <section id="compliance" className="border-line border-b" aria-labelledby="compliance-title">
+    <section id="compliance" aria-labelledby="compliance-title">
       <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
         <div className="flex flex-wrap items-end justify-between gap-8">
           <div className="max-w-2xl">
@@ -51,7 +51,7 @@ export function ComplianceMap() {
               {c.rows.map((row) => (
                 <tr
                   key={row.rule}
-                  className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-1 border-line border-t px-5 py-4 first:border-t-0 md:table-row md:px-0 md:py-0 md:first:border-t"
+                  className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-1 border-line border-t px-5 py-3 first:border-t-0 md:table-row md:px-0 md:py-0 md:first:border-t"
                 >
                   <th scope="row" className="col-start-1 row-start-1 text-left font-medium text-fg md:px-5 md:py-4 md:align-top">
                     <span className="text-lg">{row.rule}</span>
@@ -61,7 +61,7 @@ export function ComplianceMap() {
                       </span>
                     )}
                   </th>
-                  <td className="col-span-2 col-start-1 row-start-2 text-fg-3 md:px-5 md:py-4 md:align-top">
+                  <td className="col-span-2 col-start-1 row-start-2 text-fg-3 text-sm md:px-5 md:py-4 md:align-top md:text-base">
                     {row.link ? (
                       <a
                         href={row.link}

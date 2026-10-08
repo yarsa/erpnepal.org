@@ -39,7 +39,7 @@ export default function GuidePage({ slug }: { slug: string }) {
       <Breadcrumbs items={[{ label: ui.home, href: '/' }, { label: ui.breadcrumbs.guides, href: '/guides/' }, { label: guide.title }]} />
       <div className="mt-8 grid gap-12 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-16">
         <SideNav title={ui.guide.sideTitle} label={ui.onThisPage} items={toc} className="hidden lg:block" />
-        <article className="min-w-0 max-w-3xl">
+        <article className="measure min-w-0 max-w-3xl">
           <PageIntro eyebrow={`${guide.category} / ${ui.guide.eyebrowSuffix}`} title={guide.title} lead={guide.answer}>
             <p className="mt-4 text-fg-4 text-sm">
               {ui.guide.byline} · <time dateTime={guideDate}>{published}</time> ·{' '}

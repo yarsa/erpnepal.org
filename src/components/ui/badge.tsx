@@ -12,7 +12,7 @@ export const badgeVariants = cva('inline-flex items-center gap-1 whitespace-nowr
       inverse: 'bg-inverse text-on-inverse',
     },
     size: {
-      sm: 'h-5 px-2 text-[11px]',
+      sm: 'h-5 px-2 text-xs',
       md: 'h-6 px-2.5 text-xs',
     },
   },

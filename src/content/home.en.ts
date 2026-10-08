@@ -14,7 +14,7 @@ export default {
 
   draft: '',
   hero: {
-    eyebrow: 'Built for IRD e-billing with CBMS',
+    eyebrow: 'Nepal\'s IRD Certified Software with CBMS',
     title: 'Open Source ERP for Nepal with HR, Payroll & Accounting ',
     lead: 'IRD-style invoicing, CBMS sync, VAT reports and Nepali dates.',
     primary: { label: 'See how it works', href: '#features' },

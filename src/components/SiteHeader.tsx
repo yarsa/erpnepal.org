@@ -58,7 +58,7 @@ export function SiteHeader({ path }: { path: string }) {
               href={item.href}
               aria-current={isCurrent(item.href) ? 'page' : undefined}
               className={cn(
-                '-mb-px flex items-center whitespace-nowrap border-b-2 text-[15px] transition-colors hover:text-fg',
+                '-mb-px flex items-center whitespace-nowrap border-b-2 text-sm transition-colors hover:text-fg',
                 isCurrent(item.href) ? 'border-fg font-medium text-fg' : 'border-transparent text-fg-3',
               )}
             >
