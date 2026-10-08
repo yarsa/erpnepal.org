@@ -1,4 +1,4 @@
-<h1 align="center"><a href="https://erpnepal.org">erpnepal.org</a></h1>
+<h1 align="center"><a href="https://erpnepal.org">ERPNepal.org</a></h1>
 <p align="center">
   The website for <a href="https://github.com/yarsa/nepal-compliance">Nepal Compliance</a>, the open source ERP solution for Nepalese businesses with HR, Payroll & Accounting compliance.
   <br/>
@@ -12,18 +12,6 @@
 </p>
 
 This site presents [Nepal Compliance](https://github.com/yarsa/nepal-compliance), an app built on top of [Frappe Framework](https://github.com/frappe/frappe), [ERPNext](https://github.com/frappe/erpnext) and [Frappe HR](https://github.com/frappe/hrms). It is a static website: every page is pre-rendered to HTML at build time and served by GitHub Pages, with no server, database, sign-up forms, analytics or third-party requests.
-
-## What's on the site
-
-- [x] Homepage with feature tour, compliance roadmap, install steps and FAQ
-- [x] Nepali homepage at `/ne/` (draft, `noindex` until reviewed)
-- [x] Feature pages: accounting and VAT, invoicing, CBMS, payroll, HR and leave, audit trails, Nepali dates
-- [x] Add-on pages: payments, QR, SMS, attendance devices, ecommerce and more
-- [x] Practical guides for running ERP software in Nepal, with sources
-- [x] Nepal HRMS (beta) preview and a "for your business" page
-- [x] Live project numbers from GitHub and Docker Hub, fetched at build time
-- [x] Light and dark mode, mobile layout, keyboard and screen reader support
-- [x] Sitemap, `robots.txt`, `llms.txt`, canonical links, Open Graph and structured data
 
 ## Tech stack
 
@@ -55,15 +43,16 @@ npm run dev      # http://localhost:5173
 | `npm run preview` | Serve the built site at http://localhost:4173 |
 | `npm run lint` | Lint and format check; `npm run format` applies fixes |
 
-## Branches and publishing
+## Publishing Pipeline
 
 ```
 feature work ──▶ develop ──(pull request)──▶ master ──▶ GitHub Pages ──▶ erpnepal.org
 ```
 
 - **`develop`** holds all work in progress. Every push runs [`develop.yml`](.github/workflows/develop.yml): lint, build and check. It does not deploy.
+- **Markdown-only changes** (README, NOTICE, `docs/`) skip both workflows.
 - **`master`** is production. Open a pull request from `develop` when a batch of changes is ready; [`pages.yml`](.github/workflows/pages.yml) builds and checks the pull request, and after the merge deploys to GitHub Pages and confirms the live sitemap and pages (`npm run check:live`).
-- **Domain**: `erpnepal.org`, set by `public/CNAME`. In the repository settings, Pages must use **GitHub Actions** as its source.
+- **Domain**: `erpnepal.org`, set by `public/CNAME` (copied into every build).
 
 ## Project structure
 
@@ -85,13 +74,6 @@ src/
 docs/                 Research notes behind the guides and site copy
 ```
 
-## Editing content
-
-- **Homepage and navigation**: `src/content/home.en.ts`, `ui.en.ts`, and their Nepali counterparts `*.ne.ts`. Capability claims trace to the [Nepal Compliance README](https://github.com/yarsa/nepal-compliance#key-features).
-- **Features, add-ons, guides**: `content/features.mjs`, `addons.mjs`, `guides-*.mjs`. A new entry gets its page, sitemap entry and `llms.txt` line automatically.
-- **Page titles and descriptions**: `src/routes.ts` for the index and hand-written pages; detail pages take them from their content entry.
-- **Nepali**: `/ne/` stays out of search while `draft` is set in `src/content/home.ne.ts`. After a native-speaker review, set `draft: ''`.
-
 ## Checks
 
 `npm run check` fails the build if any of these break:
@@ -105,7 +87,7 @@ docs/                 Research notes behind the guides and site copy
 
 ## Contributing
 
-Corrections and improvements are welcome. Work on a branch from `develop`, run `npm run lint`, `npm run build` and `npm run check`, then open a pull request into `develop`. To report an error on the site, [open an issue](https://github.com/yarsa/erpnepal.org/issues).
+Typo Corrections and UI improvements are welcome. Work on a branch from `develop`, run `npm run lint`, `npm run build` and `npm run check`, then open a pull request into `develop`. To report an error on the site, [open an issue](https://github.com/yarsa/erpnepal.org/issues).
 
 For the app itself, see the [Nepal Compliance contributing guide](https://github.com/yarsa/nepal-compliance/blob/master/CONTRIBUTING.md).
 

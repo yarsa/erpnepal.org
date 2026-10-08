@@ -3,8 +3,12 @@ name: Publish website to GitHub Pages
 on:
   push:
     branches: [master]
+    # Markdown never reaches the build (README, NOTICE, docs/), so skip those commits.
+    paths-ignore: ['**/*.md', 'docs/**']
   pull_request:
     branches: [master]
+    # Markdown never reaches the build (README, NOTICE, docs/), so skip those commits.
+    paths-ignore: ['**/*.md', 'docs/**']
   workflow_dispatch:
   workflow_run:
     workflows: ["pages build and deployment"]
