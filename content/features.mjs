@@ -4,45 +4,32 @@ export const features = [
     "shortTitle": "Accounting and VAT",
     "title": "Nepal accounting and VAT reports for ERPNext",
     "description": "Sales, purchase, return, and VAT reports for Nepal businesses using ERPNext, with customer and supplier registers and balance confirmation.",
-    "intro": "Review sales, purchases, returns, and customer or supplier balances from the transactions your team records in ERPNext. Nepal Compliance adds value-added tax (VAT) registers and reporting tools for your accounting work in Nepal.",
-    "audience": "For accountants, finance teams, and implementation partners evaluating ERPNext for a business in Nepal.",
+    "intro": "VAT registers and reports built from the transactions your team records in ERPNext.",
+    "audience": "For accountants and finance teams.",
     "sections": [
       {
         "heading": "VAT registers and returns",
-        "body": "Separate registers for sales, purchases, and returns help your accounts team review a reporting period. Use the VAT Return Report alongside those registers when preparing figures for your accountant.",
+        "body": "Review a reporting period before you prepare figures for your accountant.",
         "items": [
-          "Sales VAT Register and Sales Return VAT Register.",
-          "Purchase VAT Register and Purchase Return VAT Register.",
-          "VAT return reporting based on the accounting records in the system."
+          "Sales and sales return VAT registers.",
+          "Purchase and purchase return VAT registers.",
+          "VAT return report."
         ]
       },
       {
-        "heading": "Review transactions by period and business partner",
-        "body": "Find transactions for a particular customer, supplier, or month. ERPNext calls customers and suppliers “parties”; the party-wise registers help you review a business relationship without searching through every transaction.",
+        "heading": "Review by period or business partner",
+        "body": "Find transactions for one customer, supplier, or month.",
         "items": [
           "Party-wise sales and purchase registers.",
           "Monthly sales and purchase registers.",
-          "Balance confirmation and purchase landing cost reports."
-        ]
-      },
-      {
-        "heading": "Prepare your accounting setup",
-        "body": "Select the company and reporting period, then compare report totals with your invoices and returns. Your accounts, taxes, and transaction records determine the results. Confirm the reports and settings available in your installed version before live use.",
-        "items": [
-          "Select the company and fiscal period to review.",
-          "Check sample invoices, returns, and report totals with your accountant.",
-          "Confirm report settings during installation."
+          "Balance confirmation and landing cost reports."
         ]
       }
     ],
     "questions": [
       {
         "question": "Does the app replace ERPNext accounting?",
-        "answer": "No. It extends ERPNext with Nepal-specific reports and workflows. ERPNext remains the underlying system for accounts and transactions."
-      },
-      {
-        "question": "Does generating a VAT report complete tax filing?",
-        "answer": "Use the report to prepare and review your figures. Your accountant still needs to confirm the contents and complete the applicable filing process."
+        "answer": "No. It adds Nepal-specific reports on top of ERPNext."
       }
     ],
     "related": [
@@ -70,45 +57,36 @@ export const features = [
     "shortTitle": "Invoicing and billing",
     "title": "Nepal invoicing and billing controls for ERPNext",
     "description": "Sequential invoice numbering, cancellation records, printed copy counts, and Nepali invoice formats for ERPNext billing.",
-    "intro": "Keep invoice numbers, cancelled transactions, and printed copies traceable in ERPNext. Nepal Compliance adds sequential numbering, cancellation records, and reprint copy counts to help billing staff and accounts managers review the same transaction history.",
-    "audience": "For billing staff, accounts managers, and teams configuring invoice workflows in ERPNext.",
+    "intro": "Traceable invoice numbers, cancellations, and printed copies in ERPNext.",
+    "audience": "For billing staff and accounts managers.",
     "sections": [
       {
-        "heading": "Invoice numbers and printed copies",
-        "body": "Issue invoices with automatically increasing numbers and identify later printed copies. Configure the numbering and print format together so the customer document matches the record your accounts team reviews.",
+        "heading": "Numbers and printed copies",
+        "body": "Invoices are numbered in order, and reprints are marked as copies.",
         "items": [
           "Sequential invoice numbering.",
-          "Copy identification on subsequent invoice prints.",
-          "Invoice print formats with Nepal-specific fields and Nepali dates."
+          "Copy marking on reprints.",
+          "Print format with Nepali dates."
         ]
       },
       {
-        "heading": "Cancellation and return records",
-        "body": "Keep a record when an invoice is cancelled. Cancellation requires the Accounts Manager role; other users are directed toward a return or credit note. Agree who approves corrections and how billing staff should request them.",
+        "heading": "Cancellations",
+        "body": "Only the Accounts Manager role can cancel; others use a return or credit note.",
         "items": [
-          "Reports for viewing or printing cancelled invoices.",
-          "A Sales Cancellation Register for reviewing cancelled sales.",
-          "Activity audit trails alongside invoice records."
-        ]
-      },
-      {
-        "heading": "Check the complete billing workflow",
-        "body": "Check creation, submission, printing, reprinting, returns, and cancellation with sample transactions before your team starts billing. Configure the CBMS connection separately and assign someone to review its responses alongside invoice records.",
-        "items": [
-          "Confirm which staff roles can create and cancel invoices.",
-          "Check your original and repeat invoice prints.",
-          "Review invoice records alongside VAT reports and any CBMS responses."
+          "Cancelled-invoice reports.",
+          "Sales Cancellation Register.",
+          "Audit trail on invoice records."
         ]
       }
     ],
     "questions": [
       {
         "question": "Can every user cancel a sales invoice?",
-        "answer": "Cancellation requires the Accounts Manager role. Review your staff permissions and correction process during setup."
+        "answer": "No. Cancelling needs the Accounts Manager role."
       },
       {
         "question": "Does printing an invoice send it to CBMS?",
-        "answer": "Printing and CBMS submission are different functions. Configure and test the billing integration separately, and check its recorded response rather than assuming a printed invoice was accepted."
+        "answer": "No. CBMS submission is separate; check its recorded response."
       }
     ],
     "related": [
@@ -136,45 +114,32 @@ export const features = [
     "shortTitle": "IRD CBMS integration",
     "title": "IRD CBMS integration for ERPNext in Nepal",
     "description": "Connect ERPNext billing to IRD CBMS with configured credentials, sales and return submissions, and recorded responses for your accounts team to review.",
-    "intro": "Connect sales invoices and returns to the Inland Revenue Department’s Central Billing Monitoring System (CBMS). Nepal Compliance prepares the billing data and records responses on the invoice, giving your accounts team a place to review the result. Setup and verification are required for your business.",
-    "audience": "For accounts managers and administrators assessing an ERPNext connection to Nepal’s billing service.",
+    "intro": "Send sales invoices and returns to the IRD Central Billing Monitoring System (CBMS) and see each response on the invoice.",
+    "audience": "For accounts managers and administrators.",
     "sections": [
       {
-        "heading": "Configure the connection",
-        "body": "Your administrator configures the CBMS username, password, business PAN/VAT number, and service addresses for sales and credit notes. Enable the connection after these details and the applicable onboarding requirements have been confirmed.",
+        "heading": "Set up the connection",
+        "body": "An administrator enters the CBMS credentials, PAN/VAT number, and service addresses, then enables it.",
         "items": [
-          "Enable CBMS configuration in the application settings.",
-          "Provide the relevant account credentials and business identifier.",
-          "Review the sales and credit note service configuration with your administrator."
+          "Off by default.",
+          "Credentials and business PAN/VAT number.",
+          "Separate sales and credit note settings."
         ]
       },
       {
-        "heading": "Invoices, returns, and responses",
-        "body": "Review the submission status beside the invoice. Sales and returns have separate submission paths, with fiscal year and Nepali invoice dates included in the billing data. Recorded responses help your team identify transactions that need attention.",
+        "heading": "Submissions and responses",
+        "body": "Each invoice shows its CBMS status, so failures are easy to find.",
         "items": [
           "Sales invoice and credit note submissions.",
-          "CBMS status and response information on invoices.",
-          "Retry processing for invoices without a successful status."
-        ]
-      },
-      {
-        "heading": "Verify before live use",
-        "body": "Test both an invoice and a return through the permitted process before relying on the connection. A queued request still needs a confirmed result. Assign an owner to check unsuccessful or unexpected responses and decide when another attempt is appropriate.",
-        "items": [
-          "Test the intended invoice and return workflow before relying on it.",
-          "Assign responsibility for reviewing failed or unexpected responses.",
-          "Confirm current operational requirements with your accountant and the relevant authority."
+          "Status and response on each invoice.",
+          "Retry for unsuccessful submissions."
         ]
       }
     ],
     "questions": [
       {
         "question": "Is CBMS enabled automatically?",
-        "answer": "CBMS starts disabled. Configure the required account details and complete the connection checks before enabling it."
-      },
-      {
-        "question": "Does setting up CBMS complete regulatory approval?",
-        "answer": "Configuration and regulatory approval are separate. Confirm the current requirements for your business with your accountant and IRD; a configured connection alone does not establish certification."
+        "answer": "No. It starts disabled until you configure it."
       }
     ],
     "related": [
@@ -202,45 +167,36 @@ export const features = [
     "shortTitle": "Payroll and contributions",
     "title": "Nepal payroll configuration for ERPNext and Frappe HR",
     "description": "Nepal payroll contributions, salary components, tax slab configuration, gratuity, and employee grades for ERPNext and Frappe HR.",
-    "intro": "Configure earnings, deductions, and payroll contributions for employees in Nepal. Nepal Compliance extends Frappe HR with provident fund and social security support, optional contributions, tax slabs, gratuity, employee grades, and basic salary settings.",
-    "audience": "For payroll teams, accountants, and implementation partners configuring employee pay in Nepal.",
+    "intro": "Nepal contributions, tax slabs, and salary components for Frappe HR.",
+    "audience": "For payroll teams and accountants.",
     "sections": [
       {
-        "heading": "Payroll contributions",
-        "body": "Select the contributions that apply to each employee and salary structure. Review the resulting amounts against your approved payroll calculations before the first pay run.",
+        "heading": "Contributions",
+        "body": "Choose the contributions that apply to each employee.",
         "items": [
-          "Employees Provident Fund (EPF) support.",
-          "Social Security Fund (SSF) support.",
-          "Citizen Investment Trust (CIT), insurance, and other optional contributions."
+          "Employees Provident Fund (EPF).",
+          "Social Security Fund (SSF).",
+          "CIT, insurance, and other optional contributions."
         ]
       },
       {
         "heading": "Salary components and tax slabs",
-        "body": "Build salary calculations from earnings and deduction components, including basic salary, gratuity, contributions, and employee grades. Tax slab configuration uses employee marital status and company fiscal year information.",
+        "body": "Tax slabs use the employee's marital status and the company fiscal year.",
         "items": [
-          "Minimum basic salary configuration.",
-          "Gratuity and employee grade components.",
-          "Income tax slab setup by company and fiscal year."
-        ]
-      },
-      {
-        "heading": "Review payroll configuration for your period",
-        "body": "Review the effective period, salary structures, filing status, and contribution choices before processing pay. Keep formulas and tax values aligned with the requirements for that period; software installation alone does not keep those choices current.",
-        "items": [
-          "Test representative employee salary slips before a live pay run.",
-          "Review changes to tax rules and contribution arrangements separately from software installation.",
-          "Keep ERPNext, Frappe HR, and Nepal Compliance versions compatible with your chosen setup."
+          "Minimum basic salary.",
+          "Gratuity and employee grades.",
+          "Income tax slabs by fiscal year."
         ]
       }
     ],
     "questions": [
       {
-        "question": "Does Nepal Compliance provide a separate payroll application?",
-        "answer": "No. It extends Frappe HR within an ERPNext installation. The installation guide requires ERPNext and Frappe HR to be installed before Nepal Compliance."
+        "question": "Is it a separate payroll app?",
+        "answer": "No. It extends Frappe HR inside ERPNext."
       },
       {
-        "question": "What should we review before each payroll period?",
-        "answer": "Check tax slabs, contribution arrangements, employee changes, and the effective payroll period. Your payroll professional should confirm any changes to the applicable requirements."
+        "question": "What should we check before each pay period?",
+        "answer": "Tax slabs, contributions, and employee changes, confirmed by your payroll professional."
       }
     ],
     "related": [
@@ -268,45 +224,36 @@ export const features = [
     "shortTitle": "Employee records and leave",
     "title": "Nepal employee records and leave for Frappe HR",
     "description": "Employee records, sick and home leave allocation, and Nepali attendance and holiday dates for ERPNext and Frappe HR.",
-    "intro": "Manage employee information, leave allocation, attendance dates, and holidays in Frappe HR. Nepal Compliance adds local employee fields and sick and home leave workflows, including configurable monthly allocation using Nepal’s Bikram Sambat calendar.",
-    "audience": "For human resources staff and administrators responsible for employee records, leave policies, and attendance.",
+    "intro": "Employee fields, sick and home leave, and Nepali dates in Frappe HR.",
+    "audience": "For HR staff and administrators.",
     "sections": [
       {
-        "heading": "Employee records and dates",
-        "body": "Keep the employee details used by leave administration and payroll in the same system. Required fields and Nepali date support help your team maintain the records needed for each employee.",
+        "heading": "Employee records",
+        "body": "Keep the details leave and payroll need in one place.",
         "items": [
           "Required employee fields.",
-          "Nepali dates for attendance, leave, and holiday records.",
-          "Fiscal year allocation based on Nepali dates."
+          "Nepali dates for attendance, leave, and holidays.",
+          "Fiscal year allocation on Nepali dates."
         ]
       },
       {
         "heading": "Leave allocation",
-        "body": "Allocate sick and home leave based on working days. For leave types using monthly allocation, set the amount and maximum allowance; eligible active allocations receive the configured monthly amount.",
+        "body": "Sick and home leave are allocated from days worked.",
         "items": [
-          "Sick and home leave allocation.",
-          "Monthly allocation using the Bikram Sambat calendar.",
-          "Maximum allowance checks for monthly allocation."
-        ]
-      },
-      {
-        "heading": "Prepare policies and attendance inputs",
-        "body": "Agree leave types, allocation amounts, policy assignments, and employee start dates before enabling the workflow. Review an employee’s balance across the period you intend to use. Biometric attendance support is planned, and device integrations need a separate compatibility check.",
-        "items": [
-          "Confirm leave policies and amounts with your human resources team.",
-          "Check both initial allocations and subsequent monthly changes.",
-          "Verify attendance device compatibility before buying or connecting equipment."
+          "Sick and home leave.",
+          "Monthly allocation on the Bikram Sambat calendar.",
+          "Maximum allowance checks."
         ]
       }
     ],
     "questions": [
       {
-        "question": "Does the app set every company’s leave policy?",
-        "answer": "The app provides configuration and allocation workflows. Your organisation still needs to review its policies, employee records, and applicable requirements before using them."
+        "question": "Does the app set our leave policy?",
+        "answer": "No. It runs the policy you configure."
       },
       {
-        "question": "Can I connect a fingerprint attendance device?",
-        "answer": "Biometric attendance support is planned. A device connection needs a separate assessment of the exact model, connection method, and your Frappe HR installation."
+        "question": "Can I connect a fingerprint device?",
+        "answer": "Biometric support is planned; each device model needs its own check."
       }
     ],
     "related": [
@@ -334,45 +281,36 @@ export const features = [
     "shortTitle": "Audit trails and records",
     "title": "ERPNext audit trails and document history for Nepal",
     "description": "Audit trails, document changes, cancellation records, and reports to help accounts teams review ERPNext transaction history.",
-    "intro": "Review changes to business documents, invoice cancellations, and recorded user activity in ERPNext. Nepal Compliance provides audit reports that help accounts managers investigate a transaction and understand the changes recorded against it.",
-    "audience": "For finance reviewers, accounts managers, and administrators investigating records in an ERPNext installation.",
+    "intro": "See who changed a document, when, and what changed.",
+    "audience": "For finance reviewers and administrators.",
     "sections": [
       {
-        "heading": "Activity and cancellation records",
-        "body": "Use the Audit Trail and Audit Log reports to review recorded activity around business documents. The Sales Cancellation Register gives your accounts team a separate view of cancelled invoices.",
+        "heading": "Activity and cancellations",
+        "body": "Audit reports and a separate register of cancelled invoices.",
         "items": [
-          "Recorded user activity and document changes.",
-          "Audit Trail reports and SQL query audit logs.",
-          "Sales cancellation records for review or printing."
+          "User activity and document changes.",
+          "Audit Trail report and SQL query audit logs.",
+          "Sales Cancellation Register."
         ]
       },
       {
-        "heading": "Investigate a document change",
-        "body": "Find a document or filter by the user who changed it. The Audit Log shows the document reference, operation, modification time, and recorded old and new field values for supported records, including invoices, journal entries, payments, and stock documents.",
+        "heading": "Investigate a change",
+        "body": "Search by document or user to see old and new values for invoices, journals, payments, and stock.",
         "items": [
-          "Find records by document reference or modifying user.",
-          "Review recorded field changes and modification times.",
-          "Examine submission and cancellation operations identified from version records."
-        ]
-      },
-      {
-        "heading": "Review sales and purchase records",
-        "body": "Use the Materialized Report to review sales and purchase records by document, company, and business partner. Select the relevant filters and compare a sample transaction with its history. The records available depend on your configuration and the activity captured.",
-        "items": [
-          "Review report filters and reporting dates before comparing totals.",
-          "Compare a sample document with its related reports and history.",
-          "Agree access and review responsibilities with the system administrator."
+          "Search by document or user.",
+          "Old and new field values with times.",
+          "Materialized Report for sales and purchases."
         ]
       }
     ],
     "questions": [
       {
-        "question": "Are these reports a substitute for an audit?",
-        "answer": "No. They provide records that can support review. The scope and conclusions of an audit depend on the reviewer, the business records, and the procedures used."
+        "question": "Do these reports replace an audit?",
+        "answer": "No. They give reviewers records to work from."
       },
       {
-        "question": "How do we start investigating a transaction?",
-        "answer": "Find its document reference, check the reporting dates and filters, and review the recorded changes. Confirm the available history and report permissions with your administrator."
+        "question": "Where do I start with one transaction?",
+        "answer": "Find its document reference, then review the recorded changes."
       }
     ],
     "related": [
@@ -404,45 +342,36 @@ export const features = [
     "shortTitle": "Nepali dates and fiscal years",
     "title": "Bikram Sambat dates for ERPNext in Nepal",
     "description": "Bikram Sambat dates for ERPNext forms, fiscal years, lists, reports, and printed business documents.",
-    "intro": "Use Bikram Sambat dates when entering transactions, reviewing reports, and printing documents in ERPNext. Nepal Compliance adds Nepal’s calendar to supported forms, fiscal years, lists, and related accounting and human resources workflows.",
-    "audience": "For accounting, billing, and human resources teams that work with Nepal’s calendar.",
+    "intro": "Bikram Sambat dates in forms, lists, reports, and printed documents.",
+    "audience": "For accounting, billing, and HR teams.",
     "sections": [
       {
-        "heading": "Dates in forms and fiscal years",
-        "body": "Enter Nepali dates in supported forms and use them when setting up a fiscal year, the period your business uses for its accounts. Check the company’s fiscal period before entering transactions in a new installation.",
+        "heading": "Entering and finding records",
+        "body": "Use Nepali dates from data entry through to reports.",
         "items": [
-          "Nepali date support for fiscal years.",
-          "Nepali date input fields in supported forms.",
-          "Date handling used by related accounting and human resources workflows."
+          "Nepali date input fields and fiscal years.",
+          "Filter, sort, and search by Nepali date.",
+          "Nepali dates in reports."
         ]
       },
       {
-        "heading": "Find and review records",
-        "body": "Find and review records using Nepali dates in supported lists, views, filters, sorting, and search. Your team can use the same calendar when moving from a transaction to a report.",
-        "items": [
-          "Nepali dates in lists and views.",
-          "Filtering, sorting, and search by date.",
-          "Nepali dates in supported reports."
-        ]
-      },
-      {
-        "heading": "Printed documents and related workflows",
-        "body": "Include Nepali dates on printed documents and in related attendance, holiday, and leave workflows. Check the forms and print formats your team uses during setup. Custom fields and third-party extensions need their own compatibility review.",
+        "heading": "Printing and HR",
+        "body": "The same dates appear on printed documents and in HR records.",
         "items": [
           "Nepali dates in print templates.",
-          "Attendance and holiday records using local dates.",
-          "Bikram Sambat monthly leave allocation for configured leave types."
+          "Attendance and holidays on local dates.",
+          "Monthly leave allocation on Bikram Sambat."
         ]
       }
     ],
     "questions": [
       {
-        "question": "Does Nepali date support cover custom forms automatically?",
-        "answer": "Custom forms need a compatibility check. Test any custom fields, document types, or extensions during setup to confirm how dates appear and behave."
+        "question": "Do custom forms get Nepali dates automatically?",
+        "answer": "Not always. Test custom fields and extensions during setup."
       },
       {
-        "question": "What should I check before using the date features?",
-        "answer": "Check a sample transaction from entry through reports and printed output, including the fiscal period. Confirm the behavior in your installed version before changing live records."
+        "question": "What should I test first?",
+        "answer": "One transaction from entry to report to printout."
       }
     ],
     "related": [
