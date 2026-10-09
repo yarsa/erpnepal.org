@@ -29,7 +29,8 @@ const visibleText = (html: string) =>
     html
       .replace(/<script[\s\S]*?<\/script>/g, '')
       .replace(/<style[\s\S]*?<\/style>/g, '')
-      .replace(/<!-- -->/g, ''),
+      .replace(/<!-- -->/g, '')
+      .replace(/<\/?(?:span|strong|a|svg|path)\b[^>]*>/g, ''),
   )
 
 // 1. URL set: exactly the previous site's pages, plus the Nepali homepage.

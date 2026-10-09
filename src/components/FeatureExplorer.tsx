@@ -1,7 +1,7 @@
 import { Tabs } from '@base-ui/react/tabs'
 import { Toggle } from '@base-ui/react/toggle'
 import { ToggleGroup } from '@base-ui/react/toggle-group'
-import { IconArrowRight, IconCheck } from '@tabler/icons-react'
+import { IconArrowRight, IconCircleCheckFilled } from '@tabler/icons-react'
 import { type Calendar, useCalendar } from '../lib/calendar'
 import { useFeatureTab } from '../lib/featureTab'
 import { useStrings } from '../lib/i18n'
@@ -10,6 +10,7 @@ import { Donut, grays } from './Donut'
 import { InvoiceCard } from './InvoiceCard'
 import { SlipCard } from './SlipCard'
 import { Badge } from './ui/badge'
+import { LinkButton } from './ui/button'
 
 export const chip =
   'inline-flex h-8 items-center gap-1.5 whitespace-nowrap rounded-full border border-fg/40 border-dashed bg-surface px-3 font-semibold text-fg-2 text-sm transition-colors hover:border-fg/70 hover:text-fg focus-visible:border-fg focus-visible:border-solid focus-visible:text-fg data-active:border-inverse data-active:border-solid data-active:bg-inverse data-active:text-on-inverse'
@@ -118,42 +119,42 @@ export function FeatureExplorer() {
   return (
     <section id="features" className="bg-subtle" aria-labelledby="features-title">
       <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <div className="max-w-2xl">
-            <h2 id="features-title" className="heading text-3xl md:text-4xl">
-              {f.title}
-            </h2>
-            <p className="mt-3 text-fg-3 text-lg">{f.lead}</p>
-          </div>
-          <div className="flex items-center gap-3">
-            <span className="text-fg-4 text-sm" id="calendar-label">
-              {f.dateLabel}
-            </span>
-            <ToggleGroup
-              value={[calendar]}
-              onValueChange={(v) => v[0] && setCalendar(v[0] as Calendar)}
-              aria-labelledby="calendar-label"
-              className="flex rounded-lg bg-muted p-0.5"
-            >
-              <Toggle value="bs" className={segment}>
-                {f.calendar.bs}
-              </Toggle>
-              <Toggle value="ad" className={segment}>
-                {f.calendar.ad}
-              </Toggle>
-            </ToggleGroup>
-          </div>
+        <div className="max-w-2xl">
+          <h2 id="features-title" className="heading text-3xl md:text-4xl">
+            {f.title}
+          </h2>
+          <p className="mt-3 text-fg-3 text-lg">{f.lead}</p>
         </div>
 
         <Tabs.Root value={active} onValueChange={(v) => select(String(v))} className="mt-10">
-          <Tabs.List aria-label={f.tabsLabel} className="flex flex-wrap gap-2">
-            {f.tabs.map((tab) => (
-              <Tabs.Tab key={tab.value} value={tab.value} className={chip}>
-                <ContentIcon name={tab.icon} className="size-4" />
-                {tab.label}
-              </Tabs.Tab>
-            ))}
-          </Tabs.List>
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <Tabs.List aria-label={f.tabsLabel} className="flex flex-wrap gap-2">
+              {f.tabs.map((tab) => (
+                <Tabs.Tab key={tab.value} value={tab.value} className={chip}>
+                  <ContentIcon name={tab.icon} className="size-4" />
+                  {tab.label}
+                </Tabs.Tab>
+              ))}
+            </Tabs.List>
+            <div className="flex items-center gap-3">
+              <span className="text-fg-3 text-sm" id="calendar-label">
+                {f.dateLabel}
+              </span>
+              <ToggleGroup
+                value={[calendar]}
+                onValueChange={(v) => v[0] && setCalendar(v[0] as Calendar)}
+                aria-labelledby="calendar-label"
+                className="flex rounded-lg bg-muted p-0.5"
+              >
+                <Toggle value="bs" className={segment}>
+                  {f.calendar.bs}
+                </Toggle>
+                <Toggle value="ad" className={segment}>
+                  {f.calendar.ad}
+                </Toggle>
+              </ToggleGroup>
+            </div>
+          </div>
 
           {/* Every panel stays in the HTML (keepMounted), so search engines see all five. */}
           {f.tabs.map((tab) => (
@@ -161,39 +162,44 @@ export function FeatureExplorer() {
               key={tab.value}
               value={tab.value}
               keepMounted
-              className="panel-in mt-8 grid items-start gap-10 lg:grid-cols-[1fr_1.05fr]"
+              className="panel-in mt-6 grid overflow-hidden rounded-2xl border border-line bg-surface shadow-sm lg:grid-cols-[1fr_1.1fr]"
             >
               {/* Anchor for #feature-<tab> links. */}
-              <div id={`feature-${tab.value}`}>
-                <h3 className="heading text-2xl">{tab.label}</h3>
+              <div id={`feature-${tab.value}`} className="flex flex-col p-6 md:p-8 lg:p-10">
+                <span className="grid size-10 place-items-center rounded-lg bg-muted text-fg" aria-hidden="true">
+                  <ContentIcon name={tab.icon} className="size-5" />
+                </span>
+                <h3 className="heading mt-5 text-2xl md:text-3xl">{tab.label}</h3>
                 {tab.nepali && (
-                  <p lang="ne" className="mt-1 text-fg-4 text-lg">
+                  <p lang="ne" className="mt-1 text-fg-3">
                     {tab.nepali}
                   </p>
                 )}
-                <ul className="mt-6 space-y-3">
+                <ul className="mt-6 space-y-3.5">
                   {tab.points.map((point) => (
                     <li key={point} className="flex gap-3 text-fg-2 text-lg">
-                      <IconCheck className="mt-1 size-4 shrink-0 text-fg" aria-hidden="true" />
+                      <IconCircleCheckFilled className="mt-1 size-5 shrink-0 text-fg" aria-hidden="true" />
                       <span>{point}</span>
                     </li>
                   ))}
                 </ul>
-                <a
-                  href={tab.link}
-                  className="mt-6 inline-flex items-center gap-1.5 font-medium text-fg underline decoration-line-strong underline-offset-4 hover:decoration-fg"
-                >
-                  {f.docsLabel} <IconArrowRight className="size-4" aria-hidden="true" />
-                </a>
+                <div className="mt-8 lg:mt-auto lg:pt-8">
+                  <LinkButton href={tab.link} size="lg">
+                    {f.docsLabel}
+                    <IconArrowRight className="size-4" aria-hidden="true" />
+                  </LinkButton>
+                </div>
               </div>
 
               {/* Demo cards: illustrative records with demo data only. */}
-              <figure className="relative overflow-hidden rounded-2xl bg-surface shadow-md">
-                <Badge size="sm" className="absolute top-4 right-4">
-                  {t.demo.tag}
-                </Badge>
-                <DemoPanel value={tab.value} />
-              </figure>
+              <div className="border-line border-t bg-subtle p-4 md:p-6 lg:border-t-0 lg:border-l">
+                <figure className="relative overflow-hidden rounded-2xl border border-line bg-surface">
+                  <Badge size="sm" className="absolute top-4 right-4">
+                    {t.demo.tag}
+                  </Badge>
+                  <DemoPanel value={tab.value} />
+                </figure>
+              </div>
             </Tabs.Panel>
           ))}
         </Tabs.Root>

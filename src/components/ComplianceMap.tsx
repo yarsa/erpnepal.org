@@ -1,3 +1,4 @@
+import { IconArrowUpRight } from '@tabler/icons-react'
 import { useStrings } from '../lib/i18n'
 import { Donut } from './Donut'
 import { Badge } from './ui/badge'
@@ -20,21 +21,21 @@ export function ComplianceMap() {
 
   return (
     <section id="compliance" aria-labelledby="compliance-title">
-      <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
-        <div className="flex flex-wrap items-end justify-between gap-8">
-          <div className="max-w-2xl">
-            <h2 id="compliance-title" className="heading text-3xl md:text-4xl">
-              {c.title}
-            </h2>
-            <p className="mt-3 text-fg-3 text-lg">{c.lead}</p>
+      <div className="mx-auto grid max-w-6xl items-start gap-10 px-5 py-16 md:px-8 md:py-24 lg:grid-cols-[20rem_minmax(0,1fr)] lg:gap-12">
+        <div className="lg:sticky lg:top-24">
+          <h2 id="compliance-title" className="heading text-3xl md:text-4xl">
+            {c.title}
+          </h2>
+          <p className="mt-3 text-fg-3 text-lg">{c.lead}</p>
+          {/* Summary of the table; the table stays the full source. */}
+          <div className="mt-8 rounded-2xl border border-line bg-surface p-6 shadow-sm">
+            <Donut slices={slices} center={c.chart.center} format={String} />
           </div>
-          {/* Summary of the table below; the table stays the full source. */}
-          <Donut slices={slices} center={c.chart.center} format={String} className="w-full max-w-xs" />
         </div>
 
-        <div className="mt-10 overflow-hidden rounded-2xl border border-line-strong">
+        <div className="overflow-hidden rounded-2xl border border-line bg-surface shadow-sm">
           <table className="w-full text-left">
-            <thead className="hidden bg-subtle text-fg-4 text-sm md:table-header-group">
+            <thead className="hidden border-line border-b bg-subtle text-fg-3 text-sm md:table-header-group">
               <tr>
                 <th scope="col" className="px-5 py-3 font-medium">
                   {c.columns.rule}
@@ -47,16 +48,16 @@ export function ComplianceMap() {
                 </th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="divide-y divide-line">
               {c.rows.map((row) => (
                 <tr
                   key={row.rule}
-                  className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-1 border-line border-t px-5 py-3 first:border-t-0 md:table-row md:px-0 md:py-0 md:first:border-t"
+                  className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-1 px-5 py-3.5 transition-colors hover:bg-subtle md:table-row md:px-0 md:py-0"
                 >
                   <th scope="row" className="col-start-1 row-start-1 text-left font-medium text-fg md:px-5 md:py-4 md:align-top">
-                    <span className="text-lg">{row.rule}</span>
+                    <span className="text-base md:text-lg">{row.rule}</span>
                     {row.nepali && (
-                      <span lang="ne" className="block font-normal text-fg-4 text-sm">
+                      <span lang="ne" className="block font-normal text-fg-3 text-sm">
                         {row.nepali}
                       </span>
                     )}
@@ -66,16 +67,26 @@ export function ComplianceMap() {
                       <a
                         href={row.link}
                         rel="noopener"
-                        className="underline decoration-line-strong underline-offset-4 hover:text-fg hover:decoration-fg"
+                        className="group/link text-fg-2 underline decoration-line-strong underline-offset-4 hover:text-fg hover:decoration-fg"
                       >
-                        {row.feature}
+                        {row.feature.slice(0, row.feature.lastIndexOf(' ') + 1)}
+                        <span className="whitespace-nowrap">
+                          {row.feature.slice(row.feature.lastIndexOf(' ') + 1)}
+                          <IconArrowUpRight
+                            className="ml-1 inline size-3.5 align-[-2px] text-fg-3 transition-transform group-hover/link:-translate-y-px group-hover/link:translate-x-px"
+                            aria-hidden="true"
+                          />
+                        </span>
                       </a>
                     ) : (
                       row.feature
                     )}
                   </td>
                   <td className="col-start-2 row-start-1 text-right md:px-5 md:py-4 md:align-top">
-                    <Badge tone={status[row.status as Status]?.tone ?? 'gray'}>{label(row.status)}</Badge>
+                    <Badge tone={status[row.status as Status]?.tone ?? 'gray'}>
+                      <span className="size-1.5 rounded-full bg-current" aria-hidden="true" />
+                      {label(row.status)}
+                    </Badge>
                   </td>
                 </tr>
               ))}
