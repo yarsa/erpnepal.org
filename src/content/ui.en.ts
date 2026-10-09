@@ -62,6 +62,8 @@ export default {
     main: 'Main',
     menu: 'Menu',
     theme: 'Toggle dark mode',
+    light: 'Light',
+    dark: 'Dark',
     language: 'Language',
     github: 'Nepal Compliance on GitHub',
     stars: 'stars',

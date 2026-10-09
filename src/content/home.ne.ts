@@ -13,9 +13,10 @@ export default {
   },
   hero: {
     eyebrow: 'निःशुल्क IRD सूचीकृत ई-बिलिङ सफ्टवेयर, CBMS सहित',
+    eyebrowStrong: 'IRD सूचीकृत',
     eyebrowHref: '/features/cbms/',
     title: 'IRD अनुसार बिल, भ्याट, र तलब मिलाउनुहोस्।',
-    lead: 'ERP मै IRD अनुसारको बिल, CBMS, भ्याट रिपोर्ट र नेपाली मिति।',
+    lead: 'नेपालमा ERPNext का लागि IRD ई-बिलिङ, CBMS सिंक, भ्याट र तलब।',
     primary: { label: 'कसरी चल्छ, हेर्नुहोस्', href: '#features' },
     secondary: { label: 'इन्स्टल गर्नुहोस्', href: '#get-started' },
     assurance: ['लाइसेन्स शुल्क छैन', 'ओपन सोर्स (GPL-3.0)', 'तपाईंकै सर्भरमा चल्छ'],
@@ -158,6 +159,7 @@ export default {
       ],
     },
     tag: 'नमुना डेटा',
+    addFeatures: 'एप इन्स्टल गर्नुहोस्',
     previewLabel: 'नमुना डेटासहित सफ्टवेयरको झलक',
   },
   compliance: {

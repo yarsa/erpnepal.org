@@ -46,10 +46,11 @@ export default function MobileMenu({
                 {other === 'ne' ? t.language.ne : 'English'}
               </Menu.LinkItem>
             )}
-            <Menu.Item onClick={toggleTheme} className={item}>
+            <Menu.Item onClick={toggleTheme} className={`${item} sm:hidden`}>
               <IconMoon className="size-4 text-fg-3 dark:hidden" aria-hidden="true" />
               <IconSun className="hidden size-4 text-fg-3 dark:block" aria-hidden="true" />
-              {ui.a11y.theme}
+              <span className="dark:hidden">{ui.a11y.dark}</span>
+              <span className="hidden dark:inline">{ui.a11y.light}</span>
             </Menu.Item>
           </Menu.Popup>
         </Menu.Positioner>

@@ -199,6 +199,30 @@ body {
 }
 
 /* Fades in as it enters on the left and out as it leaves on the right. */
+@utility pulse-ring {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: inherit;
+    border: 2px solid var(--fg);
+    pointer-events: none;
+    animation: pulse-ring 1s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.06, 1.25);
+  }
+}
+
 @keyframes outline-sweep {
   0% {
     background-position: 100% 0;
@@ -231,6 +255,10 @@ body {
   .outline-sweep::before {
     animation: none !important;
     opacity: 0;
+  }
+  .pulse-ring::after {
+    animation: none !important;
+    opacity: 0.3;
   }
 }
 /* biome-ignore-end lint/complexity/noImportantStyles: see above */

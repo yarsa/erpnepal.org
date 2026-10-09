@@ -22,6 +22,8 @@ export default {
     main: 'मुख्य',
     menu: 'मेनु',
     theme: 'डार्क मोड अन/अफ गर्नुहोस्',
+    light: 'लाइट',
+    dark: 'डार्क',
     language: 'भाषा',
     github: 'GitHub मा Nepal Compliance',
     stars: 'स्टार',

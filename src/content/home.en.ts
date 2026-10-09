@@ -5,7 +5,6 @@ const hrPayroll = `${repo}#hr--payroll`
 const basicSetup = `${repo}#basic-setup`
 
 export default {
-  // Dates verified with two converters (nepali-date-converter, bikram-sambat-js).
   dates: {
     invoice: { bs: '20 Ashwin 2083', ad: '6 Oct 2026' },
     fiscalStart: { bs: '1 Shrawan 2083', ad: '17 Jul 2026' },
@@ -13,13 +12,13 @@ export default {
   },
   hero: {
     eyebrow: 'Free IRD Certified E-Billing Software with CBMS',
+    eyebrowStrong: 'IRD Certified',
     eyebrowHref: '/features/cbms/',
-    title: 'Open Source ERP for Nepal with HR, Payroll & Accounting ',
-    lead: 'IRD-style invoicing, CBMS sync, VAT reports and Nepali dates.',
+    title: 'Free & Open Source ERP Software for Nepal',
+    lead: 'IRD e-billing, CBMS sync, VAT, Payroll, Biometric Attendance and more',
     primary: { label: 'See how it works', href: '#features' },
     secondary: { label: 'Install', href: '#get-started' },
-    // Reassurance under the buttons; each item restates a fact shown elsewhere on the page.
-    assurance: ['No licence fee', 'Open source (GPL-3.0)', 'Runs on your server'],
+    assurance: ['No licence fee', 'Open source (GPL-3.0)', 'Runs on your own server'],
   },
   proof: {
     label: 'Project facts',
@@ -159,6 +158,7 @@ export default {
       ],
     },
     tag: 'Demo data',
+    addFeatures: 'Install Apps',
     previewLabel: 'Product preview with demo data',
   },
   compliance: {

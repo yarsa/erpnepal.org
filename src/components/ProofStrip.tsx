@@ -16,17 +16,21 @@ export function ProofStrip() {
 
   return (
     <section aria-label={t.proof.label}>
-      <dl className="mx-auto grid max-w-6xl grid-cols-2 gap-y-8 px-5 py-10 sm:grid-cols-3 md:px-8 lg:grid-cols-5">
-        {items.map(({ icon: Icon, value, label }) => (
-          <div key={label} className="flex flex-col items-center gap-1 text-center">
-            <dt className="order-2 text-fg-4 text-sm">{label}</dt>
-            <dd className="order-1 flex items-center gap-2 font-medium text-3xl tabular-nums">
-              <Icon className="size-5 text-fg-4" stroke={1.75} aria-hidden="true" />
-              {value}
-            </dd>
-          </div>
-        ))}
-      </dl>
+      <div className="mx-auto max-w-6xl px-5 py-10 md:px-8 md:py-12">
+        <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line lg:grid-cols-5">
+          {items.map(({ icon: Icon, value, label }) => (
+            <div key={label} className="flex flex-col gap-4 bg-surface p-5 last:odd:col-span-2 md:p-6 lg:last:odd:col-span-1">
+              <span className="grid size-9 place-items-center rounded-lg bg-muted text-fg-2" aria-hidden="true">
+                <Icon className="size-[18px]" stroke={1.75} />
+              </span>
+              <div className="flex flex-col gap-1">
+                <dt className="order-2 text-fg-3 text-sm">{label}</dt>
+                <dd className="order-1 font-semibold text-3xl tracking-tight">{value}</dd>
+              </div>
+            </div>
+          ))}
+        </dl>
+      </div>
     </section>
   )
 }
