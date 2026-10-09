@@ -1,26 +1,43 @@
-import { IconArrowRight } from '@tabler/icons-react'
-import { useFeatureTab } from '../lib/featureTab'
+import { Toggle } from '@base-ui/react/toggle'
+import { ToggleGroup } from '@base-ui/react/toggle-group'
+import { IconArrowRight, IconCircleCheckFilled, IconCirclePlus, IconPlus } from '@tabler/icons-react'
+import { useRef, useState } from 'react'
 import { useStrings } from '../lib/i18n'
 import { ContentIcon } from '../lib/icons'
-import { InvoiceCard } from './InvoiceCard'
-import { SlipCard } from './SlipCard'
-import { Badge } from './ui/badge'
+import { useMinWidth } from '../lib/useMinWidth'
+import { DemoPanel } from './FeatureExplorer'
 import { LinkButton } from './ui/button'
 
 export function HomeHero() {
   const { t } = useStrings()
-  const { open } = useFeatureTab()
+  const tabs = t.features.tabs
+  const [selected, setSelected] = useState([tabs[0].value])
+  const wide = useMinWidth(640)
+  const panel = useRef<HTMLDivElement>(null)
+
+  // Newest selection first, so each added feature's demo appears at the top of the window.
+  function choose(next: string[]) {
+    if (next.length === 0) return
+    const added = next.filter((value) => !selected.includes(value))
+    setSelected([...added, ...selected.filter((value) => next.includes(value))])
+    if (added.length) panel.current?.scrollTo({ top: 0, behavior: 'smooth' })
+  }
   const hero = t.hero as typeof t.hero & { titleTail?: string }
+  const [before, after] = hero.eyebrow.split(hero.eyebrowStrong)
   return (
     <section className="-mt-16 bg-subtle pt-16" aria-labelledby="hero-title">
       <div className="mx-auto max-w-6xl px-5 pt-10 text-center md:px-8 md:pt-16">
         <div>
           <a
             href={hero.eyebrowHref}
-            className="group mx-auto inline-flex max-w-full items-center gap-1 whitespace-nowrap rounded-full border border-line-strong bg-surface px-2.5 py-1 text-fg-3 text-xs shadow-sm outline-sweep transition-colors hover:text-fg sm:gap-1.5 sm:px-3 sm:text-sm"
+            className="group mx-auto inline-flex max-w-full items-center gap-1 whitespace-nowrap rounded-full border border-line-strong bg-surface px-2.5 py-1 text-fg text-xs shadow-sm outline-sweep sm:gap-1.5 sm:px-3 sm:text-sm"
           >
             {/* One line on phones: 12 px text there; on very narrow screens it truncates. */}
-            <span className="truncate">{hero.eyebrow}</span>
+            <span className="truncate">
+              {before}
+              {after !== undefined && <strong className="font-semibold">{hero.eyebrowStrong}</strong>}
+              {after}
+            </span>
             <IconArrowRight className="size-3 shrink-0 transition-transform sm:size-3.5 group-hover:translate-x-0.5" aria-hidden="true" />
           </a>
         </div>
@@ -50,67 +67,94 @@ export function HomeHero() {
             </li>
           ))}
         </ul>
-
-        {/* Shortcuts into "What it does": each opens its tab there. */}
-        <nav aria-label={t.features.tabsLabel} className="mt-6">
-          <ul className="flex flex-wrap justify-center gap-2">
-            {t.features.tabs.map((tab) => (
-              <li key={tab.value}>
-                <a
-                  href={`#feature-${tab.value}`}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    open(tab.value)
-                  }}
-                  className="inline-flex h-8 items-center gap-1.5 rounded-full border border-line-strong bg-surface px-3 font-semibold text-fg-2 text-sm transition-colors hover:border-fg/70 hover:text-fg focus-visible:border-fg focus-visible:text-fg"
-                >
-                  <ContentIcon name={tab.icon} className="size-4 text-fg-3" />
-                  {tab.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
       </div>
 
-      {/* Product preview: demo records inside an app window, partly cropped by the section edge. */}
-      <div className="mx-auto mt-12 max-w-4xl px-5 pb-14 md:px-8 md:pb-20" role="img" aria-label={t.demo.previewLabel}>
-        <div className="overflow-hidden rounded-2xl bg-surface text-left shadow-lg" aria-hidden="true">
-          {/* Window bar: three dots and a breadcrumb to the open record. */}
+      <div className="mx-auto mt-12 max-w-5xl px-5 pb-14 md:px-8 md:pb-20">
+        <div className="overflow-hidden rounded-2xl bg-surface text-left shadow-lg">
           <div className="flex h-11 items-center gap-3 border-line border-b px-4">
-            <div className="flex gap-1.5">
-              <span className="size-2.5 rounded-full bg-line-strong" />
-              <span className="size-2.5 rounded-full bg-line-strong" />
-              <span className="size-2.5 rounded-full bg-line-strong" />
-            </div>
-            <p className="min-w-0 flex-1 truncate text-fg-3 text-xs">
-              {t.demo.invoice.heading} <span className="px-1 text-fg-4">/</span>
-              <span className="text-fg-2">{t.demo.invoice.number}</span>
+            <TrafficLights />
+            <p className="min-w-0 flex-1 truncate text-fg-3 text-xs" aria-hidden="true">
+              Nepal Compliance <span className="px-1 text-fg-4">/</span>
+              <span className="text-fg-2">{tabs.find((tab) => tab.value === selected[0])?.label}</span>
             </p>
-            <Badge tone="inverse" className="shrink-0">
-              {t.demo.tag}
-            </Badge>
           </div>
-          <div className="flex">
-            {/* Sidebar: one icon per feature, the first one current. */}
-            <div className="hidden w-14 shrink-0 flex-col items-center gap-2 border-line border-r py-4 sm:flex">
-              {t.features.tabs.map((tab, i) => (
-                <span key={tab.value} className={`grid size-9 place-items-center rounded-lg ${i === 0 ? 'bg-muted text-fg' : 'text-fg-4'}`}>
-                  <ContentIcon name={tab.icon} className="size-4" />
-                </span>
-              ))}
+          <div className="sm:flex">
+            <div className="flex items-center gap-2 overflow-x-auto border-line border-b p-3 [scrollbar-width:none] sm:w-60 sm:shrink-0 sm:flex-col sm:items-stretch sm:overflow-visible sm:border-r sm:border-b-0">
+              <ToggleGroup
+                multiple
+                value={selected}
+                onValueChange={choose}
+                orientation={wide ? 'vertical' : 'horizontal'}
+                aria-label={t.demo.previewLabel}
+                className="flex gap-1.5 sm:flex-col sm:gap-0.5"
+              >
+                {tabs.map((tab) => (
+                  <Toggle
+                    key={tab.value}
+                    value={tab.value}
+                    className="group/item flex h-9 shrink-0 items-center gap-2 whitespace-nowrap rounded-full border border-line-strong py-1 pr-3 pl-1.5 font-medium text-fg-2 text-sm transition-colors hover:border-fg/40 hover:text-fg data-pressed:border-transparent data-pressed:bg-muted data-pressed:text-fg sm:h-11 sm:gap-2.5 sm:rounded-lg sm:border-transparent sm:px-1.5 sm:hover:border-transparent sm:hover:bg-muted/60 sm:data-pressed:bg-muted"
+                  >
+                    <span className="grid size-6 shrink-0 place-items-center rounded-md bg-muted text-fg-3 transition-colors group-data-pressed/item:bg-surface group-data-pressed/item:text-fg group-data-pressed/item:shadow-sm sm:size-8">
+                      <ContentIcon name={tab.icon} className="size-4" />
+                    </span>
+                    <span className="group-data-pressed/item:font-semibold sm:flex-1 sm:text-left">{tab.label}</span>
+                    <IconCirclePlus
+                      className="size-[18px] shrink-0 text-fg-3 group-data-pressed/item:hidden"
+                      stroke={1.5}
+                      aria-hidden="true"
+                    />
+                    <IconCircleCheckFilled
+                      className="hidden size-[18px] shrink-0 text-fg group-data-pressed/item:block"
+                      aria-hidden="true"
+                    />
+                  </Toggle>
+                ))}
+              </ToggleGroup>
+              <LinkButton
+                href={hero.secondary.href}
+                variant="solid"
+                className="pulse-ring shrink-0 rounded-full font-semibold ring-2 ring-fg/20 ring-offset-2 ring-offset-surface sm:mt-auto sm:rounded-lg"
+              >
+                <IconPlus className="size-4" aria-hidden="true" />
+                {t.demo.addFeatures}
+              </LinkButton>
             </div>
-            <div className="grid min-w-0 flex-1 gap-4 bg-subtle p-4 md:grid-cols-[1.1fr_1fr] md:items-start md:p-5">
-              <div className="overflow-hidden rounded-2xl border border-line bg-surface">
-                <InvoiceCard />
-              </div>
-              <div className="hidden overflow-hidden rounded-2xl border border-line bg-surface md:block">
-                <SlipCard />
-              </div>
+            <div ref={panel} className="h-[26rem] min-w-0 flex-1 space-y-4 overflow-y-auto bg-subtle p-4 sm:h-[32rem] md:p-5">
+              {selected.map((value) => (
+                <div key={value} className="panel-in overflow-hidden rounded-2xl border border-line bg-surface">
+                  <DemoPanel value={value} />
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </div>
     </section>
+  )
+}
+
+const lights = [
+  { color: 'bg-[#ff5f57] border-[#e0443e]', glyph: <path d="M2 2l4 4M6 2L2 6" /> },
+  { color: 'bg-[#febc2e] border-[#dea123]', glyph: <path d="M1.5 4h5" /> },
+  { color: 'bg-[#28c840] border-[#1aab29]', glyph: <path d="M4 1.5v5M1.5 4h5" /> },
+]
+
+function TrafficLights() {
+  return (
+    <div className="group/lights flex gap-2" aria-hidden="true">
+      {lights.map((light) => (
+        <span key={light.color} className={`grid size-3 place-items-center rounded-full border ${light.color}`}>
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 8 8"
+            className="size-2 stroke-black/60 opacity-0 transition-opacity group-hover/lights:opacity-100"
+            strokeWidth="1.2"
+            fill="none"
+          >
+            {light.glyph}
+          </svg>
+        </span>
+      ))}
+    </div>
   )
 }
