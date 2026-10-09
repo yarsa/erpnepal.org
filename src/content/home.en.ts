@@ -14,12 +14,12 @@ export default {
   hero: {
     eyebrow: 'Free IRD Certified E-Billing Software with CBMS',
     eyebrowHref: '/features/cbms/',
-    title: 'Open Source ERP for Nepal with HR, Payroll & Accounting ',
-    lead: 'IRD-style invoicing, CBMS sync, VAT reports and Nepali dates.',
+    title: 'Free & Open Source ERP Software for Nepal',
+    lead: '',
     primary: { label: 'See how it works', href: '#features' },
     secondary: { label: 'Install', href: '#get-started' },
     // Reassurance under the buttons; each item restates a fact shown elsewhere on the page.
-    assurance: ['No licence fee', 'Open source (GPL-3.0)', 'Runs on your server'],
+    assurance: ['No licence fee', 'Open source (GPL-3.0)', 'Runs on your own server'],
   },
   proof: {
     label: 'Project facts',
