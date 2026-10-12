@@ -42,17 +42,27 @@ export function HomeHero() {
             <IconArrowRight className="size-3 shrink-0 transition-transform sm:size-3.5 group-hover:translate-x-0.5" aria-hidden="true" />
           </a>
         </div>
-        <h1 id="hero-title" className="heading mx-auto mt-4 max-w-3xl text-4xl sm:text-5xl md:text-6xl dark:text-white">
+        <h1 id="hero-title" className="heading mx-auto mt-4 max-w-4xl font-bold text-[2.75rem] leading-[1.05] sm:text-6xl md:text-7xl dark:text-white">
           {hero.title}
           {hero.titleTail && <span className="text-fg-4"> {hero.titleTail}</span>}
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-fg-3 text-xl dark:text-white">{hero.lead}</p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-          <LinkButton href={hero.primary.href} variant="solid" size="xl">
+          <LinkButton
+            href={hero.primary.href}
+            variant="solid"
+            size="xl"
+            className="dark:bg-orange-700 dark:font-semibold dark:text-white dark:hover:bg-orange-800 dark:hover:opacity-100"
+          >
             {hero.primary.label}
             <IconArrowRight className="size-4" aria-hidden="true" />
           </LinkButton>
-          <LinkButton href={hero.secondary.href} variant="outline" size="xl">
+          <LinkButton
+            href={hero.secondary.href}
+            variant="outline"
+            size="xl"
+            className="dark:border-orange-700 dark:bg-transparent dark:font-semibold dark:text-white dark:hover:bg-orange-700/30"
+          >
             {hero.secondary.label}
           </LinkButton>
         </div>
