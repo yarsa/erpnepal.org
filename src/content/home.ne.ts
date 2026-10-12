@@ -205,15 +205,7 @@ export default {
   },
   getStarted: {
     title: 'सुरु गरौं',
-    lead: 'दुई बाटो छन्।',
-    business: {
-      title: 'मेरो व्यवसाय छ',
-      body: 'तपाईंको IT टिम वा पार्टनरले इन्स्टल गरिदिन्छ। पहिले बिलिङ चलाउनुहोस्, अनि तलब थप्नुहोस्।',
-      primary: { label: 'कम्युनिटीमा सोध्नुहोस्', href: `${repo}/discussions` },
-      secondary: { label: 'फिचरहरू हेर्नुहोस्', href: '#features' },
-    },
     technical: {
-      title: 'म ERPNext सेटअप गर्छु',
       body: 'ERPNext र Frappe HR भएको Frappe साइट चाहिन्छ।',
       commands: en.getStarted.technical.commands,
       copy: 'कपी',

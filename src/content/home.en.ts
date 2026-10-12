@@ -204,15 +204,7 @@ export default {
   },
   getStarted: {
     title: 'Get started',
-    lead: 'Two ways in.',
-    business: {
-      title: 'I run a business',
-      body: 'Your IT team or a partner installs it. Start with billing, then add payroll.',
-      primary: { label: 'Ask the community', href: `${repo}/discussions` },
-      secondary: { label: 'See the features', href: '#features' },
-    },
     technical: {
-      title: 'I set up Myself',
       body: 'Needs a Frappe site with ERPNext and Frappe HR.',
       commands: [
         'bench get-app https://github.com/yarsa/nepal-compliance.git',
