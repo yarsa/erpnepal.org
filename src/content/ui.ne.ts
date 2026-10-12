@@ -10,6 +10,7 @@ export default {
   ],
   install: { label: 'इन्स्टल', href: '/ne/#get-started' },
   home: 'होम',
+  featuresMenu: { label: 'फिचरहरू', all: 'सबै फिचर', allBody: 'स्रोतसहित सबै फिचर।', new: 'नयाँ' },
   search: {
     label: 'खोज्नुहोस्',
     placeholder: 'गाइड, फिचर र एड-अन खोज्नुहोस्…',

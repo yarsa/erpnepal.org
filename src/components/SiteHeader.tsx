@@ -4,6 +4,7 @@ import { repo } from '../content/home.en.ts'
 import { cn } from '../lib/cn'
 import { homePath, useStrings } from '../lib/i18n'
 import { compact, useStats } from '../lib/stats'
+import { FeaturesMenu } from './FeaturesMenu'
 import { MobileMenuSlot } from './MobileMenuSlot'
 import { SearchSlot } from './SearchSlot'
 import { Button, LinkButton } from './ui/button'
@@ -62,19 +63,19 @@ export function SiteHeader({ path }: { path: string }) {
 
         {/* The full nav needs ~1040 px beside the controls, so it starts at xl. */}
         <nav aria-label={ui.a11y.main} className="hidden h-full items-stretch gap-6 xl:flex">
-          {ui.nav.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              aria-current={isCurrent(item.href) ? 'page' : undefined}
-              className={cn(
-                '-mb-px flex items-center whitespace-nowrap border-b-2 text-sm transition-colors hover:text-fg',
-                isCurrent(item.href) ? 'border-fg font-medium text-fg' : 'border-transparent text-fg-3',
-              )}
-            >
-              {item.label}
-            </a>
-          ))}
+          {ui.nav.map((item) => {
+            const className = cn(
+              '-mb-px flex items-center whitespace-nowrap border-b-2 text-sm transition-colors hover:text-fg',
+              isCurrent(item.href) ? 'border-fg font-medium text-fg' : 'border-transparent text-fg-3',
+            )
+            return item.href === '/features/' ? (
+              <FeaturesMenu key={item.href} label={item.label} className={className} />
+            ) : (
+              <a key={item.href} href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined} className={className}>
+                {item.label}
+              </a>
+            )
+          })}
         </nav>
 
         <div className="ml-auto flex shrink-0 items-center gap-1 sm:gap-2">

@@ -46,37 +46,68 @@ export function DemoPanel({ value }: { value: string }) {
           <p className="mt-1 font-medium text-fg text-lg">
             {t.demo.leave.fiscalYear} {d.fiscalStart[calendar]}
           </p>
-          <dl className="mt-5 divide-y divide-line rounded-lg border border-line text-sm">
-            {t.demo.leave.rows.map((row) => (
-              <div key={row.label} className="flex items-center justify-between gap-4 px-3 py-2.5">
-                <dt className="text-fg-2">{row.label}</dt>
-                <dd>
-                  <Badge size="sm" className="tabular-nums">
-                    {row.value}
-                  </Badge>
-                </dd>
-              </div>
-            ))}
-          </dl>
+          <div className="mt-5 overflow-hidden rounded-lg border border-line">
+            <table className="w-full text-sm">
+              <thead className="border-line border-b bg-subtle">
+                <tr>
+                  <th scope="col" className="px-3 py-2 text-left font-medium text-fg-4 text-xs">
+                    {t.demo.columns.item}
+                  </th>
+                  <th scope="col" className="px-3 py-2 text-left font-medium text-fg-4 text-xs text-right">
+                    {t.demo.columns.days}
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-line">
+                {t.demo.leave.rows.map((row) => (
+                  <tr key={row.label}>
+                    <th scope="row" className="px-3 py-2.5 text-left font-normal text-fg-2">
+                      {row.label}
+                    </th>
+                    <td className="px-3 py-2.5 text-right">
+                      <Badge size="sm" className="tabular-nums">
+                        {row.value}
+                      </Badge>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )
     case 'dates':
       return (
         <div className="p-6">
           <p className="text-fg-4 text-sm">{t.demo.calendar.heading}</p>
-          <dl className="mt-5 text-sm">
-            {t.demo.calendar.rows.map((row) => (
-              <div key={row.key} className="grid grid-cols-[1fr_auto_auto] items-baseline gap-4 border-line border-t py-2.5">
-                <dt className="text-fg-2">{row.label}</dt>
-                <dd className="text-fg tabular-nums">
-                  {d[row.key].bs} {t.demo.calendar.bs}
-                </dd>
-                <dd className="text-fg-4 tabular-nums">
-                  {d[row.key].ad} {t.demo.calendar.ad}
-                </dd>
-              </div>
-            ))}
-          </dl>
+          <div className="mt-5 overflow-hidden rounded-lg border border-line">
+            <table className="w-full text-sm">
+              <thead className="border-line border-b bg-subtle">
+                <tr>
+                  <th scope="col" className="px-3 py-2 text-left font-medium text-fg-4 text-xs">
+                    {t.demo.columns.date}
+                  </th>
+                  <th scope="col" className="px-3 py-2 text-left font-medium text-fg-4 text-xs">
+                    {t.demo.calendar.bs}
+                  </th>
+                  <th scope="col" className="px-3 py-2 text-left font-medium text-fg-4 text-xs">
+                    {t.demo.calendar.ad}
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-line">
+                {t.demo.calendar.rows.map((row) => (
+                  <tr key={row.key}>
+                    <th scope="row" className="px-3 py-2.5 text-left font-normal text-fg-2">
+                      {row.label}
+                    </th>
+                    <td className="whitespace-nowrap px-3 py-2.5 text-fg tabular-nums">{d[row.key].bs}</td>
+                    <td className="whitespace-nowrap px-3 py-2.5 text-fg-4 tabular-nums">{d[row.key].ad}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
           <p className="mt-3 text-fg-4 text-sm">{t.demo.calendar.note}</p>
         </div>
       )
@@ -89,25 +120,110 @@ export function DemoPanel({ value }: { value: string }) {
               {t.demo.audit.rows.length}
             </Badge>
           </div>
-          <ol className="mt-4 divide-y divide-line rounded-lg border border-line text-sm">
-            {t.demo.audit.rows.map((row) => (
-              <li key={`${row.doc}-${row.action}`} className="flex items-center justify-between gap-3 px-3 py-2.5">
-                <div className="min-w-0 flex-1">
-                  <p className="truncate font-medium text-fg tabular-nums">{row.doc}</p>
-                  <p className="truncate text-fg-4 text-xs">
-                    {d.invoice[calendar]} · {row.user}
-                  </p>
-                </div>
-                {/* Green only for the CBMS sync, the one success state; the rest are neutral. */}
-                <Badge size="sm" tone={row.action === t.demo.invoice.status ? 'green' : 'gray'} className="shrink-0">
-                  {row.action}
-                </Badge>
-              </li>
-            ))}
-          </ol>
+          <div className="mt-4 overflow-hidden rounded-lg border border-line">
+            <table className="w-full table-fixed text-sm">
+              <thead className="border-line border-b bg-subtle">
+                <tr>
+                  <th scope="col" className="w-[55%] px-3 py-2 text-left font-medium text-fg-4 text-xs">
+                    {t.demo.columns.document}
+                  </th>
+                  <th scope="col" className="px-3 py-2 text-left font-medium text-fg-4 text-xs text-right">
+                    {t.demo.columns.action}
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-line">
+                {t.demo.audit.rows.map((row) => (
+                  <tr key={`${row.doc}-${row.action}`}>
+                    <th scope="row" className="px-3 py-2.5 text-left font-normal">
+                      <span className="block truncate font-medium text-fg tabular-nums">{row.doc}</span>
+                      <span className="block truncate text-fg-4 text-xs">
+                        {d.invoice[calendar]} · {row.user}
+                      </span>
+                    </th>
+                    <td className="px-3 py-2.5 text-right">
+                      {/* Green only for the CBMS sync, the one success state; the rest are neutral. */}
+                      <Badge
+                        size="sm"
+                        tone={row.action === t.demo.invoice.status ? 'green' : 'gray'}
+                        className="h-auto min-h-5 whitespace-normal py-0.5 text-right max-sm:rounded-md sm:whitespace-nowrap"
+                      >
+                        {row.action}
+                      </Badge>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )
   }
+}
+
+export function DemoTable({ values }: { values: string[] }) {
+  const { t } = useStrings()
+  const { calendar } = useCalendar()
+  const demo = t.demo
+  const rows: Record<string, (readonly [string, string])[]> = {
+    billing: [
+      ...demo.invoice.lines.map((l) => [l.label, l.amount] as const),
+      [demo.invoice.total.label, demo.invoice.total.amount],
+      [demo.invoice.number, demo.invoice.status],
+    ],
+    payroll: [...demo.slip.lines.map((l) => [l.label, l.amount] as const), [demo.slip.total.label, demo.slip.total.amount]],
+    hr: demo.leave.rows.map((r) => [r.label, r.value] as const),
+    dates: demo.calendar.rows.map((r) => [r.label, `${t.dates[r.key][calendar]} ${demo.calendar[calendar]}`] as const),
+    audit: demo.audit.rows.map((r) => [r.doc, r.action] as const),
+  }
+  return (
+    <table className="w-full text-sm">
+      <thead className="border-line border-b bg-subtle">
+        <tr>
+          <th scope="col" className="px-3 py-2 pl-4 text-left font-medium text-fg-4 text-xs max-sm:hidden">
+            {demo.columns.feature}
+          </th>
+          <th scope="col" className="px-3 py-2 text-left font-medium text-fg-4 text-xs">
+            {demo.columns.record}
+          </th>
+          <th scope="col" className="px-3 py-2 text-left font-medium text-fg-4 text-xs pr-4 text-right">
+            {demo.columns.value}
+          </th>
+        </tr>
+      </thead>
+      {values.map((value) => {
+        const tab = t.features.tabs.find((item) => item.value === value)
+        const list = rows[value] ?? []
+        return (
+          <tbody key={value} className="border-line border-b last:border-b-0">
+            <tr className="sm:hidden">
+              <th scope="rowgroup" colSpan={2} className="bg-subtle/60 px-3 py-2 text-left font-medium text-fg text-xs">
+                {tab?.label}
+              </th>
+            </tr>
+            {list.map(([record, amount], i) => (
+              <tr key={`${record}-${amount}`} className="transition-colors hover:bg-subtle">
+                {i === 0 && (
+                  <th
+                    scope="rowgroup"
+                    rowSpan={list.length}
+                    className="w-40 border-line border-r py-2.5 pr-3 pl-4 text-left align-top font-medium text-fg max-sm:hidden"
+                  >
+                    <span className="flex items-center gap-2">
+                      {tab && <ContentIcon name={tab.icon} className="size-4 shrink-0 text-fg-3" />}
+                      {tab?.label}
+                    </span>
+                  </th>
+                )}
+                <td className="break-words px-3 py-2.5 text-fg-2">{record}</td>
+                <td className="py-2.5 pr-3 pl-3 text-right text-fg tabular-nums sm:whitespace-nowrap sm:pr-4">{amount}</td>
+              </tr>
+            ))}
+          </tbody>
+        )
+      })}
+    </table>
+  )
 }
 
 export function FeatureExplorer() {
