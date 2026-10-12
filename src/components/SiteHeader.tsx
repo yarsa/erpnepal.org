@@ -55,8 +55,11 @@ export function SiteHeader({ path }: { path: string }) {
         scrolled ? 'border-line bg-page/90 backdrop-blur' : 'border-transparent bg-transparent',
       )}
     >
-      <div className="mx-auto flex h-16 max-w-6xl items-center gap-2 px-4 sm:gap-4 sm:px-5 md:gap-8 md:px-8">
-        <a href={homePath[locale]} className="flex min-w-0 items-center gap-2 font-medium text-base text-fg sm:gap-2.5 sm:text-lg">
+      <div className="mx-auto flex h-16 max-w-6xl items-center gap-2 px-4 sm:gap-4 sm:px-5 md:gap-8 md:px-8 xl:gap-7">
+        <a
+          href={homePath[locale]}
+          className="flex min-w-0 items-center gap-2 font-semibold text-base text-fg sm:gap-2.5 sm:text-lg xl:shrink-0"
+        >
           <img src="/assets/nepal-compliance.svg" width="28" height="28" alt="" className="shrink-0 dark:invert" />
           <span className="truncate">Nepal Compliance</span>
         </a>
