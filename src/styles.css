@@ -201,10 +201,20 @@ body {
       inset var(--default-transition-duration) var(--ease-out),
       padding var(--default-transition-duration) var(--ease-out);
   }
+  /* On hover the band stops travelling: the whole outline shows and its colours cycle in place. */
   &:hover::before,
   &:focus-visible::before {
     inset: calc(-2px - var(--sweep-gap, 0px));
     padding: 2px;
+    background: linear-gradient(90deg, #ff3b30, #ff9500, #ffcc00, #34c759, #0a84ff, #5e5ce6, #bf5af2);
+    opacity: 1;
+    animation: outline-hue 2s linear infinite;
+  }
+}
+
+@keyframes outline-hue {
+  to {
+    filter: hue-rotate(360deg);
   }
 }
 
