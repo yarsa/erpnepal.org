@@ -42,7 +42,10 @@ export function HomeHero() {
             <IconArrowRight className="size-3 shrink-0 transition-transform sm:size-3.5 group-hover:translate-x-0.5" aria-hidden="true" />
           </a>
         </div>
-        <h1 id="hero-title" className="heading mx-auto mt-4 max-w-4xl font-bold text-[2.75rem] leading-[1.05] sm:text-6xl md:text-7xl dark:text-white">
+        <h1
+          id="hero-title"
+          className="heading mx-auto mt-4 max-w-4xl font-bold text-[2.75rem] leading-[1.05] sm:text-6xl md:text-7xl dark:text-white"
+        >
           {hero.title}
           {hero.titleTail && <span className="text-fg-4"> {hero.titleTail}</span>}
         </h1>
