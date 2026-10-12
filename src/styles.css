@@ -92,6 +92,14 @@
   color-scheme: dark;
 }
 
+/* An inverse panel that is pure black with white text in light mode. */
+:root:not([data-theme="dark"]) .inverse-black {
+  --surface: #000000;
+  --fg: #ffffff;
+  --fg-2: #ffffff;
+  --fg-3: #ffffff;
+}
+
 html {
   scroll-padding-top: 72px;
   -webkit-font-smoothing: antialiased;

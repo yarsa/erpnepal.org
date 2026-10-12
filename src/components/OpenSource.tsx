@@ -15,7 +15,7 @@ export function OpenSource() {
     <section aria-labelledby="oss-title">
       <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
         {/* Inverse panel: dark tokens in both themes (see .inverse in styles.css). */}
-        <div className="inverse relative isolate overflow-hidden rounded-2xl bg-surface px-6 py-10 text-fg shadow-lg md:px-12 md:py-14">
+        <div className="inverse inverse-black relative isolate overflow-hidden rounded-2xl bg-surface px-6 py-10 text-fg shadow-lg md:px-12 md:py-14">
           <div
             className="-z-10 pointer-events-none absolute inset-0 bg-[radial-gradient(55%_70%_at_100%_0%,rgb(255_255_255/0.08),transparent_70%)]"
             aria-hidden="true"

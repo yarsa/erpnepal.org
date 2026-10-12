@@ -253,7 +253,7 @@ export default {
     title: 'सोध्नुहोस्, सेयर गर्नुहोस्, साथ दिनुहोस्',
     body: 'Yarsa को कम्युनिटी प्रोजेक्ट।',
     links: [
-      { label: 'GitHub Discussions', href: `${repo}/discussions` },
+      { label: 'समुदायलाई सोध्नुहोस्', href: `${repo}/discussions` },
       { label: 'समस्या रिपोर्ट गर्नुहोस्', href: `${repo}/issues` },
       { label: 'योगदान गर्ने तरिका', href: `${repo}/blob/master/CONTRIBUTING.md` },
     ],
