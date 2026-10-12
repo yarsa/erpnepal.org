@@ -13,8 +13,10 @@ export function SiteFooter() {
     <footer className="inverse bg-surface text-fg">
       <div className="mx-auto flex max-w-6xl flex-col gap-6 px-5 py-12 md:flex-row md:items-start md:justify-between md:px-8">
         <div className="max-w-xs">
-          <a href={homePath[locale]} className="inline-flex items-center gap-2.5 font-medium text-lg">
-            <img src="/assets/nepal-compliance.svg" width="28" height="28" alt="" className="invert" />
+          <a href={homePath[locale]} className="inline-flex items-center gap-2.5 font-semibold text-lg">
+            <span className="grid size-10 place-items-center rounded-lg border border-line-strong bg-muted">
+              <img src="/assets/nepal-compliance.svg" width="24" height="24" alt="" className="invert" />
+            </span>
             Nepal Compliance
           </a>
           <p className="mt-3 text-fg-3 text-sm">{t.footer.tagline}</p>
@@ -41,9 +43,14 @@ export function SiteFooter() {
             <ul className="flex flex-wrap gap-x-6 md:justify-end">
               {t.footer.links.map((item) => (
                 <li key={item.href}>
-                  <a href={item.href} rel={isExternal(item.href) ? 'noopener' : undefined} className={link}>
+                  <a href={item.href} rel={isExternal(item.href) ? 'noopener' : undefined} className={`group ${link}`}>
                     {item.label}
-                    {isExternal(item.href) && <IconArrowUpRight className="size-3.5 opacity-60" aria-hidden="true" />}
+                    {isExternal(item.href) && (
+                      <IconArrowUpRight
+                        className="size-3.5 opacity-60 transition group-hover:translate-x-px group-hover:-translate-y-px group-hover:opacity-100"
+                        aria-hidden="true"
+                      />
+                    )}
                   </a>
                 </li>
               ))}
@@ -52,7 +59,7 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="border-line border-t">
-        <p className="mx-auto max-w-6xl px-5 py-5 text-center text-fg-3 text-sm md:px-8">
+        <p className="mx-auto max-w-6xl px-5 py-6 text-fg-3 text-sm md:px-8">
           {credit.before}
           <a
             href={credit.href}
