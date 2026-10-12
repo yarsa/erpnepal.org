@@ -1,17 +1,18 @@
 import { Toggle } from '@base-ui/react/toggle'
 import { ToggleGroup } from '@base-ui/react/toggle-group'
-import { IconArrowRight, IconCircleCheckFilled, IconCirclePlus, IconPlus } from '@tabler/icons-react'
+import { IconArrowRight, IconCircleCheckFilled, IconCirclePlus, IconLayoutList, IconPlus, IconTable } from '@tabler/icons-react'
 import { useRef, useState } from 'react'
 import { useStrings } from '../lib/i18n'
 import { ContentIcon } from '../lib/icons'
 import { useMinWidth } from '../lib/useMinWidth'
-import { DemoPanel } from './FeatureExplorer'
+import { DemoPanel, DemoTable } from './FeatureExplorer'
 import { LinkButton } from './ui/button'
 
 export function HomeHero() {
   const { t } = useStrings()
   const tabs = t.features.tabs
   const [selected, setSelected] = useState([tabs[0].value])
+  const [view, setView] = useState('document')
   const wide = useMinWidth(640)
   const panel = useRef<HTMLDivElement>(null)
 
@@ -77,6 +78,28 @@ export function HomeHero() {
               Nepal Compliance <span className="px-1 text-fg-4">/</span>
               <span className="text-fg-2">{tabs.find((tab) => tab.value === selected[0])?.label}</span>
             </p>
+            <ToggleGroup
+              value={[view]}
+              onValueChange={(next) => next[0] && setView(next[0])}
+              aria-label={t.demo.views.label}
+              className="flex shrink-0 rounded-lg bg-muted p-0.5"
+            >
+              {(
+                [
+                  ['document', IconLayoutList],
+                  ['table', IconTable],
+                ] as const
+              ).map(([value, Icon]) => (
+                <Toggle
+                  key={value}
+                  value={value}
+                  className="flex h-7 items-center gap-1.5 rounded-md px-2.5 text-fg-3 text-xs transition-colors hover:text-fg data-pressed:bg-surface data-pressed:font-medium data-pressed:text-fg data-pressed:shadow-sm"
+                >
+                  <Icon className="size-3.5" aria-hidden="true" />
+                  {t.demo.views[value]}
+                </Toggle>
+              ))}
+            </ToggleGroup>
           </div>
           <div className="sm:flex">
             <div className="flex items-center gap-2 overflow-x-auto border-line border-b p-3 [scrollbar-width:none] sm:w-60 sm:shrink-0 sm:flex-col sm:items-stretch sm:overflow-visible sm:border-r sm:border-b-0">
@@ -110,21 +133,37 @@ export function HomeHero() {
                   </Toggle>
                 ))}
               </ToggleGroup>
+              <a
+                href={t.demo.moreApps.href}
+                className="flex h-9 shrink-0 items-center gap-2 whitespace-nowrap rounded-full border border-line-strong border-dashed py-1 pr-3 pl-1.5 font-medium text-fg-3 text-sm transition-colors hover:border-fg/40 hover:text-fg sm:mt-0.5 sm:h-11 sm:gap-2.5 sm:rounded-lg sm:px-1.5"
+              >
+                <span className="grid size-6 shrink-0 place-items-center rounded-md border border-line-strong border-dashed sm:size-8">
+                  <IconPlus className="size-4" aria-hidden="true" />
+                </span>
+                <span className="sm:flex-1">{t.demo.moreApps.label}</span>
+                <IconArrowRight className="size-4 shrink-0" aria-hidden="true" />
+              </a>
               <LinkButton
                 href={hero.secondary.href}
                 variant="solid"
-                className="pulse-ring shrink-0 rounded-full font-semibold ring-2 ring-fg/20 ring-offset-2 ring-offset-surface sm:mt-auto sm:rounded-lg"
+                className="outline-sweep shrink-0 rounded-full font-semibold [--sweep-gap:2px] sm:mt-auto sm:rounded-lg sm:before:rounded-[calc(var(--radius-lg)+3px)]"
               >
                 <IconPlus className="size-4" aria-hidden="true" />
                 {t.demo.addFeatures}
               </LinkButton>
             </div>
             <div ref={panel} className="h-[26rem] min-w-0 flex-1 space-y-4 overflow-y-auto bg-subtle p-4 sm:h-[32rem] md:p-5">
-              {selected.map((value) => (
-                <div key={value} className="panel-in overflow-hidden rounded-2xl border border-line bg-surface">
-                  <DemoPanel value={value} />
+              {view === 'table' ? (
+                <div className="panel-in overflow-hidden rounded-2xl border border-line bg-surface">
+                  <DemoTable values={selected} />
                 </div>
-              ))}
+              ) : (
+                selected.map((value) => (
+                  <div key={value} className="panel-in overflow-hidden rounded-2xl border border-line bg-surface">
+                    <DemoPanel value={value} />
+                  </div>
+                ))
+              )}
             </div>
           </div>
         </div>

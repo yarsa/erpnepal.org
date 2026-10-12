@@ -160,6 +160,9 @@ export default {
     },
     tag: 'नमुना डेटा',
     addFeatures: 'एप इन्स्टल गर्नुहोस्',
+    moreApps: { label: 'थप एपहरू', href: '/addons/' },
+    views: { label: 'दृश्य', document: 'कागजात', table: 'तालिका' },
+    columns: { item: 'विवरण', days: 'दिन', document: 'कागजात', action: 'कार्य', date: 'मिति', feature: 'फिचर', record: 'रेकर्ड', value: 'मान' },
     previewLabel: 'नमुना डेटासहित सफ्टवेयरको झलक',
   },
   compliance: {

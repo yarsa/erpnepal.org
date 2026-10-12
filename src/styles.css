@@ -173,19 +173,21 @@ body {
   &::before {
     content: "";
     position: absolute;
-    inset: -1px;
+    inset: calc(-1px - var(--sweep-gap, 0px));
     padding: 1px;
     border-radius: inherit;
-    /* Eased falloff on both sides of the highlight, so it has no hard edges. */
+    /* A rainbow band that fades out at both ends, so it has no hard edges. */
     background:
       linear-gradient(
         90deg,
         transparent 25%,
-        color-mix(in srgb, var(--fg) 25%, transparent) 35%,
-        color-mix(in srgb, var(--fg) 75%, transparent) 43%,
-        var(--fg) 50%,
-        color-mix(in srgb, var(--fg) 75%, transparent) 57%,
-        color-mix(in srgb, var(--fg) 25%, transparent) 65%,
+        rgb(255 59 48 / 0.35) 31%,
+        #ff9500 37%,
+        #ffcc00 43%,
+        #34c759 50%,
+        #0a84ff 57%,
+        #5e5ce6 63%,
+        rgb(191 90 242 / 0.35) 69%,
         transparent 75%
       )
       0 0 / 300% 100% no-repeat;
@@ -195,31 +197,14 @@ body {
     animation: outline-sweep 4s cubic-bezier(0.45, 0, 0.55, 1) infinite;
     will-change: background-position, opacity;
     pointer-events: none;
+    transition:
+      inset var(--default-transition-duration) var(--ease-out),
+      padding var(--default-transition-duration) var(--ease-out);
   }
-}
-
-/* Fades in as it enters on the left and out as it leaves on the right. */
-@utility pulse-ring {
-  position: relative;
-  &::after {
-    content: "";
-    position: absolute;
-    inset: -4px;
-    border-radius: inherit;
-    border: 2px solid var(--fg);
-    pointer-events: none;
-    animation: pulse-ring 1s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
-  }
-}
-
-@keyframes pulse-ring {
-  0% {
-    opacity: 0.45;
-    transform: scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(1.06, 1.25);
+  &:hover::before,
+  &:focus-visible::before {
+    inset: calc(-2px - var(--sweep-gap, 0px));
+    padding: 2px;
   }
 }
 
@@ -255,10 +240,6 @@ body {
   .outline-sweep::before {
     animation: none !important;
     opacity: 0;
-  }
-  .pulse-ring::after {
-    animation: none !important;
-    opacity: 0.3;
   }
 }
 /* biome-ignore-end lint/complexity/noImportantStyles: see above */

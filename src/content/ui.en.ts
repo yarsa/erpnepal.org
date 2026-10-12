@@ -50,6 +50,7 @@ export default {
     tableSuffix: 'comparison',
   },
   breadcrumbs: { features: 'Features', addons: 'Add-ons', guides: 'Guides' },
+  featuresMenu: { label: 'Features', all: 'All features', allBody: 'Every feature, with sources.', new: 'New' },
   search: {
     label: 'Search',
     placeholder: 'Search guides, features and add-ons…',

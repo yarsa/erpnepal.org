@@ -11,7 +11,7 @@ export default {
     slipPeriod: { bs: 'Ashwin 2083', ad: 'Sep–Oct 2026' },
   },
   hero: {
-    eyebrow: 'Free IRD Certified E-Billing Software with CBMS',
+    eyebrow: '100% Free IRD Certified e-Billing Software',
     eyebrowStrong: 'IRD Certified',
     eyebrowHref: '/features/cbms/',
     title: 'Free & Open Source ERP Software for Nepal',
@@ -159,6 +159,9 @@ export default {
     },
     tag: 'Demo data',
     addFeatures: 'Install Apps',
+    moreApps: { label: 'More apps', href: '/addons/' },
+    views: { label: 'View', document: 'Document', table: 'Table' },
+    columns: { item: 'Item', days: 'Days', document: 'Document', action: 'Action', date: 'Date', feature: 'Feature', record: 'Record', value: 'Value' },
     previewLabel: 'Product preview with demo data',
   },
   compliance: {
