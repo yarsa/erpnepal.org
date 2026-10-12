@@ -255,7 +255,7 @@ export default {
     title: 'Ask, share, contribute',
     body: 'A community project by Yarsa.',
     links: [
-      { label: 'GitHub Discussions', href: `${repo}/discussions` },
+      { label: 'Ask Community', href: `${repo}/discussions` },
       { label: 'Report an issue', href: `${repo}/issues` },
       { label: 'Contributing guide', href: `${repo}/blob/master/CONTRIBUTING.md` },
     ],
