@@ -7,6 +7,7 @@ import { GetStarted } from '../components/GetStarted'
 import { HomeHero } from '../components/HomeHero'
 import { OpenSource } from '../components/OpenSource'
 import { ProofStrip } from '../components/ProofStrip'
+import { StickyInstall } from '../components/StickyInstall'
 import { CalendarProvider } from '../lib/calendar'
 import { FeatureTabProvider } from '../lib/featureTab'
 import { useStrings } from '../lib/i18n'
@@ -26,6 +27,7 @@ export default function HomePage() {
         <FaqList />
         <ExploreMore />
         <CommunityBand />
+        <StickyInstall />
       </FeatureTabProvider>
     </CalendarProvider>
   )
