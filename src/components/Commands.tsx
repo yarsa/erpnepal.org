@@ -20,7 +20,7 @@ export function Commands({ className }: { className?: string }) {
   }
   return (
     <>
-      <div className={`inverse overflow-hidden rounded-lg border border-line bg-surface ${className ?? ''}`}>
+      <div className={`inverse inverse-black overflow-hidden rounded-lg border border-line bg-surface ${className ?? ''}`}>
         <div className="flex gap-1.5 border-line border-b px-3 py-3" aria-hidden="true">
           <span className="size-2.5 rounded-full bg-line-strong" />
           <span className="size-2.5 rounded-full bg-line-strong" />
