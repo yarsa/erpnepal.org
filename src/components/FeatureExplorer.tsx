@@ -233,7 +233,7 @@ export function FeatureExplorer() {
   const { active, select } = useFeatureTab()
 
   return (
-    <section id="features" className="bg-subtle" aria-labelledby="features-title">
+    <section id="features" className="bg-subtle dark:bg-black" aria-labelledby="features-title">
       <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
         <div className="max-w-2xl">
           <h2 id="features-title" className="heading text-3xl md:text-4xl">

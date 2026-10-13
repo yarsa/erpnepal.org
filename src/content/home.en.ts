@@ -226,20 +226,20 @@ export default {
     title: 'Questions',
     items: [
       {
-        q: 'Is it IRD compliant?',
-        a: 'It follows IRD e-billing rules.',
+        q: 'Is it IRD certified?',
+        a: 'Yes. Nepal Compliance is IRD certified e-billing software with CBMS.',
       },
       {
         q: 'What does it cost?',
-        a: 'No licence fee. Hosting, setup and support cost extra.',
+        a: '100% free, with no licence fee. You may pay for your own hosting, setup and support.',
       },
       {
         q: 'What do I need to run it?',
-        a: 'A Frappe site with ERPNext and Frappe HR. See the install guide for versions.',
+        a: 'A Frappe site with ERPNext and Frappe HR installed. See install guides.',
       },
       {
         q: 'Where can I get help?',
-        a: 'GitHub Discussions or Issues. Community backed.',
+        a: 'Ask in GitHub Discussions, or report a bug in Issues. Community backed.',
       },
     ],
   },
@@ -262,7 +262,6 @@ export default {
   },
   footer: {
     tagline: 'An app for ERPNext and Frappe HR.',
-    // `name` is linked to `href`; the rest is plain text around it.
     credit: { before: 'A project by ', name: 'Yarsa', href: 'https://www.yarsalabs.com/', after: ' and contributors. Built on Frappe, ERPNext and Frappe HR.' },
     site: [
       { label: 'Features', href: '/features/' },

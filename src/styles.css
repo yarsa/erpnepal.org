@@ -100,6 +100,19 @@
   --fg-3: #ffffff;
 }
 
+/* Dark mode page and section backgrounds are pure black; cards keep their own surface. */
+[data-theme="dark"] {
+  --page: #000000;
+  --subtle: #000000;
+}
+
+/* Brighter borders on the black background so containers keep their edges. */
+[data-theme="dark"],
+[data-theme="dark"] .inverse {
+  --line: #383838;
+  --line-strong: #525252;
+}
+
 html {
   scroll-padding-top: 72px;
   -webkit-font-smoothing: antialiased;

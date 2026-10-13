@@ -10,7 +10,7 @@ export function SiteFooter() {
   const { locale, t, ui } = useStrings()
   const credit = t.footer.credit
   return (
-    <footer className="inverse inverse-black bg-surface text-fg">
+    <footer className="inverse inverse-black bg-surface dark:bg-black text-fg">
       <div className="mx-auto flex max-w-6xl flex-col gap-6 px-5 py-12 md:flex-row md:items-start md:justify-between md:px-8">
         <div className="max-w-xs">
           <a href={homePath[locale]} className="inline-flex items-center gap-2.5 font-semibold text-lg">
