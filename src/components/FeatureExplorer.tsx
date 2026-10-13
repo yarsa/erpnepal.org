@@ -1,7 +1,7 @@
 import { Tabs } from '@base-ui/react/tabs'
 import { Toggle } from '@base-ui/react/toggle'
 import { ToggleGroup } from '@base-ui/react/toggle-group'
-import { IconArrowRight, IconCircleCheckFilled } from '@tabler/icons-react'
+import { IconArrowRight } from '@tabler/icons-react'
 import { type Calendar, useCalendar } from '../lib/calendar'
 import { useFeatureTab } from '../lib/featureTab'
 import { useStrings } from '../lib/i18n'
@@ -11,6 +11,7 @@ import { InvoiceCard } from './InvoiceCard'
 import { SlipCard } from './SlipCard'
 import { Badge } from './ui/badge'
 import { LinkButton } from './ui/button'
+import { CheckDot } from './ui/check'
 
 export const chip =
   'inline-flex h-8 items-center gap-1.5 whitespace-nowrap rounded-full border border-fg/40 border-dashed bg-surface px-3 font-semibold text-fg-2 text-sm transition-colors hover:border-fg/70 hover:text-fg focus-visible:border-fg focus-visible:border-solid focus-visible:text-fg data-active:border-inverse data-active:border-solid data-active:bg-inverse data-active:text-on-inverse'
@@ -377,7 +378,7 @@ export function FeatureExplorer() {
                 <ul className="mt-6 space-y-3.5">
                   {tab.points.map((point) => (
                     <li key={point} className="flex gap-3 text-fg-2 text-lg">
-                      <IconCircleCheckFilled className="mt-1 size-5 shrink-0 text-fg" aria-hidden="true" />
+                      <CheckDot className="mt-1 size-5 text-fg" />
                       <span>{point}</span>
                     </li>
                   ))}

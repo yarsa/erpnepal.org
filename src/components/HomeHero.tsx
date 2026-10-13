@@ -1,12 +1,13 @@
 import { Toggle } from '@base-ui/react/toggle'
 import { ToggleGroup } from '@base-ui/react/toggle-group'
-import { IconArrowRight, IconCircleCheckFilled, IconCirclePlus, IconLayoutList, IconPlus, IconTable } from '@tabler/icons-react'
+import { IconArrowRight, IconCirclePlus, IconLayoutList, IconPlus, IconTable } from '@tabler/icons-react'
 import { useRef, useState } from 'react'
 import { useStrings } from '../lib/i18n'
 import { ContentIcon } from '../lib/icons'
 import { useMinWidth } from '../lib/useMinWidth'
 import { DemoPanel, DemoTable } from './FeatureExplorer'
 import { LinkButton } from './ui/button'
+import { CheckDot } from './ui/check'
 
 export function HomeHero() {
   const { t } = useStrings()
@@ -139,10 +140,7 @@ export function HomeHero() {
                       stroke={1.5}
                       aria-hidden="true"
                     />
-                    <IconCircleCheckFilled
-                      className="hidden size-[18px] shrink-0 text-fg group-data-pressed/item:block"
-                      aria-hidden="true"
-                    />
+                    <CheckDot className="hidden size-[18px] text-fg group-data-pressed/item:block" />
                   </Toggle>
                 ))}
               </ToggleGroup>
