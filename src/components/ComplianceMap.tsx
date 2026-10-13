@@ -1,4 +1,3 @@
-import { IconArrowUpRight } from '@tabler/icons-react'
 import { cn } from '../lib/cn'
 import { useStrings } from '../lib/i18n'
 
@@ -88,11 +87,14 @@ export function ComplianceMap() {
         </div>
 
         {/* Stages run left to right; on narrow screens the track scrolls sideways. */}
-        <ol className="-mx-5 mt-12 flex snap-x snap-mandatory scroll-px-5 overflow-x-auto px-5 pt-1 pb-2 md:scroll-px-8 [scrollbar-width:none] md:-mx-8 md:px-8 lg:mx-0 lg:grid lg:grid-cols-4 lg:overflow-visible lg:px-0">
+        <ol className="-mx-5 mt-12 flex snap-x snap-mandatory scroll-px-5 overflow-x-auto px-5 pt-1 pb-2 md:scroll-px-8 [scrollbar-width:none] md:-mx-8 md:px-8 lg:mx-0 lg:grid lg:grid-cols-5 lg:overflow-visible lg:px-0">
           {groups.map((group, g) => {
             const next = groups[g + 1]
             return (
-              <li key={group.key} className="w-[17rem] shrink-0 snap-start pr-4 lg:w-auto">
+              <li key={group.key} className="flex w-[17rem] shrink-0 snap-start flex-col pr-4 lg:w-auto">
+                <h3 className="mb-3 font-medium text-fg-4 text-xs uppercase tracking-wider">
+                  {(c.groups as Record<string, string>)[group.key] ?? group.key}
+                </h3>
                 <div className="relative flex h-6 items-center">
                   <Node status={group.status} />
                   {/* The track: solid into finished stages, dashed into stages still underway. */}
@@ -111,51 +113,29 @@ export function ComplianceMap() {
                     />
                   </span>
                 </div>
-                <h3 className="mt-4 font-medium text-fg-4 text-xs uppercase tracking-wider">
-                  {(c.groups as Record<string, string>)[group.key] ?? group.key}
-                </h3>
-                <ol className="mt-3 space-y-3">
-                  {group.list.map((row) => {
-                    const status = statusOf(row.status)
-                    return (
-                      <li
-                        key={row.rule}
-                        className={cn(
-                          'rounded-xl border bg-surface p-4 transition hover:-translate-y-0.5 hover:shadow-md',
-                          status === 'supported' ? 'border-line shadow-sm' : 'border-line-strong border-dashed',
-                        )}
-                      >
-                        <div className="flex items-center justify-between gap-3">
-                          <span className="flex items-center gap-1.5 font-medium text-fg-3 text-xs">
+                <div
+                  className={cn(
+                    'mt-4 flex flex-1 flex-col rounded-xl border bg-surface',
+                    group.status === 'supported' ? 'border-line shadow-sm' : 'border-line-strong border-dashed',
+                  )}
+                >
+                  <ul className="flex-1 divide-y divide-line">
+                    {group.list.map((row) => {
+                      const status = statusOf(row.status)
+                      return (
+                        <li key={row.rule} className="flex items-start gap-2.5 px-4 py-2.5">
+                          <span className="mt-0.5">
                             <Node status={status} small />
-                            {c.status[status]}
                           </span>
-                          {row.link && (
-                            <a
-                              href={row.link}
-                              rel="noopener"
-                              aria-label={`${c.code}: ${row.rule}`}
-                              className="group/link inline-flex shrink-0 items-center gap-0.5 font-medium text-fg-2 text-xs underline decoration-line-strong underline-offset-4 hover:text-fg hover:decoration-fg"
-                            >
-                              {c.code}
-                              <IconArrowUpRight
-                                className="size-3.5 transition-transform group-hover/link:-translate-y-px group-hover/link:translate-x-px"
-                                aria-hidden="true"
-                              />
-                            </a>
-                          )}
-                        </div>
-                        <p className={cn('mt-3 font-semibold', status === 'supported' ? 'text-fg' : 'text-fg-2')}>{row.rule}</p>
-                        {row.nepali && (
-                          <p lang="ne" className="text-fg-3 text-sm">
-                            {row.nepali}
-                          </p>
-                        )}
-                        <p className="mt-1.5 text-fg-3 text-sm">{row.feature}</p>
-                      </li>
-                    )
-                  })}
-                </ol>
+                          <span className={cn('flex-1 text-sm', status === 'supported' ? 'text-fg' : 'text-fg-2')}>
+                            {row.rule}
+                            {status !== 'supported' && <span className="block text-fg-3 text-xs">{c.status[status]}</span>}
+                          </span>
+                        </li>
+                      )
+                    })}
+                  </ul>
+                </div>
               </li>
             )
           })}

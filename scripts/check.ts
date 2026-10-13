@@ -136,7 +136,7 @@ const homeStrings = (t: typeof home) => [
   t.hero.title,
   t.hero.lead,
   ...t.features.tabs.flatMap((tab) => [tab.label, ...tab.points]),
-  ...t.compliance.rows.flatMap((row) => [row.rule, row.feature]),
+  ...t.compliance.rows.map((row) => row.rule),
   ...t.getStarted.technical.commands,
   ...t.faq.items.flatMap((i) => [i.q, i.a]),
   ...t.explore.cards.map((c) => c.title),
