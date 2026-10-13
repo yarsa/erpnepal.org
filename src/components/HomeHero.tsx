@@ -11,7 +11,7 @@ import { LinkButton } from './ui/button'
 export function HomeHero() {
   const { t } = useStrings()
   const tabs = t.features.tabs
-  const [selected, setSelected] = useState([tabs[0].value])
+  const [selected, setSelected] = useState(['payroll', 'billing'])
   const [view, setView] = useState('document')
   const wide = useMinWidth(640)
   const panel = useRef<HTMLDivElement>(null)

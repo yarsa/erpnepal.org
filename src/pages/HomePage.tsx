@@ -17,7 +17,7 @@ export default function HomePage() {
   const tabs = t.features.tabs.map((tab) => tab.value)
   return (
     <CalendarProvider>
-      <FeatureTabProvider initial={tabs[0]} tabs={tabs}>
+      <FeatureTabProvider initial="billing" tabs={tabs}>
         <HomeHero />
         <ProofStrip />
         <FeatureExplorer />

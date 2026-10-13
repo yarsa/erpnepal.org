@@ -4,6 +4,8 @@ import {
   IconBriefcase,
   IconCalculator,
   IconCalendarEvent,
+  IconChartBar,
+  IconCloudUpload,
   IconGitBranch,
   IconLifebuoy,
   IconPackage,
@@ -29,6 +31,8 @@ const icons: Record<string, Icon> = {
   'lucide-plug': IconPlug,
   'lucide-book-open': IconBook2,
   'lucide-briefcase': IconBriefcase,
+  'lucide-chart': IconChartBar,
+  'lucide-cloud-upload': IconCloudUpload,
 }
 
 export function ContentIcon({ name, className }: { name: string; className?: string }) {

@@ -36,6 +36,29 @@ export default {
     tabsLabel: 'Feature',
     tabs: [
       {
+        value: 'accounting',
+        icon: 'lucide-chart',
+        label: 'Accounting',
+        nepali: 'लेखा',
+        points: [
+          'Sales and purchase VAT registers.',
+          'VAT return report by month.',
+          'Party-wise and monthly registers.',
+        ],
+        link: '/features/accounting-and-vat/',
+      },
+      {
+        value: 'audit',
+        icon: 'lucide-shield-check',
+        label: 'Audit trails',
+        nepali: 'अडिट ट्रेल',
+        points: [
+          'User activity and SQL query logs.',
+          'Sales cancellation register.',
+        ],
+        link: '/features/audit-and-reports/',
+      },
+      {
         value: 'billing',
         icon: 'lucide-receipt',
         label: 'Bills and VAT',
@@ -48,16 +71,16 @@ export default {
         link: '/features/invoicing/',
       },
       {
-        value: 'payroll',
-        icon: 'lucide-calculator',
-        label: 'Payroll',
-        nepali: 'तलब',
+        value: 'cbms',
+        icon: 'lucide-cloud-upload',
+        label: 'CBMS sync',
+        nepali: 'सीबीएमएस',
         points: [
-          'Tax slabs by filing status.',
-          'SSF, EPF and CIT contributions.',
-          'Gratuity, grades and minimum salary.',
+          'Sales invoices and returns sent to IRD CBMS.',
+          'Each CBMS response shown on the invoice.',
+          'Failed syncs are easy to find and retry.',
         ],
-        link: '/features/payroll/',
+        link: '/features/cbms/',
       },
       {
         value: 'hr',
@@ -82,15 +105,16 @@ export default {
         link: '/features/nepali-dates/',
       },
       {
-        value: 'audit',
-        icon: 'lucide-shield-check',
-        label: 'Audit trails',
-        nepali: 'अडिट ट्रेल',
+        value: 'payroll',
+        icon: 'lucide-calculator',
+        label: 'Payroll',
+        nepali: 'तलब',
         points: [
-          'User activity and SQL query logs.',
-          'Sales cancellation register.',
+          'Tax slabs by filing status.',
+          'SSF, EPF and CIT contributions.',
+          'Gratuity, grades and minimum salary.',
         ],
-        link: '/features/audit-and-reports/',
+        link: '/features/payroll/',
       },
     ],
     docsLabel: 'How it works',
@@ -157,11 +181,30 @@ export default {
         { doc: 'SINV-2083-00042', action: 'Synced to CBMS', user: 'system' },
       ],
     },
+    vat: {
+      heading: 'VAT return',
+      period: 'Ashwin 2083',
+      rows: [
+        { label: 'Taxable sales', amount: '2,40,000' },
+        { label: 'Output VAT 13%', amount: '31,200' },
+        { label: 'Taxable purchases', amount: '1,50,000' },
+        { label: 'Input VAT 13%', amount: '− 19,500' },
+      ],
+      total: { label: 'VAT payable (Rs)', amount: '11,700' },
+    },
+    cbms: {
+      heading: 'CBMS sync log',
+      rows: [
+        { doc: 'SINV-2083-00042', type: 'Sales invoice', status: 'Synced', ok: true },
+        { doc: 'SRET-2083-00003', type: 'Sales return', status: 'Synced', ok: true },
+        { doc: 'SINV-2083-00043', type: 'Sales invoice', status: 'Retry queued', ok: false },
+      ],
+    },
     tag: 'Demo data',
     addFeatures: 'Install Apps',
     moreApps: { label: 'More apps', href: '/addons/' },
     views: { label: 'View', document: 'Document', table: 'Table' },
-    columns: { item: 'Item', days: 'Days', document: 'Document', action: 'Action', date: 'Date', feature: 'Feature', record: 'Record', value: 'Value' },
+    columns: { amount: 'Amount (Rs)', status: 'Status', item: 'Item', days: 'Days', document: 'Document', action: 'Action', date: 'Date', feature: 'Feature', record: 'Record', value: 'Value' },
     previewLabel: 'Product preview with demo data',
   },
   compliance: {
@@ -226,20 +269,20 @@ export default {
     title: 'Questions',
     items: [
       {
-        q: 'Is it IRD compliant?',
-        a: 'It follows IRD e-billing rules.',
+        q: 'Is it IRD certified?',
+        a: 'Yes. Nepal Compliance is IRD certified e-billing software with CBMS.',
       },
       {
         q: 'What does it cost?',
-        a: 'No licence fee. Hosting, setup and support cost extra.',
+        a: '100% free, with no licence fee. You may pay for your own hosting, setup and support.',
       },
       {
         q: 'What do I need to run it?',
-        a: 'A Frappe site with ERPNext and Frappe HR. See the install guide for versions.',
+        a: 'A Frappe site with ERPNext and Frappe HR installed. See install guides.',
       },
       {
         q: 'Where can I get help?',
-        a: 'GitHub Discussions or Issues. Community backed.',
+        a: 'Ask in GitHub Discussions, or report a bug in Issues. Community backed.',
       },
     ],
   },
@@ -262,7 +305,6 @@ export default {
   },
   footer: {
     tagline: 'An app for ERPNext and Frappe HR.',
-    // `name` is linked to `href`; the rest is plain text around it.
     credit: { before: 'A project by ', name: 'Yarsa', href: 'https://www.yarsalabs.com/', after: ' and contributors. Built on Frappe, ERPNext and Frappe HR.' },
     site: [
       { label: 'Features', href: '/features/' },

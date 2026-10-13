@@ -76,6 +76,87 @@ export function DemoPanel({ value }: { value: string }) {
           </div>
         </div>
       )
+    case 'accounting':
+      return (
+        <div className="p-6">
+          <p className="text-fg-4 text-sm">{t.demo.vat.heading}</p>
+          <p className="mt-1 font-medium text-fg text-lg">{t.demo.vat.period}</p>
+          <div className="mt-5 overflow-hidden rounded-lg border border-line">
+            <table className="w-full text-sm">
+              <thead className="border-line border-b bg-subtle">
+                <tr>
+                  <th scope="col" className="px-3 py-2 text-left font-medium text-fg-4 text-xs">
+                    {t.demo.columns.item}
+                  </th>
+                  <th scope="col" className="px-3 py-2 text-left font-medium text-fg-4 text-xs text-right">
+                    {t.demo.columns.amount}
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-line">
+                {t.demo.vat.rows.map((row) => (
+                  <tr key={row.label}>
+                    <th scope="row" className="px-3 py-2.5 text-left font-normal text-fg-2">
+                      {row.label}
+                    </th>
+                    <td className="px-3 py-2.5 text-right text-fg tabular-nums">{row.amount}</td>
+                  </tr>
+                ))}
+              </tbody>
+              <tfoot className="border-line border-t">
+                <tr>
+                  <th scope="row" className="px-3 py-2.5 text-left font-semibold text-fg">
+                    {t.demo.vat.total.label}
+                  </th>
+                  <td className="px-3 py-2.5 text-right font-semibold text-fg tabular-nums">{t.demo.vat.total.amount}</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      )
+    case 'cbms':
+      return (
+        <div className="p-6">
+          <div className="flex items-center gap-2">
+            <p className="text-fg-4 text-sm">{t.demo.cbms.heading}</p>
+            <Badge size="sm" className="tabular-nums">
+              {t.demo.cbms.rows.length}
+            </Badge>
+          </div>
+          <div className="mt-4 overflow-hidden rounded-lg border border-line">
+            <table className="w-full text-sm">
+              <thead className="border-line border-b bg-subtle">
+                <tr>
+                  <th scope="col" className="px-3 py-2 text-left font-medium text-fg-4 text-xs">
+                    {t.demo.columns.document}
+                  </th>
+                  <th scope="col" className="px-3 py-2 text-left font-medium text-fg-4 text-xs text-right">
+                    {t.demo.columns.status}
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-line">
+                {t.demo.cbms.rows.map((row) => (
+                  <tr key={row.doc}>
+                    <th scope="row" className="px-3 py-2.5 text-left font-normal">
+                      <span className="block font-medium text-fg tabular-nums">{row.doc}</span>
+                      <span className="block text-fg-4 text-xs">
+                        {row.type} · {d.invoice[calendar]}
+                      </span>
+                    </th>
+                    <td className="px-3 py-2.5 text-right">
+                      <Badge size="sm" tone={row.ok ? 'green' : 'amber'}>
+                        {row.status}
+                      </Badge>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )
     case 'dates':
       return (
         <div className="p-6">
@@ -175,6 +256,8 @@ export function DemoTable({ values }: { values: string[] }) {
     hr: demo.leave.rows.map((r) => [r.label, r.value] as const),
     dates: demo.calendar.rows.map((r) => [r.label, `${t.dates[r.key][calendar]} ${demo.calendar[calendar]}`] as const),
     audit: demo.audit.rows.map((r) => [r.doc, r.action] as const),
+    accounting: [...demo.vat.rows.map((r) => [r.label, r.amount] as const), [demo.vat.total.label, demo.vat.total.amount]],
+    cbms: demo.cbms.rows.map((r) => [r.doc, r.status] as const),
   }
   return (
     <table className="w-full text-sm">
@@ -233,7 +316,7 @@ export function FeatureExplorer() {
   const { active, select } = useFeatureTab()
 
   return (
-    <section id="features" className="bg-subtle" aria-labelledby="features-title">
+    <section id="features" className="bg-subtle dark:bg-black" aria-labelledby="features-title">
       <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
         <div className="max-w-2xl">
           <h2 id="features-title" className="heading text-3xl md:text-4xl">
