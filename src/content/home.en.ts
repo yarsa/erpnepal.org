@@ -1,8 +1,5 @@
 export const repo = 'https://github.com/yarsa/nepal-compliance'
 const readme = `${repo}#readme`
-const accounting = `${repo}#accounting--billing`
-const hrPayroll = `${repo}#hr--payroll`
-const basicSetup = `${repo}#basic-setup`
 
 export default {
   dates: {
@@ -209,23 +206,46 @@ export default {
   },
   compliance: {
     title: 'Compliance Roadmap',
-    lead: 'Each rule and how the app covers it. Rows link to the code.',
+    lead: 'From the project README.',
     progress: '{done} of {total} rules supported',
-    code: 'Code',
-    groups: { billing: 'Billing and tax', people: 'People and payroll', dates: 'Dates', next: 'Coming next' },
+    groups: { setup: 'Setup and Nepali dates', accounting: 'Billing and audit', vat: 'VAT and reports', payroll: 'HR and payroll', next: 'Coming next' },
     columns: { rule: 'Rule', feature: 'How the app handles it', status: 'Status' },
     status: { supported: 'Supported', beta: 'Beta', progress: 'In Progress' },
     rows: [
-      { group: 'billing', rule: 'IRD e-billing', nepali: '', feature: 'No deleted bills; reprints marked as copies', status: 'supported', link: accounting },
-      { group: 'billing', rule: 'IRD CBMS', nepali: '', feature: 'Each bill synced with CBMS', status: 'supported', link: accounting },
-      { group: 'billing', rule: 'VAT', nepali: 'मूल्य अभिवृद्धि कर', feature: 'VAT registers and return report', status: 'supported', link: accounting },
-      { group: 'billing', rule: 'Audit trail', nepali: '', feature: 'User activity and SQL query logs', status: 'supported', link: accounting },
-      { group: 'people', rule: 'Labour Act 2074', nepali: 'श्रम ऐन, २०७४', feature: 'Leave, minimum salary, gratuity', status: 'supported', link: hrPayroll },
-      { group: 'people', rule: 'SSF and EPF', nepali: 'सामाजिक सुरक्षा कोष', feature: 'Payroll contributions', status: 'supported', link: hrPayroll },
-      { group: 'people', rule: 'Income tax slabs', nepali: '', feature: 'Slabs by filing status', status: 'supported', link: hrPayroll },
-      { group: 'dates', rule: 'Bikram Sambat dates', nepali: 'विक्रम संवत्', feature: 'Forms, reports and prints', status: 'supported', link: basicSetup },
-      { group: 'next', rule: 'Employee self-service', nepali: '', feature: 'Nepal HRMS app, in testing', status: 'beta', link: '' },
-      { group: 'next', rule: 'Biometric attendance devices', nepali: '', feature: 'Model-by-model integration', status: 'progress', link: hrPayroll },
+      { group: 'setup', rule: 'Nepali dates for the fiscal year', status: 'supported' },
+      { group: 'setup', rule: 'Nepali dates in input fields', status: 'supported' },
+      { group: 'setup', rule: 'Nepali dates in lists, views, filters, sorting and search', status: 'supported' },
+      { group: 'setup', rule: 'Nepali dates in reports', status: 'supported' },
+      { group: 'setup', rule: 'Nepali dates in print templates', status: 'supported' },
+      { group: 'setup', rule: 'Fiscal year allocation on Nepali dates', status: 'supported' },
+      { group: 'setup', rule: 'Mandatory fields in the employee record', status: 'supported' },
+      { group: 'setup', rule: 'Attendance, leave and holidays on Nepali dates', status: 'supported' },
+      { group: 'accounting', rule: 'Invoice cancellation, never deletion', status: 'supported' },
+      { group: 'accounting', rule: 'Report of cancelled invoices', status: 'supported' },
+      { group: 'accounting', rule: '“Copy # of Original” on reprints', status: 'supported' },
+      { group: 'accounting', rule: 'Audit trail of user activity', status: 'supported' },
+      { group: 'accounting', rule: 'Invoice numbers in chronological order', status: 'supported' },
+      { group: 'accounting', rule: 'Sync with IRD CBMS', status: 'supported' },
+      { group: 'accounting', rule: 'Sales cancellation register', status: 'supported' },
+      { group: 'accounting', rule: 'SQL query audit logs', status: 'supported' },
+      { group: 'vat', rule: 'Audit trail report', status: 'supported' },
+      { group: 'vat', rule: 'Sales and sales return VAT register', status: 'supported' },
+      { group: 'vat', rule: 'Purchase and purchase return VAT register', status: 'supported' },
+      { group: 'vat', rule: 'Party-wise sales and purchase register', status: 'supported' },
+      { group: 'vat', rule: 'Monthly sales and purchase register', status: 'supported' },
+      { group: 'vat', rule: 'Landing cost reports for purchases', status: 'supported' },
+      { group: 'vat', rule: 'Materialized reports', status: 'supported' },
+      { group: 'vat', rule: 'VAT return reports', status: 'supported' },
+      { group: 'vat', rule: 'Balance confirmation', status: 'supported' },
+      { group: 'payroll', rule: 'Automatic sick and home leave from working days', status: 'supported' },
+      { group: 'payroll', rule: 'Tax slabs by marital status, individual or household', status: 'supported' },
+      { group: 'payroll', rule: 'Automatic grades and gratuity', status: 'supported' },
+      { group: 'payroll', rule: 'Automatic minimum basic salary', status: 'supported' },
+      { group: 'payroll', rule: 'CIT, insurance and other optional contributions', status: 'supported' },
+      { group: 'payroll', rule: 'Employees\' Provident Fund (EPF)', status: 'supported' },
+      { group: 'payroll', rule: 'Social Security Fund (SSF)', status: 'supported' },
+      { group: 'next', rule: 'Employee self-service, Nepal HRMS app', status: 'beta' },
+      { group: 'next', rule: 'Biometric attendance systems', status: 'progress' },
     ],
   },
   openSource: {

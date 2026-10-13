@@ -1,8 +1,5 @@
 import en, { repo } from './home.en.ts'
 
-const accounting = `${repo}#accounting--billing`
-const hrPayroll = `${repo}#hr--payroll`
-const basicSetup = `${repo}#basic-setup`
 
 export default {
   // Same dates as home.en.ts; BS strings from nepali-date-converter's Nepali output.
@@ -210,23 +207,46 @@ export default {
   },
   compliance: {
     title: 'नियम पालनाको रोडम्याप',
-    lead: 'कुन नियम, एपले कसरी मिलाउँछ। हरेक लाइन कोडसँग जोडिएको छ।',
+    lead: 'प्रोजेक्टको README बाट।',
     progress: '{total} मध्ये {done} नियम उपलब्ध',
-    code: 'कोड',
-    groups: { billing: 'बिल र कर', people: 'कर्मचारी र तलब', dates: 'मिति', next: 'आउँदै' },
+    groups: { setup: 'सेटअप र नेपाली मिति', accounting: 'बिलिङ र अडिट', vat: 'भ्याट र रिपोर्ट', payroll: 'कर्मचारी र तलब', next: 'आउँदै' },
     columns: { rule: 'नियम', feature: 'एपले कसरी गर्छ', status: 'स्थिति' },
     status: { supported: 'उपलब्ध', beta: 'बिटा', progress: 'काम हुँदैछ' },
     rows: [
-      { group: 'billing', rule: 'IRD ई-बिलिङ', nepali: '', feature: 'बिल डिलिट हुँदैन; फेरि प्रिन्टमा “प्रतिलिपि” लेखिन्छ', status: 'supported', link: accounting },
-      { group: 'billing', rule: 'IRD CBMS', nepali: '', feature: 'हरेक बिल CBMS मा सिंक', status: 'supported', link: accounting },
-      { group: 'billing', rule: 'भ्याट (मूल्य अभिवृद्धि कर)', nepali: '', feature: 'भ्याटको खरिद/बिक्री खाता र रिटर्न रिपोर्ट', status: 'supported', link: accounting },
-      { group: 'billing', rule: 'अडिट ट्रेल', nepali: '', feature: 'कसले के गर्‍यो र SQL क्वेरीको लग', status: 'supported', link: accounting },
-      { group: 'people', rule: 'श्रम ऐन, २०७४', nepali: '', feature: 'बिदा, न्यूनतम तलब, उपदान', status: 'supported', link: hrPayroll },
-      { group: 'people', rule: 'SSF र EPF', nepali: '', feature: 'तलबमै कट्टी र योगदान', status: 'supported', link: hrPayroll },
-      { group: 'people', rule: 'आयकर स्ल्याब', nepali: '', feature: 'एकल र दम्पतीका लागि छुट्टाछुट्टै', status: 'supported', link: hrPayroll },
-      { group: 'dates', rule: 'वि.सं. मिति', nepali: '', feature: 'फारम, रिपोर्ट र प्रिन्टमा', status: 'supported', link: basicSetup },
-      { group: 'next', rule: 'कर्मचारी सेल्फ-सर्भिस', nepali: '', feature: 'Nepal HRMS एप, परीक्षण हुँदैछ', status: 'beta', link: '' },
-      { group: 'next', rule: 'बायोमेट्रिक हाजिरी मेसिन', nepali: '', feature: 'मेसिनको मोडेलअनुसार जोडिँदैछ', status: 'progress', link: hrPayroll },
+      { group: 'setup', rule: 'आर्थिक वर्षमा नेपाली मिति', status: 'supported' },
+      { group: 'setup', rule: 'इनपुट फिल्डमा नेपाली मिति', status: 'supported' },
+      { group: 'setup', rule: 'सूची, भ्यू, फिल्टर, क्रम र खोजमा नेपाली मिति', status: 'supported' },
+      { group: 'setup', rule: 'रिपोर्टमा नेपाली मिति', status: 'supported' },
+      { group: 'setup', rule: 'प्रिन्ट टेम्प्लेटमा नेपाली मिति', status: 'supported' },
+      { group: 'setup', rule: 'नेपाली मितिमा आर्थिक वर्ष बाँडफाँड', status: 'supported' },
+      { group: 'setup', rule: 'कर्मचारी विवरणमा अनिवार्य फिल्ड', status: 'supported' },
+      { group: 'setup', rule: 'नेपाली मितिमा हाजिरी, बिदा र सार्वजनिक बिदा', status: 'supported' },
+      { group: 'accounting', rule: 'बिल क्यान्सिल हुन्छ, डिलिट हुँदैन', status: 'supported' },
+      { group: 'accounting', rule: 'क्यान्सिल बिलको रिपोर्ट', status: 'supported' },
+      { group: 'accounting', rule: 'फेरि प्रिन्टमा “सक्कलको प्रतिलिपि #”', status: 'supported' },
+      { group: 'accounting', rule: 'प्रयोगकर्ताको गतिविधिको अडिट ट्रेल', status: 'supported' },
+      { group: 'accounting', rule: 'मितिक्रमअनुसार बिल नम्बर', status: 'supported' },
+      { group: 'accounting', rule: 'IRD को CBMS सँग सिंक', status: 'supported' },
+      { group: 'accounting', rule: 'बिक्री क्यान्सिल खाता', status: 'supported' },
+      { group: 'accounting', rule: 'SQL क्वेरी अडिट लग', status: 'supported' },
+      { group: 'vat', rule: 'अडिट ट्रेल रिपोर्ट', status: 'supported' },
+      { group: 'vat', rule: 'बिक्री र बिक्री फिर्ताको भ्याट खाता', status: 'supported' },
+      { group: 'vat', rule: 'खरिद र खरिद फिर्ताको भ्याट खाता', status: 'supported' },
+      { group: 'vat', rule: 'पार्टीअनुसार बिक्री र खरिद खाता', status: 'supported' },
+      { group: 'vat', rule: 'मासिक बिक्री र खरिद खाता', status: 'supported' },
+      { group: 'vat', rule: 'खरिदको ल्यान्डिङ कस्ट रिपोर्ट', status: 'supported' },
+      { group: 'vat', rule: 'म्याटेरियलाइज्ड रिपोर्ट', status: 'supported' },
+      { group: 'vat', rule: 'भ्याट रिटर्न रिपोर्ट', status: 'supported' },
+      { group: 'vat', rule: 'ब्यालेन्स कन्फर्मेसन', status: 'supported' },
+      { group: 'payroll', rule: 'काम गरेका दिनअनुसार बिरामी र घर बिदा आफैं', status: 'supported' },
+      { group: 'payroll', rule: 'वैवाहिक स्थितिअनुसार कर स्ल्याब, एकल वा दम्पती', status: 'supported' },
+      { group: 'payroll', rule: 'ग्रेड र उपदानको हिसाब आफैं', status: 'supported' },
+      { group: 'payroll', rule: 'न्यूनतम आधारभूत तलब आफैं', status: 'supported' },
+      { group: 'payroll', rule: 'CIT, बिमा र अन्य ऐच्छिक योगदान', status: 'supported' },
+      { group: 'payroll', rule: 'कर्मचारी सञ्चय कोष (EPF)', status: 'supported' },
+      { group: 'payroll', rule: 'सामाजिक सुरक्षा कोष (SSF)', status: 'supported' },
+      { group: 'next', rule: 'कर्मचारी सेल्फ-सर्भिस, Nepal HRMS एप', status: 'beta' },
+      { group: 'next', rule: 'बायोमेट्रिक हाजिरी प्रणाली', status: 'progress' },
     ],
   },
   openSource: {

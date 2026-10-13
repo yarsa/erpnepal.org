@@ -1,14 +1,15 @@
-import { IconArrowUpRight, IconBrandGithub, IconCircleCheckFilled, IconCircleDashed } from '@tabler/icons-react'
+import { IconArrowUpRight, IconBrandGithub, IconCircleDashed } from '@tabler/icons-react'
 import { cn } from '../lib/cn'
 import { useStrings } from '../lib/i18n'
 import { ContentIcon } from '../lib/icons'
 import { LinkButton } from './ui/button'
+import { CheckDot } from './ui/check'
 
 export function OpenSource() {
   const { t } = useStrings()
   const o = t.openSource
   const columns = [
-    { ...o.free, Icon: IconCircleCheckFilled, card: 'border-line-strong bg-muted/40' },
+    { ...o.free, Icon: CheckDot, card: 'border-line-strong bg-muted/40' },
     { ...o.paid, Icon: IconCircleDashed, card: 'border-line-strong border-dashed' },
   ]
   return (

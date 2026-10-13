@@ -1,7 +1,7 @@
-import { IconCheck } from '@tabler/icons-react'
 import { useCalendar } from '../lib/calendar'
 import { useStrings } from '../lib/i18n'
 import { Badge } from './ui/badge'
+import { CheckMark } from './ui/check'
 
 /** Demo tax invoice (demo data only). */
 export function InvoiceCard() {
@@ -40,7 +40,7 @@ export function InvoiceCard() {
       </table>
       <div className="mt-4 flex flex-wrap gap-2">
         <Badge tone="green" size="sm">
-          <IconCheck className="size-3" aria-hidden="true" />
+          <CheckMark className="size-3" />
           {inv.status}
         </Badge>
         <Badge size="sm">{inv.copy}</Badge>
