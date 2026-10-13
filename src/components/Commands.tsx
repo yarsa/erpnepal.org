@@ -29,7 +29,7 @@ export function Commands({ className }: { className?: string }) {
         <div className="divide-y divide-line">
           {g.commands.map((command) => (
             <div key={command} className="flex items-center gap-2 py-1.5 pr-1.5 pl-4">
-              <pre className="min-w-0 flex-1 overflow-x-auto py-1.5 font-mono text-fg text-sm leading-6 [scrollbar-width:none]">
+              <pre className="min-w-0 flex-1 overflow-x-auto py-1.5 font-bold font-mono text-fg text-sm leading-6 [scrollbar-width:none]">
                 <code>
                   <span className="select-none text-fg-3" aria-hidden="true">
                     ${' '}
