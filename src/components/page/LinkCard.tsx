@@ -14,18 +14,27 @@ export interface Card {
   number?: string
 }
 
-/** The one card used by every directory and grid. Linked cards lift on hover. */
+/** The one card used by every directory and grid. Linked cards share the homepage Explore more hover and focus states. */
 export function LinkCard({ card, headingLevel: Heading = 'h2', hidden }: { card: Card; headingLevel?: 'h2' | 'h3'; hidden?: boolean }) {
   const { title, body, eyebrow, badge, href, link, icon, number } = card
   const hasTop = Boolean(icon || number || eyebrow)
   return (
     <li
       hidden={hidden}
-      className={cn('relative flex flex-col p-6', href ? 'card-link' : 'rounded-2xl border border-line-strong bg-surface')}
+      className={cn(
+        'relative flex flex-col p-6',
+        href
+          ? 'card-link group border-line shadow-sm transition-transform duration-200 hover:-translate-y-0.5'
+          : 'rounded-2xl border border-line-strong bg-surface',
+      )}
     >
       {hasTop && (
         <div className="flex items-center gap-2 text-fg-4 text-sm">
-          {icon && <ContentIcon name={icon} className="size-5 text-fg-2" />}
+          {icon && (
+            <span className="mr-1 grid size-11 shrink-0 place-items-center rounded-lg bg-muted text-fg-2 transition-colors group-hover:bg-inverse group-hover:text-on-inverse">
+              <ContentIcon name={icon} className="size-5" />
+            </span>
+          )}
           {number && <span className="tabular-nums">{number}</span>}
           {eyebrow && <span>{eyebrow}</span>}
           {badge && (
@@ -44,10 +53,11 @@ export function LinkCard({ card, headingLevel: Heading = 'h2', hidden }: { card:
           title
         )}
       </Heading>
-      <p className="mt-2 text-fg-3">{body}</p>
+      <p className={cn('mt-2 text-fg-3', href && link && 'mb-6')}>{body}</p>
       {href && link && (
-        <span className="mt-auto inline-flex items-center gap-1.5 pt-4 font-medium text-fg" aria-hidden="true">
-          {link} <IconArrowRight className="size-4" />
+        <span className="mt-auto flex items-center justify-between border-line border-t pt-4 font-medium text-fg" aria-hidden="true">
+          {link}
+          <IconArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
         </span>
       )}
     </li>
