@@ -98,7 +98,7 @@ for (const [path, html] of pages) {
   for (const [, ld] of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) JSON.parse(ld)
 
   const external = [...html.matchAll(/<(?:script|link)\b[^>]*(?:src|href)="(https?:\/\/[^"]+)"[^>]*>/g)]
-    .filter((m) => !/rel="canonical"/.test(m[0]))
+    .filter((m) => !/rel="(?:canonical|alternate)"/.test(m[0]))
     .map((m) => m[1])
   assert.deepEqual(external, [], `${where}: external resources loaded: ${external.join(', ')}`)
 

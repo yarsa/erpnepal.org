@@ -43,3 +43,4 @@ export function render(route: Route, stats: Stats) {
 
 export { addons, features, guideDate, guides } from './lib/site'
 export { notFound, redirects, routes, sections } from './routes'
+export { en, ne }
