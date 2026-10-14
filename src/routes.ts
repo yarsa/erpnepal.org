@@ -28,26 +28,27 @@ export const routes: Route[] = [
     path: '',
     kind: 'home',
     locale: 'en',
-    title: 'Nepal Compliance — IRD billing, VAT and Nepal payroll',
+    title: 'Free ERP Software for Nepal | IRD Billing, VAT & Payroll',
     description:
-      'Open-source app that adds IRD-style billing, CBMS sync, VAT reports, Nepal payroll and Bikram Sambat dates to ERPNext and Frappe HR. No licence fee; runs on your own server.',
+      'Free, open-source ERP for Nepal built on ERPNext: IRD e-billing with CBMS sync, VAT registers and returns, SSF and EPF payroll, and Nepali (BS) dates.',
     suffix: false,
   },
   {
     path: 'ne/',
     kind: 'home',
     locale: 'ne',
-    title: 'Nepal Compliance — IRD बिलिङ, भ्याट र तलब',
-    description: 'IRD शैलीको बिलिङ, CBMS सिंक, भ्याट रिपोर्ट, नेपाली तलब र विक्रम संवत् मिति थप्ने खुला स्रोत एप । लाइसेन्स शुल्क छैन',
+    title: 'नेपालका लागि निःशुल्क ERP सफ्टवेयर | IRD बिलिङ, भ्याट र तलब',
+    description:
+      'ERPNext मा बनेको निःशुल्क, खुला स्रोत ERP: CBMS सिंकसहित IRD ई-बिलिङ, भ्याट खाता र रिटर्न, SSF र EPF सहितको तलब, र विक्रम संवत् मिति।',
     suffix: false,
   },
   {
     path: 'features/',
     kind: 'features',
     locale: 'en',
-    title: 'Features for accounting, billing, and payroll in Nepal',
+    title: 'ERPNext Features for Nepal: VAT, IRD Billing and Payroll',
     description:
-      'Explore Nepal Compliance features for everyday business: VAT registers, invoice controls, payroll contributions, leave, audit records, and local dates.',
+      'Every Nepal Compliance feature for ERPNext: VAT registers and returns, IRD invoice controls, CBMS sync, SSF and EPF payroll, leave, audit trails and BS dates.',
     suffix: site,
   },
   ...features.map(
@@ -65,9 +66,9 @@ export const routes: Route[] = [
     path: 'addons/',
     kind: 'addons',
     locale: 'en',
-    title: 'Add-ons for payments, attendance, and business services',
+    title: 'ERPNext Add-ons for Nepal: QR Payments, SMS, Attendance',
     description:
-      'Explore Nepal Compliance integration options for QR payments, CORPORATEPAY, SMS, attendance devices, ecommerce, and local business services.',
+      'Connect ERPNext to Nepali services: Fonepay and NEPALPAY QR, CORPORATEPAY, Sparrow SMS, NPI government payments, attendance devices and ecommerce.',
     suffix: site,
   },
   ...addons.map(
@@ -85,9 +86,9 @@ export const routes: Route[] = [
     path: 'guides/',
     kind: 'guides',
     locale: 'en',
-    title: 'Practical ERP, accounting, and payroll guides for Nepal',
+    title: 'ERP, VAT and Payroll Guides for Nepal',
     description:
-      'Answers to practical questions about ERP software, VAT invoices, CBMS, payroll, payment reconciliation, attendance, migration, and backups in Nepal.',
+      'Source-linked guides for Nepali businesses: choosing ERP software, VAT invoices, CBMS integration, payroll and SSF, QR payments, attendance and backups.',
     suffix: guidesSuffix,
   },
   ...guides.map(
@@ -105,16 +106,16 @@ export const routes: Route[] = [
     path: 'workflows/',
     kind: 'workflows',
     locale: 'en',
-    title: 'Is Nepal Compliance right for your business?',
+    title: 'ERP Workflows for Nepali Shops, Services and Teams',
     description:
-      'See how Nepal Compliance can support a shop, trading business, service company, or growing team, and what to consider before choosing your setup.',
+      'How shops, trading firms, service businesses and growing teams in Nepal run billing, VAT and payroll on ERPNext, and what to prepare before you start.',
     suffix: site,
   },
   {
     path: 'nepal-hrms/',
     kind: 'nepal-hrms',
     locale: 'en',
-    title: 'Nepal HRMS — HR and Payroll for Nepal (Beta)',
+    title: 'Nepal HRMS: HR and Payroll Software for Nepal (Beta)',
     description:
       'Preview Nepal HRMS: employee self-service, attendance, leave, payroll, and reports. In beta testing ahead of its planned inclusion in Nepal Compliance.',
     suffix: site,
