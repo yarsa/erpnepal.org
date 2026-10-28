@@ -20,15 +20,45 @@ export interface Route {
   noindex?: boolean
 }
 
-const site = ' | Nepal Compliance'
-const guidesSuffix = ' | ERP Nepal Guides'
+const site = ' | ERP Nepal'
+
+// Search titles stay within about 60 characters with the suffix, so Google shows them in full.
+// Page headings keep the longer titles from the content files.
+const short: Record<string, string> = {
+  'features/accounting-and-vat': 'Nepal Accounting and VAT Reports for ERPNext',
+  'features/audit-and-reports': 'ERPNext Audit Trails and Records for Nepal',
+  'features/cbms': 'IRD CBMS Integration for ERPNext in Nepal',
+  'features/hr-and-leave': 'Nepal Employee Records and Leave for Frappe HR',
+  'features/invoicing': 'Nepal Invoicing and Billing for ERPNext',
+  'features/nepali-dates': 'Bikram Sambat (BS) Dates for ERPNext',
+  'features/payroll': 'Nepal Payroll for ERPNext and Frappe HR',
+  'addons/attendance-devices': 'Attendance Devices for Frappe HR',
+  'addons/corporatepay': 'CORPORATEPAY Integration for ERPNext',
+  'addons/custom-integrations': 'Custom ERPNext Integrations for Nepal',
+  'addons/ecommerce': 'Ecommerce Integration for ERPNext in Nepal',
+  'addons/fonepay-nepalpay-qr': 'Fonepay and NEPALPAY QR for ERPNext',
+  'addons/nizipos-dynamic-qr': 'NiziPOS Dynamic QR for ERPNext',
+  'addons/nizitap-nfc-attendance': 'NiziTap NFC Attendance for Frappe HR',
+  'addons/npi-government-payments': 'NPI Government Payments for ERPNext',
+  'addons/sparrow-sms': 'Sparrow SMS for ERPNext in Nepal',
+  'guides/attendance-device-integration-guide': 'Choosing Attendance Devices for Frappe HR',
+  'guides/cbms-integration-nepal': 'CBMS Integration in Nepal: Setup & Fixes',
+  'guides/choosing-erp-software-nepal': 'How to Choose ERP Software in Nepal',
+  'guides/erpnext-hosting-backups': 'Self-Hosting ERPNext: Costs, Security, Backups',
+  'guides/payroll-setup-nepal': 'How to Set Up Payroll for Nepal in ERPNext',
+  'guides/qr-payment-reconciliation': 'Reconcile QR Payments in ERPNext (Nepal)',
+  'guides/spreadsheet-to-erpnext': 'Move Spreadsheet Records into ERPNext',
+  'guides/ssf-pf-cit-payroll': 'SSF, Provident Fund and CIT in Payroll',
+  'guides/vat-invoices-nepal': 'VAT Invoice Setup in ERPNext for Nepal',
+}
+const titleFor = (dir: string, slug: string, fallback: string) => short[`${dir}/${slug}`] ?? fallback
 
 export const routes: Route[] = [
   {
     path: '',
     kind: 'home',
     locale: 'en',
-    title: 'Free ERP Software for Nepal | IRD Billing, VAT & Payroll',
+    title: 'Free ERP Accounting Software for Nepal | IRD Certified e-Billing & VAT',
     description:
       'Free, open-source ERP for Nepal built on ERPNext: IRD e-billing with CBMS sync, VAT registers and returns, SSF and EPF payroll, and Nepali (BS) dates.',
     suffix: false,
@@ -46,7 +76,7 @@ export const routes: Route[] = [
     path: 'features/',
     kind: 'features',
     locale: 'en',
-    title: 'ERPNext Features for Nepal: VAT, IRD Billing and Payroll',
+    title: 'Nepal ERPNext Features: VAT, Billing & Payroll',
     description:
       'Every Nepal Compliance feature for ERPNext: VAT registers and returns, IRD invoice controls, CBMS sync, SSF and EPF payroll, leave, audit trails and BS dates.',
     suffix: site,
@@ -57,7 +87,7 @@ export const routes: Route[] = [
       kind: 'feature',
       slug: f.slug,
       locale: 'en',
-      title: f.title,
+      title: titleFor('features', f.slug, f.title),
       description: f.description,
       suffix: site,
     }),
@@ -66,7 +96,7 @@ export const routes: Route[] = [
     path: 'addons/',
     kind: 'addons',
     locale: 'en',
-    title: 'ERPNext Add-ons for Nepal: QR Payments, SMS, Attendance',
+    title: 'ERPNext Add-ons for Nepal: QR, SMS, Attendance',
     description:
       'Connect ERPNext to Nepali services: Fonepay and NEPALPAY QR, CORPORATEPAY, Sparrow SMS, NPI government payments, attendance devices and ecommerce.',
     suffix: site,
@@ -77,7 +107,7 @@ export const routes: Route[] = [
       kind: 'addon',
       slug: a.slug,
       locale: 'en',
-      title: a.title,
+      title: titleFor('addons', a.slug, a.title),
       description: a.description,
       suffix: site,
     }),
@@ -89,7 +119,7 @@ export const routes: Route[] = [
     title: 'ERP, VAT and Payroll Guides for Nepal',
     description:
       'Source-linked guides for Nepali businesses: choosing ERP software, VAT invoices, CBMS integration, payroll and SSF, QR payments, attendance and backups.',
-    suffix: guidesSuffix,
+    suffix: site,
   },
   ...guides.map(
     (g): Route => ({
@@ -97,16 +127,16 @@ export const routes: Route[] = [
       kind: 'guide',
       slug: g.slug,
       locale: 'en',
-      title: g.title,
+      title: titleFor('guides', g.slug, g.title),
       description: g.description,
-      suffix: guidesSuffix,
+      suffix: site,
     }),
   ),
   {
     path: 'workflows/',
     kind: 'workflows',
     locale: 'en',
-    title: 'ERP Workflows for Nepali Shops, Services and Teams',
+    title: 'ERP Workflows for Nepali Businesses',
     description:
       'How shops, trading firms, service businesses and growing teams in Nepal run billing, VAT and payroll on ERPNext, and what to prepare before you start.',
     suffix: site,
@@ -115,7 +145,7 @@ export const routes: Route[] = [
     path: 'nepal-hrms/',
     kind: 'nepal-hrms',
     locale: 'en',
-    title: 'Nepal HRMS: HR and Payroll Software for Nepal (Beta)',
+    title: 'Nepal HRMS: HR & Payroll Software (Beta)',
     description:
       'Preview Nepal HRMS: employee self-service, attendance, leave, payroll, and reports. In beta testing ahead of its planned inclusion in Nepal Compliance.',
     suffix: site,
@@ -126,7 +156,7 @@ export const notFound: Route = {
   path: '404.html',
   kind: 'not-found',
   locale: 'en',
-  title: 'Page not found',
+  title: 'Page Not Found',
   description: 'This address has no page on erpnepal.org. The homepage has features, installation and project links.',
   suffix: site,
   noindex: true,
