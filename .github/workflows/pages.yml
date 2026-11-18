@@ -47,6 +47,8 @@ jobs:
     needs: validate
     if: github.event_name != 'pull_request' && (github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success')
     permissions:
+      # deploy-pages looks up the uploaded artifact through the Actions API.
+      actions: read
       contents: read
       pages: write
       id-token: write
