@@ -5,6 +5,7 @@ import { gzipSync } from 'node:zlib'
 import { addons } from '../content/addons.mjs'
 import { features } from '../content/features.mjs'
 import { guides } from '../content/guides.mjs'
+import { landings } from '../content/landing.mjs'
 import home from '../src/content/home.en.ts'
 import homeNe from '../src/content/home.ne.ts'
 
@@ -44,6 +45,7 @@ const expected = [
   ...features.map((f) => `features/${f.slug}/`),
   ...addons.map((a) => `addons/${a.slug}/`),
   ...guides.map((g) => `guides/${g.slug}/`),
+  ...landings.map((l) => `${l.slug}/`),
 ].sort()
 async function htmlDirs(dir = ''): Promise<string[]> {
   const out: string[] = []
@@ -144,6 +146,14 @@ const homeStrings = (t: typeof home) => [
 ]
 let checked = expectText('', homeStrings(home))
 checked += expectText('ne/', homeStrings(homeNe))
+for (const l of landings) {
+  checked += expectText(`${l.slug}/`, [
+    l.title,
+    l.answer,
+    ...l.sections.flatMap((s) => [s.heading, s.body, ...(s.items ?? [])]),
+    ...l.questions.flatMap((q) => [q.question, q.answer]),
+  ])
+}
 type Detail = {
   title: string
   intro: string

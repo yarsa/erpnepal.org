@@ -30,5 +30,6 @@ export default {
     stars: 'स्टार',
     site: 'साइट',
     project: 'प्रोजेक्ट',
+    solutions: 'नेपालका लागि सफ्टवेयर',
   },
 } satisfies typeof en

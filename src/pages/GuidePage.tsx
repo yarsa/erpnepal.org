@@ -6,12 +6,8 @@ import { SideNav } from '../components/page/SideNav'
 import { useStrings } from '../lib/i18n'
 import { guideDate, guides } from '../lib/site'
 
-const published = new Date(`${guideDate}T00:00:00Z`).toLocaleDateString('en-GB', {
-  day: 'numeric',
-  month: 'long',
-  year: 'numeric',
-  timeZone: 'UTC',
-})
+const formatDate = (iso: string) =>
+  new Date(`${iso}T00:00:00Z`).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
 
 export default function GuidePage({ slug }: { slug: string }) {
   const { ui } = useStrings()
@@ -42,7 +38,8 @@ export default function GuidePage({ slug }: { slug: string }) {
         <article className="measure min-w-0 max-w-3xl">
           <PageIntro eyebrow={`${guide.category} / ${ui.guide.eyebrowSuffix}`} title={guide.title} lead={guide.answer}>
             <p className="mt-4 text-fg-4 text-sm">
-              {ui.guide.byline} · <time dateTime={guideDate}>{published}</time> ·{' '}
+              {ui.guide.byline} · <time dateTime={guideDate}>{formatDate(guideDate)}</time> · {ui.guide.reviewed}{' '}
+              <time dateTime={guide.reviewed}>{formatDate(guide.reviewed)}</time> ·{' '}
               <a href="/guides/#editorial" className="underline underline-offset-4 hover:text-fg">
                 {ui.guide.editorial}
               </a>

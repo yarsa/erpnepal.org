@@ -20,6 +20,17 @@ export default {
     next: { title: 'Does it fit your business?', body: 'See where to start.', label: 'Find your starting point', href: '/workflows/' },
     related: 'Related features',
   },
+  landing: {
+    primary: { label: 'Install free', href: '/#get-started' },
+    secondary: { label: 'See all features', href: '/features/' },
+    questions: 'Questions and answers',
+    features: 'Feature details',
+    guides: 'Related guides',
+    more: 'Free software for Nepali businesses',
+    references: 'Sources',
+    referencesNote: 'Project documentation and official sites.',
+    next: { title: 'Try it on your own data', body: 'Install the free app, then test a month of real transactions.', label: 'Get started', href: '/#get-started' },
+  },
   addon: {
     eyebrowSuffix: 'Add-on guide',
     sideTitle: 'Add-on integrations',
@@ -40,6 +51,7 @@ export default {
     eyebrowSuffix: 'Practical guide',
     sideTitle: 'In this guide',
     byline: 'Published by ERP Nepal',
+    reviewed: 'Last reviewed',
     editorial: 'Editorial approach',
     references: 'References:',
     questions: 'Questions and answers',
@@ -70,5 +82,6 @@ export default {
     stars: 'stars',
     site: 'Site',
     project: 'Project',
+    solutions: 'Software for Nepal',
   },
 }
