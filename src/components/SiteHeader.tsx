@@ -55,10 +55,10 @@ export function SiteHeader({ path }: { path: string }) {
         scrolled ? 'border-line bg-page/90 backdrop-blur' : 'border-transparent bg-transparent',
       )}
     >
-      <div className="mx-auto flex h-16 max-w-6xl items-center gap-2 px-4 sm:gap-4 sm:px-5 md:gap-8 md:px-8 xl:gap-7">
+      <div className="mx-auto flex h-16 max-w-6xl items-center gap-2 px-4 max-[359px]:gap-1.5 max-[359px]:px-3 sm:gap-4 sm:px-5 md:gap-8 md:px-8 xl:gap-7">
         <a
           href={homePath[locale]}
-          className="flex min-w-0 items-center gap-2 font-semibold text-base text-fg sm:gap-2.5 sm:text-lg xl:shrink-0"
+          className="flex min-w-0 items-center gap-2 font-semibold text-base text-fg max-[359px]:gap-1.5 max-[359px]:text-sm sm:gap-2.5 sm:text-lg xl:shrink-0"
         >
           <img src="/assets/nepal-compliance.svg" width="28" height="28" alt="" className="shrink-0 dark:invert" />
           <span className="truncate">Nepal Compliance</span>
@@ -136,7 +136,7 @@ export function SiteHeader({ path }: { path: string }) {
             )}
           </a>
 
-          <LinkButton href={locale === 'ne' ? '/ne/#get-started' : ui.install.href} variant="solid" className="sm:ml-1">
+          <LinkButton href={locale === 'ne' ? '/ne/#get-started' : ui.install.href} variant="solid" className="max-[359px]:px-2.5 sm:ml-1">
             {ui.install.label}
           </LinkButton>
 

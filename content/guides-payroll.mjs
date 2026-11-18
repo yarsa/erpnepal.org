@@ -97,7 +97,7 @@ export const guidesPayroll = [
   {
     slug: 'erpnext-hosting-backups',
     title: 'Self-hosting ERPNext: costs, security, and backups',
-    description: 'Plan ERPNext hosting with a practical cost worksheet, restricted access, complete backups, and a restore drill before putting accounting or payroll into production.',
+    description: 'Plan ERPNext hosting with a cost worksheet, restricted access, complete backups, and a restore drill before running accounting or payroll on it.',
     category: 'Implementation',
     answer: 'Budget for the server, backups, updates, and an owner for recovery. Restore a full backup into a test site before going live.',
     sections: [

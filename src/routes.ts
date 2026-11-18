@@ -58,7 +58,7 @@ export const routes: Route[] = [
     path: '',
     kind: 'home',
     locale: 'en',
-    title: 'Free ERP Accounting Software for Nepal - IRD Certified e-Billing & VAT',
+    title: 'Free ERP Accounting Software for Nepal - IRD Certified e-Billing',
     description:
       'Free, open-source ERP for Nepal built on ERPNext: IRD e-billing with CBMS sync, VAT registers and returns, SSF and EPF payroll, and Nepali (BS) dates.',
     suffix: false,
