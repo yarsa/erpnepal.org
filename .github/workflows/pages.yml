@@ -10,6 +10,9 @@ on:
     # Markdown never reaches the build (README, NOTICE, docs/), so skip those commits.
     paths-ignore: ['**/*.md', 'docs/**']
   workflow_dispatch:
+  # Rebuild daily 00:30 UTC is 06:15 in Nepal.
+  schedule:
+    - cron: '30 0 * * *'
   workflow_run:
     workflows: ["pages build and deployment"]
     types: [completed]
