@@ -1,9 +1,20 @@
 // Every page the site builds, with its metadata. The URL set matches the
 // previous site, so existing links and search results keep working.
 import type { Locale } from './lib/i18n'
-import { addons, features, guides } from './lib/site'
+import { addons, features, guides, landings } from './lib/site'
 
-export type PageKind = 'home' | 'features' | 'feature' | 'addons' | 'addon' | 'guides' | 'guide' | 'workflows' | 'nepal-hrms' | 'not-found'
+export type PageKind =
+  | 'home'
+  | 'landing'
+  | 'features'
+  | 'feature'
+  | 'addons'
+  | 'addon'
+  | 'guides'
+  | 'guide'
+  | 'workflows'
+  | 'nepal-hrms'
+  | 'not-found'
 
 export interface Route {
   /** Path without the leading slash: '' for the homepage, 'features/' … */
@@ -58,7 +69,7 @@ export const routes: Route[] = [
     path: '',
     kind: 'home',
     locale: 'en',
-    title: 'Free ERP Accounting Software for Nepal | IRD Certified e-Billing & VAT',
+    title: 'Free ERP Accounting Software for Nepal - IRD Certified e-Billing',
     description:
       'Free, open-source ERP for Nepal built on ERPNext: IRD e-billing with CBMS sync, VAT registers and returns, SSF and EPF payroll, and Nepali (BS) dates.',
     suffix: false,
@@ -72,6 +83,17 @@ export const routes: Route[] = [
       'ERPNext मा बनेको निःशुल्क, खुला स्रोत ERP: CBMS सिंकसहित IRD ई-बिलिङ, भ्याट खाता र रिटर्न, SSF र EPF सहितको तलब, र विक्रम संवत् मिति।',
     suffix: false,
   },
+  ...landings.map(
+    (l): Route => ({
+      path: `${l.slug}/`,
+      kind: 'landing',
+      slug: l.slug,
+      locale: 'en',
+      title: l.seoTitle,
+      description: l.description,
+      suffix: site,
+    }),
+  ),
   {
     path: 'features/',
     kind: 'features',

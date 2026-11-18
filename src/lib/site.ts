@@ -1,8 +1,9 @@
 import { addons } from '../../content/addons.mjs'
 import { features } from '../../content/features.mjs'
 import { guideDate, guides } from '../../content/guides.mjs'
+import { landings } from '../../content/landing.mjs'
 
-export { addons, features, guideDate, guides }
+export { addons, features, guideDate, guides, landings }
 
 export type Feature = (typeof features)[number]
 export type Addon = (typeof addons)[number]

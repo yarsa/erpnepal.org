@@ -324,6 +324,13 @@ export default {
     ],
   },
   footer: {
+    solutions: [
+      { label: 'Accounting software', href: '/accounting-software-nepal/' },
+      { label: 'IRD billing software', href: '/ird-billing-software-nepal/' },
+      { label: 'VAT software', href: '/vat-software-nepal/' },
+      { label: 'Payroll software', href: '/payroll-software-nepal/' },
+      { label: 'ERPNext for Nepal', href: '/erpnext-nepal/' },
+    ],
     tagline: 'An app for ERPNext and Frappe HR.',
     credit: { before: 'A project by ', name: 'Yarsa', href: 'https://www.yarsalabs.com/', after: ' and contributors. Built on Frappe, ERPNext and Frappe HR.' },
     site: [

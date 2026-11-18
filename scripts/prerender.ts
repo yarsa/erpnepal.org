@@ -17,7 +17,7 @@ const abs = (path: string) => new URL(path, siteUrl).href
 const dist = new URL('../dist/', import.meta.url)
 const ssr = new URL('../dist-ssr/entry-server.js', import.meta.url)
 const server: typeof Server = await import(ssr.href)
-const { render, routes, notFound, redirects, sections, features, addons, guides, guideDate, en, ne } = server
+const { render, routes, notFound, redirects, sections, features, addons, guides, guideDate, landings, en, ne } = server
 
 const template = await readFile(new URL('index.html', dist), 'utf8')
 // Without these markers every page would ship as an empty shell.
@@ -40,6 +40,7 @@ function chunkFiles(key: string, seen = new Set<string>()): string[] {
 const mainFiles = new Set(chunkFiles('index.html'))
 const pageModule: Record<Route['kind'], string> = {
   home: 'HomePage',
+  landing: 'LandingPage',
   features: 'FeaturesPage',
   feature: 'FeaturePage',
   addons: 'AddonsPage',
@@ -139,13 +140,15 @@ function structuredData(route: Route, url: string, title: string): object[] {
     },
   ]
   const entry =
-    route.kind === 'feature'
-      ? features.find((f) => f.slug === route.slug)
-      : route.kind === 'addon'
-        ? addons.find((a) => a.slug === route.slug)
-        : route.kind === 'guide'
-          ? guides.find((g) => g.slug === route.slug)
-          : undefined
+    route.kind === 'landing'
+      ? landings.find((l) => l.slug === route.slug)
+      : route.kind === 'feature'
+        ? features.find((f) => f.slug === route.slug)
+        : route.kind === 'addon'
+          ? addons.find((a) => a.slug === route.slug)
+          : route.kind === 'guide'
+            ? guides.find((g) => g.slug === route.slug)
+            : undefined
   const faq = entry ? faqPage(entry.questions, url) : null
   if (faq) data.push(faq)
   if (route.kind === 'guide') {
@@ -158,7 +161,7 @@ function structuredData(route: Route, url: string, title: string): object[] {
         description: guide.description,
         mainEntityOfPage: url,
         datePublished: guideDate,
-        dateModified: guideDate,
+        dateModified: guide.reviewed,
         inLanguage: 'en',
         author: { '@type': 'Organization', name: 'ERP Nepal', url: abs('guides/#editorial') },
         publisher,
@@ -240,7 +243,7 @@ await writeFile(
   new URL('sitemap.xml', dist),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${indexed
     .map((r) => {
-      const lastmod = r.kind === 'guide' ? guideDate : built
+      const lastmod = r.kind === 'guide' ? (guides.find((g) => g.slug === r.slug)?.reviewed ?? guideDate) : built
       const alternates =
         r.kind === 'home'
           ? `<xhtml:link rel="alternate" hreflang="en" href="${abs('')}"/><xhtml:link rel="alternate" hreflang="ne" href="${abs('ne/')}"/><xhtml:link rel="alternate" hreflang="x-default" href="${abs('')}"/>`
@@ -270,7 +273,7 @@ await writeFile(
 // and the full text of every feature, add-on and guide (llms-full.txt).
 const md = (s: string) => s.replace(/[[\]]/g, '\\$&')
 const list = (items: readonly { title: string; description: string; slug: string }[], dir: string) =>
-  items.map((i) => `- [${md(i.title)}](${abs(`${dir}/${i.slug}/`)}): ${md(i.description)}`).join('\n')
+  items.map((i) => `- [${md(i.title)}](${abs(`${dir ? `${dir}/` : ''}${i.slug}/`)}): ${md(i.description)}`).join('\n')
 const home = en.t
 const groups = home.compliance.groups as Record<string, string>
 const coverage = Object.entries(groups).map(([key, label]) => {
@@ -309,6 +312,7 @@ await writeFile(
     '',
     `- [Overview](${abs('')})`,
     `- [Full text for AI tools](${abs('llms-full.txt')})`,
+    list(landings, ''),
     list(features, 'features'),
     '',
     '## Nepal HRMS (Beta)',
@@ -337,6 +341,7 @@ await writeFile(
 
 type Section = { heading: string; body?: string; items?: string[]; paragraphs?: string[]; table?: { headers: string[]; rows: string[][] } }
 type Entry = {
+  reviewed?: string
   title: string
   description: string
   slug: string
@@ -350,7 +355,8 @@ const page = (e: Entry, dir: string) =>
   [
     `## ${e.title}`,
     '',
-    `URL: ${abs(`${dir}/${e.slug}/`)}`,
+    `URL: ${abs(`${dir ? `${dir}/` : ''}${e.slug}/`)}`,
+    ...(e.reviewed ? [`Last reviewed: ${e.reviewed}`] : []),
     '',
     e.answer ? `Short answer: ${e.answer}` : (e.intro ?? e.description),
     '',
@@ -369,6 +375,9 @@ await writeFile(
   new URL('llms-full.txt', dist),
   [
     ...summary,
+    '# Overview pages',
+    '',
+    ...(landings as unknown as Entry[]).map((l) => page(l, '')),
     '# Features',
     '',
     ...(features as unknown as Entry[]).map((f) => page(f, 'features')),

@@ -39,6 +39,17 @@ export function SiteFooter() {
               ))}
             </ul>
           </nav>
+          <nav aria-label={ui.a11y.solutions}>
+            <ul className="flex flex-wrap gap-x-6 md:justify-end">
+              {t.footer.solutions.map((item) => (
+                <li key={item.href}>
+                  <a href={item.href} className={link}>
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
           <nav aria-label={ui.a11y.project}>
             <ul className="flex flex-wrap gap-x-6 md:justify-end">
               {t.footer.links.map((item) => (

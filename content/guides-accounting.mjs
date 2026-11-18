@@ -9,6 +9,8 @@ const ird = source('ird', 'IRD CBMS technical documentation notice', 'https://ir
 export const guidesAccounting = [
   {
     slug: 'choosing-erp-software-nepal',
+    // Update this date whenever the guide is checked against current rules.
+    reviewed: '2026-09-28',
     title: 'How to choose ERP or accounting software for a business in Nepal',
     description: 'A practical evaluation checklist for Nepal businesses: test real transactions, local accounting requirements, migration, support, and total operating costs.',
     category: 'Choosing software',
@@ -49,6 +51,8 @@ export const guidesAccounting = [
   },
   {
     slug: 'vat-invoices-nepal',
+    // Update this date whenever the guide is checked against current rules.
+    reviewed: '2026-09-28',
     title: 'VAT invoice setup in ERPNext: checks for a Nepal business',
     description: 'Check ERPNext company records, tax templates, invoice output, returns, and report totals before using a Nepal VAT billing setup in production.',
     category: 'Accounting and billing',
@@ -89,6 +93,8 @@ export const guidesAccounting = [
   },
   {
     slug: 'cbms-integration-nepal',
+    // Update this date whenever the guide is checked against current rules.
+    reviewed: '2026-09-28',
     title: 'Preparing and troubleshooting a CBMS integration in Nepal',
     description: 'Prepare business details, app settings, representative invoices, response evidence, and support information before relying on an ERPNext CBMS connection.',
     category: 'Accounting and billing',

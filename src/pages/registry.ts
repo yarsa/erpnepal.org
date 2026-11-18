@@ -13,6 +13,7 @@ export type PageComponent = ComponentType<{ slug: string }>
 
 export const loaders: Record<PageKind, () => Promise<{ default: PageComponent }>> = {
   home: () => import('./HomePage'),
+  landing: () => import('./LandingPage'),
   features: () => import('./FeaturesPage'),
   feature: () => import('./FeaturePage'),
   addons: () => import('./AddonsPage'),

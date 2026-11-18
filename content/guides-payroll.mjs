@@ -2,6 +2,8 @@
 export const guidesPayroll = [
   {
     slug: 'payroll-setup-nepal',
+    // Update this date whenever the guide is checked against current rules.
+    reviewed: '2026-09-28',
     title: 'How to set up payroll for Nepal in ERPNext',
     description: 'A practical Nepal payroll setup guide covering salary structures, employee assignments, tax configuration, sample calculations, and the first payroll review.',
     category: 'Payroll',
@@ -50,6 +52,8 @@ export const guidesPayroll = [
   },
   {
     slug: 'ssf-pf-cit-payroll',
+    // Update this date whenever the guide is checked against current rules.
+    reviewed: '2026-09-28',
     title: 'SSF, provident fund, and CIT payroll configuration explained',
     description: 'Understand how to separate employee deductions, employer costs, fund liabilities, and tax treatment when configuring SSF, provident fund, and CIT in payroll.',
     category: 'Payroll',
@@ -96,8 +100,10 @@ export const guidesPayroll = [
   },
   {
     slug: 'erpnext-hosting-backups',
+    // Update this date whenever the guide is checked against current rules.
+    reviewed: '2026-09-28',
     title: 'Self-hosting ERPNext: costs, security, and backups',
-    description: 'Plan ERPNext hosting with a practical cost worksheet, restricted access, complete backups, and a restore drill before putting accounting or payroll into production.',
+    description: 'Plan ERPNext hosting with a cost worksheet, restricted access, complete backups, and a restore drill before running accounting or payroll on it.',
     category: 'Implementation',
     answer: 'Budget for the server, backups, updates, and an owner for recovery. Restore a full backup into a test site before going live.',
     sections: [

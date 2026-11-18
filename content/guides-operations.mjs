@@ -1,6 +1,8 @@
 export const guidesOperations = [
   {
     slug: 'qr-payment-reconciliation',
+    // Update this date whenever the guide is checked against current rules.
+    reviewed: '2026-09-28',
     title: 'How to reconcile QR payments with ERPNext invoices in Nepal',
     description: 'Match QR receipts to invoices, distinguish customer payments from bank settlements, and investigate duplicates, short payments, and missing references.',
     category: 'Payments and reconciliation',
@@ -44,6 +46,8 @@ export const guidesOperations = [
   },
   {
     slug: 'attendance-device-integration-guide',
+    // Update this date whenever the guide is checked against current rules.
+    reviewed: '2026-09-28',
     title: 'How to choose an attendance-device integration for Frappe HR',
     description: 'Evaluate exports, APIs, employee mappings, shift rules, and offline recovery before connecting an attendance device to Frappe HR.',
     category: 'Attendance and HR',
@@ -86,6 +90,8 @@ export const guidesOperations = [
   },
   {
     slug: 'spreadsheet-to-erpnext',
+    // Update this date whenever the guide is checked against current rules.
+    reviewed: '2026-09-28',
     title: 'How to move spreadsheet records into ERPNext',
     description: 'Plan a spreadsheet migration with field mapping, trial imports, opening balances, reconciliation totals, and a controlled switch to ERPNext.',
     category: 'Implementation and migration',

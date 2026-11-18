@@ -11,6 +11,7 @@ import FeaturesPage from './pages/FeaturesPage'
 import GuidePage from './pages/GuidePage'
 import GuidesPage from './pages/GuidesPage'
 import HomePage from './pages/HomePage'
+import LandingPage from './pages/LandingPage'
 import NepalHrmsPage from './pages/NepalHrmsPage'
 import NotFoundPage from './pages/NotFoundPage'
 import type { PageComponent } from './pages/registry'
@@ -19,6 +20,7 @@ import type { PageKind, Route } from './routes'
 
 const pages: Record<PageKind, PageComponent> = {
   home: HomePage,
+  landing: LandingPage,
   features: FeaturesPage,
   feature: FeaturePage,
   addons: AddonsPage,
@@ -41,6 +43,6 @@ export function render(route: Route, stats: Stats) {
   )
 }
 
-export { addons, features, guideDate, guides } from './lib/site'
+export { addons, features, guideDate, guides, landings } from './lib/site'
 export { notFound, redirects, routes, sections } from './routes'
 export { en, ne }
